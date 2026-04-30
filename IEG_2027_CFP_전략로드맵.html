@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEG 2027 CFP 자격 취득 전략 로드맵</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1E2761;
+    --navy2:  #162054;
+    --blue:   #1565C0;
+    --ice:    #CADCFC;
+    --amber:  #F4A223;
+    --mint:   #02C39A;
+    --light:  #EEF2FF;
+    --white:  #FFFFFF;
+    --gray:   #64748B;
+    --text:   #1A1F3C;
+    --bg:     #F4F6FB;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-width: 900px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 64px 80px 52px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(202,220,252,.07);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: 60px; top: 40px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(244,162,35,.08);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .hero h1 span { color: var(--amber); }
+  .hero p {
+    color: var(--ice);
+    font-size: 15px;
+    font-weight: 300;
+    max-width: 640px;
+    line-height: 1.8;
+    position: relative; z-index: 1;
+  }
+  .hero-meta {
+    margin-top: 32px;
+    display: flex;
+    gap: 32px;
+    position: relative; z-index: 1;
+  }
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-meta-label { font-size: 11px; color: var(--ice); opacity: .6; letter-spacing: 1px; text-transform: uppercase; }
+  .hero-meta-value { font-size: 14px; font-weight: 700; color: var(--white); }
+
+  /* ── NAV ── */
+  .nav-bar {
+    background: var(--white);
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky; top: 0; z-index: 100;
+    padding: 0 80px;
+    display: flex;
+    gap: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .nav-bar a {
+    display: block;
+    padding: 16px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: color .2s, border-color .2s;
+    white-space: nowrap;
+  }
+  .nav-bar a:hover { color: var(--navy); border-color: var(--navy); }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 64px 80px;
+  }
+  .section + .section { border-top: 1px solid #e2e8f0; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--navy);
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+  .section-sub {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.8;
+    max-width: 700px;
+    margin-bottom: 40px;
+  }
+
+  /* ── PITCH QUOTE ── */
+  .pitch-box {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .pitch-box::before {
+    content: '"';
+    position: absolute;
+    right: 32px; top: -20px;
+    font-size: 160px;
+    font-weight: 900;
+    color: rgba(255,255,255,.04);
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .pitch-box .pitch-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+  .pitch-messages {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+    position: relative; z-index: 1;
+  }
+  .pitch-msg {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .pitch-msg-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pitch-msg-body { font-size: 13px; color: var(--ice); line-height: 1.7; }
+
+  /* ── 3-STEP CARDS ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 24px;
+  }
+  .step-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(30,39,97,.10);
+    display: flex;
+    flex-direction: column;
+  }
+  .step-card-head {
+    padding: 24px 26px 18px;
+    position: relative;
+  }
+  .step-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .step-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.35;
+  }
+  .step-card-body {
+    background: var(--white);
+    padding: 22px 26px;
+    flex: 1;
+  }
+  .step-action-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--light);
+  }
+  .step-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .step-list li {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 20px;
+    position: relative;
+  }
+  .step-list li::before {
+    content: '→';
+    position: absolute; left: 0;
+    font-weight: 700;
+    color: var(--blue);
+  }
+  .step-effect {
+    margin-top: 16px;
+    background: var(--light);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    color: var(--navy);
+    line-height: 1.7;
+    border-left: 3px solid var(--navy);
+  }
+  .step-effect b { color: var(--navy); }
+
+  /* ── MAPPING TABLE ── */
+  .map-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(30,39,97,.09);
+    font-size: 13.5px;
+  }
+  .map-table thead th {
+    background: var(--navy);
+    color: var(--white);
+    font-weight: 700;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: .3px;
+  }
+  .map-table tbody tr:nth-child(odd) td { background: var(--light); }
+  .map-table tbody tr:nth-child(even) td { background: var(--white); }
+  .map-table tbody tr:hover td { background: #dce8ff; transition: background .15s; }
+  .map-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #e0e8f8;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .map-table td:first-child { font-weight: 700; color: var(--navy); }
+  .map-table td.cert { color: var(--blue); font-weight: 600; }
+  .map-table td.appeal {
+    color: var(--blue);
+    font-weight: 600;
+  }
+  .map-table td .tag {
+    display: inline-block;
+    background: #e3f0ff;
+    color: var(--blue);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11.5px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-wrapper {
+    position: relative;
+    padding: 12px 0 0;
+  }
+
+  /* Horizontal connector line */
+  .timeline-line {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 0;
+  }
+  .timeline-spine {
+    position: absolute;
+    top: 44px;
+    left: 60px;
+    right: 60px;
+    height: 4px;
+    background: var(--navy);
+    border-radius: 2px;
+    z-index: 0;
+  }
+
+  .timeline-phases {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .phase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  /* dot */
+  .phase-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    background: var(--navy);
+    box-shadow: 0 0 0 3px var(--navy);
+    margin-bottom: 0;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    margin-top: 35px;
+  }
+  .phase:last-child .phase-dot { background: var(--amber); box-shadow: 0 0 0 3px var(--amber); }
+
+  .phase-card {
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(30,39,97,.09);
+    padding: 20px 20px 18px;
+    width: calc(100% - 24px);
+    margin-top: 20px;
+    border-top: 4px solid var(--navy);
+    position: relative;
+  }
+  .phase:last-child .phase-card { border-top-color: var(--amber); }
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: -16px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid var(--white);
+  }
+
+  .phase-period {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .phase-name {
+    font-size: 17px;
+    font-weight: 900;
+    color: var(--navy);
+    margin-bottom: 14px;
+    line-height: 1.25;
+  }
+  .phase:last-child .phase-name { color: var(--amber); }
+  .phase-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .phase-items li {
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+  }
+  .phase-items li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--blue);
+    font-size: 10px;
+    top: 3px;
+  }
+  .phase-tag {
+    display: inline-block;
+    margin-top: 14px;
+    background: var(--light);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 4px 14px;
+  }
+  .phase:last-child .phase-tag {
+    background: #FFF3DC;
+    color: var(--amber);
+  }
+
+  /* ── CFP GOAL BANNER ── */
+  .goal-banner {
+    background: linear-gradient(135deg, var(--amber) 0%, #e8870a 100%);
+    border-radius: 16px;
+    padding: 28px 40px;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    box-shadow: 0 8px 32px rgba(244,162,35,.3);
+  }
+  .goal-trophy { font-size: 48px; flex-shrink: 0; }
+  .goal-text h3 { font-size: 22px; font-weight: 900; color: var(--white); margin-bottom: 8px; }
+  .goal-text p { font-size: 14px; color: rgba(255,255,255,.85); line-height: 1.7; }
+  .goal-stats {
+    margin-left: auto;
+    display: flex;
+    gap: 28px;
+    flex-shrink: 0;
+  }
+  .goal-stat { text-align: center; }
+  .goal-stat-val { font-size: 28px; font-weight: 900; color: var(--white); line-height: 1; }
+  .goal-stat-label { font-size: 11px; color: rgba(255,255,255,.7); margin-top: 4px; }
+
+  /* ── WIN-WIN GRID ── */
+  .wins-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+  }
+  .win-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 26px 28px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    box-shadow: 0 3px 16px rgba(30,39,97,.07);
+    border-left: 5px solid var(--navy);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .win-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(30,39,97,.13); }
+  .win-card:nth-child(2) { border-left-color: var(--blue); }
+  .win-card:nth-child(3) { border-left-color: var(--mint); }
+  .win-card:nth-child(4) { border-left-color: var(--amber); }
+  .win-icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
+  .win-who { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+  .win-what { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .win-detail { font-size: 12.5px; color: var(--gray); line-height: 1.7; }
+
+  /* ── HI-TEC ── */
+  .hitec-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+  .hitec-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px 24px;
+    box-shadow: 0 3px 16px rgba(30,39,97,.07);
+    border-top: 4px solid var(--navy);
+  }
+  .hitec-card:nth-child(2) { border-top-color: var(--blue); }
+  .hitec-card:nth-child(3) { border-top-color: var(--amber); }
+  .hitec-icon { font-size: 28px; margin-bottom: 12px; }
+  .hitec-title { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+  .hitec-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .hitec-list li {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 18px;
+    position: relative;
+  }
+  .hitec-list li::before { content: '•'; position: absolute; left: 0; color: var(--blue); font-size: 14px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy2);
+    color: var(--ice);
+    padding: 28px 80px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: .9;
+  }
+  footer span { opacity: .6; }
+
+  /* print */
+  @media print {
+    .nav-bar { display: none; }
+    .section { padding: 40px 60px; }
+    .hero { padding: 48px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Executive Strategy Report</div>
+  <h1>IEG <span>2027 CFP</span><br>자격 취득 전략 로드맵</h1>
+  <p>미국 조지아·앨라배마 커뮤니티 칼리지 시장 진출 및<br>한국 대기업 연계 취업 파이프라인 구축 전략</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">작성 부서</span>
+      <span class="hero-meta-value">전략기획팀</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">보고 일자</span>
+      <span class="hero-meta-value">2025년</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">목표 달성</span>
+      <span class="hero-meta-value">2027 CFP 자격 취득</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">문서 등급</span>
+      <span class="hero-meta-value" style="color:#F4A223;">CONFIDENTIAL</span>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#background">시장 배경</a>
+  <a href="#pitch">피칭 메시지</a>
+  <a href="#steps">3-Step 전략</a>
+  <a href="#mapping">장비 매핑</a>
+  <a href="#roadmap">로드맵</a>
+  <a href="#hitec">HI-TEC 액션</a>
+  <a href="#winwin">상생 모델</a>
+</nav>
+
+<!-- 1. BACKGROUND -->
+<section class="section" id="background">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">시장 배경 및 기회 분석</h2>
+  <p class="section-sub">조지아·앨라배마 지역의 한국 대기업 진출이 가속화됨에 따라 현지 숙련 인력 공급 부족이 심각한 과제로 부상하고 있습니다. 커뮤니티 칼리지의 KPI 압박과 IEG의 솔루션이 완벽하게 맞물리는 구조입니다.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div style="background:#FFF8EC;border:2px solid var(--amber);border-radius:16px;padding:28px 32px;">
+      <div style="font-size:26px;margin-bottom:12px;">🏭</div>
+      <div style="font-size:17px;font-weight:800;color:var(--amber);margin-bottom:16px;">한국 기업의 인력 수요</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+        <li style="font-size:13.5px;color:var(--text);line-height:1.7;padding-left:20px;position:relative;">
+          <span style="position:absolute;left:0;color:var(--amber);font-weight:700;">▸</span>
+          <b>현대차(HMGMA)</b> — 조지아 메타플랜트 약 2만 명 고용 목표
+        </li>
+        <li style="font-size:13.5px;color:var(--text);line-height:1.7;padding-left:20px;position:relative;">
+          <span style="position:absolute;left:0;color:var(--amber);font-weight:700;">▸</span>
+          <b>SK온</b> — 앨라배마 배터리 공장 대규모 기술 인력 채용 지속
+        </li>
+        <li style="font-size:13.5px;color:#CC0000;line-height:1.7;padding-left:20px;position:relative;font-weight:600;">
+          <span style="position:absolute;left:0;color:#CC0000;font-weight:700;">▸</span>
+          문제: '즉시 투입 가능한(Job-Ready)' 현지 인력 극심한 부족
+        </li>
+      </ul>
+    </div>
+    <div style="background:var(--light);border:2px solid var(--navy);border-radius:16px;padding:28px 32px;">
+      <div style="font-size:26px;margin-bottom:12px;">🎓</div>
+      <div style="font-size:17px;font-weight:800;color:var(--navy);margin-bottom:16px;">커뮤니티 칼리지 KPI</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+        <li style="font-size:13.5px;color:var(--text);line-height:1.7;padding-left:20px;position:relative;">
+          <span style="position:absolute;left:0;color:var(--blue);font-weight:700;">▸</span>
+          <b>① 인증 취득률</b> — SACA, Amazon MRA 등 산업 공인 자격 취득
+        </li>
+        <li style="font-size:13.5px;color:var(--text);line-height:1.7;padding-left:20px;position:relative;">
+          <span style="position:absolute;left:0;color:var(--blue);font-weight:700;">▸</span>
+          <b>② 취업률</b> — 졸업 후 지역 산업체 취업 성공률
+        </li>
+        <li style="font-size:13.5px;color:var(--blue);line-height:1.7;padding-left:20px;position:relative;font-weight:600;">
+          <span style="position:absolute;left:0;color:var(--blue);font-weight:700;">▸</span>
+          기회: IEG = 두 KPI를 동시에 해결하는 유일한 통합 솔루션
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PITCH -->
+<section class="section" id="pitch" style="background:var(--white);">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">총장·학장 대상 핵심 피칭 메시지</h2>
+  <p class="section-sub">대학 의사결정자에게 전달할 단 하나의 핵심 메시지와 세 가지 근거입니다.</p>
+
+  <div class="pitch-box">
+    <div class="pitch-text">"We solve your Student Placement Problem<br>with Korean Industry Connections."</div>
+    <div class="pitch-messages">
+      <div class="pitch-msg">
+        <div class="pitch-msg-tag">① 산업 배경</div>
+        <div class="pitch-msg-body">조지아에 투자한 한국 기업들은 미국 현지에서 '즉시 투입 가능한' 인력을 찾지 못해 고전하고 있습니다.</div>
+      </div>
+      <div class="pitch-msg">
+        <div class="pitch-msg-tag">② 솔루션</div>
+        <div class="pitch-msg-body">IEG는 그 기업들이 사용하는 것과 동일한 핵심 기술을 SACA 표준에 맞춰 구현한 장비를 제공합니다.</div>
+      </div>
+      <div class="pitch-msg">
+        <div class="pitch-msg-tag">③ 결과 보장</div>
+        <div class="pitch-msg-body">장비 도입 → SACA 인증 → 한국 기업 인턴십으로 이어지는 완전한 취업 파이프라인을 완성시켜 드립니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. STEPS -->
+<section class="section" id="steps">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">3-Step 패키지 추진 전략</h2>
+  <p class="section-sub">단순 장비 판매가 아닌, 대학의 운영 모델(Business Model)을 설계하는 파트너로 포지셔닝하는 세 단계 전략입니다.</p>
+
+  <div class="steps-grid">
+    <!-- Step 1 -->
+    <div class="step-card">
+      <div class="step-card-head" style="background:var(--amber);">
+        <div class="step-num">Step 01</div>
+        <div class="step-title">인턴십 선확보<br><span style="font-weight:400;font-size:14px;">Anchor Strategy</span></div>
+      </div>
+      <div class="step-card-body">
+        <div class="step-action-label">핵심 액션</div>
+        <ul class="step-list">
+          <li>현대차·SK온 인사팀과 사전 미팅 추진</li>
+          <li>LOI(의향서) 확보 — IEG 교육생 우선 채용·인턴십 부여 의사 확인</li>
+        </ul>
+        <div class="step-effect">
+          <b>💡 전략적 효과:</b> '장비를 사면 취업처를 연결해 드리겠다'는 제안은 총장이 거절할 수 없는 가장 강력한 레버리지입니다.
+        </div>
+      </div>
+    </div>
+    <!-- Step 2 -->
+    <div class="step-card">
+      <div class="step-card-head" style="background:var(--navy);">
+        <div class="step-num">Step 02</div>
+        <div class="step-title">SACA 인증 지원<br><span style="font-weight:400;font-size:14px;">Certification as a Service</span></div>
+      </div>
+      <div class="step-card-body">
+        <div class="step-action-label">핵심 액션</div>
+        <ul class="step-list">
+          <li>장비 구매 시 SACA 공인 인증 센터 등록 지원</li>
+          <li>커리큘럼 맵 + 시험 준비 패키지 번들로 제공</li>
+          <li>별도 교재 개발 없이 즉시 과정 개설 가능</li>
+        </ul>
+        <div class="step-effect">
+          <b>💡 전략적 효과:</b> 교재 개발 비용·시간 절감 → 도입 결정의 진입 장벽이 사실상 0에 가깝습니다.
+        </div>
+      </div>
+    </div>
+    <!-- Step 3 -->
+    <div class="step-card">
+      <div class="step-card-head" style="background:var(--blue);">
+        <div class="step-num">Step 03</div>
+        <div class="step-title">Joint Lab 명칭 부여<br><span style="font-weight:400;font-size:14px;">Branding</span></div>
+      </div>
+      <div class="step-card-body">
+        <div class="step-action-label">핵심 액션</div>
+        <ul class="step-list">
+          <li>"IEG-HMGMA Smart Manufacturing Center" 공동 실습실 명칭 제안</li>
+          <li>한국 대기업 브랜드 활용 공동 마케팅 효과 창출</li>
+        </ul>
+        <div class="step-effect">
+          <b>💡 전략적 효과:</b> 총장에게 글로벌 산업계 협력을 상징하는 최고의 홍보 수단 — 예산 확보 및 대외 명성에 직접 기여합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. MAPPING TABLE -->
+<section class="section" id="mapping" style="background:var(--white);">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">IEG 장비 — SACA / Amazon MRA 인증 매핑</h2>
+  <p class="section-sub">미국 교육자들이 선호하는 역량(Competency) 기반으로 정리한 장비-인증 매핑 시트입니다. 상담 현장에서 즉시 활용 가능합니다.</p>
+
+  <table class="map-table">
+    <thead>
+      <tr>
+        <th style="width:17%">대상 장비 (IEG)</th>
+        <th style="width:18%">연관 인증</th>
+        <th style="width:32%">핵심 역량 (Competencies)</th>
+        <th style="width:33%">교육적 어필 포인트</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MPS 3400 / 3400N</td>
+        <td class="cert">SACA Silver/Gold<br>(C-201, C-202)</td>
+        <td>AC/DC 전기 시스템 제어, 모터 제어<br>센서 보정, PLC 로직 트러블슈팅</td>
+        <td class="appeal"><span class="tag">현장 재현형</span><br>현대차·SK온 생산 라인에 가장 근접한 실습 플랫폼</td>
+      </tr>
+      <tr>
+        <td>DX Labeler</td>
+        <td class="cert">Amazon MRA<br>(Phase 1 &amp; 2)</td>
+        <td>컨베이어 시스템 유지보수<br>바코드 리딩·전동기 드라이브 설정</td>
+        <td class="appeal"><span class="tag">스마트 팩토리</span><br>아마존 물류 및 스마트 팩토리 전 공정 사이클 학습</td>
+      </tr>
+      <tr>
+        <td>PLC Trainer</td>
+        <td class="cert">SACA C-204<br>(PLC Systems 1)</td>
+        <td>래더 다이어그램 작성<br>HMI 인터페이스 설계, 통신 모듈 구성</td>
+        <td class="appeal"><span class="tag">멀티 호환</span><br>Siemens / Allen-Bradley / Mitsubishi 멀티 PLC 지원</td>
+      </tr>
+      <tr>
+        <td>Sensor Trainer</td>
+        <td class="cert">SACA C-211<br>(Automation Sensors)</td>
+        <td>유도형/정전용량형 센서 감도 조절<br>아날로그 신호 처리</td>
+        <td class="appeal"><span class="tag">데이터 분석</span><br>정밀 제어를 위한 데이터 수집 및 분석 역량 강화</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--gray);margin-top:12px;font-style:italic;">* 모든 장비는 구매 즉시 SACA 인증 과정 개설 가능 — 별도 교재 개발 불요</p>
+</section>
+
+<!-- 5. ROADMAP -->
+<section class="section" id="roadmap">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">2027 CFP 취득 로드맵</h2>
+  <p class="section-sub">2025년 하반기부터 2027년 CFP 자격 취득 완성까지, 단계별 목표와 핵심 활동을 시각화한 타임라인입니다.</p>
+
+  <div class="timeline-wrapper">
+    <div class="timeline-spine"></div>
+    <div class="timeline-phases">
+
+      <div class="phase">
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-period">2025 Q3</div>
+          <div class="phase-name">준비 &amp;<br>파트너십</div>
+          <ul class="phase-items">
+            <li>현대차·SK온 인사팀 미팅</li>
+            <li>LOI(의향서) 체결 추진</li>
+            <li>SACA 파트너십 협의</li>
+            <li>HI-TEC 부스 전략 수립</li>
+          </ul>
+          <span class="phase-tag">LOI 1건 이상 확보</span>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-period">2025 Q4 – 2026 Q1</div>
+          <div class="phase-name">HI-TEC 2026<br>전시 &amp; 계약</div>
+          <ul class="phase-items">
+            <li>"SACA-MRA Mapped" 배너 부스</li>
+            <li>Dean / VP급 집중 미팅</li>
+            <li>파일럿 1~2개교 계약</li>
+            <li>장비 납품 및 과정 개설</li>
+          </ul>
+          <span class="phase-tag">파일럿 계약 체결</span>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-period">2026 Q2 – Q3</div>
+          <div class="phase-name">확산 &amp;<br>파이프라인 가동</div>
+          <ul class="phase-items">
+            <li>SACA 인증자 1기 배출</li>
+            <li>취업 파이프라인 실적 확보</li>
+            <li>추가 5개교 이상 확장</li>
+            <li>한국 기업 채용 연계 가동</li>
+          </ul>
+          <span class="phase-tag">5개교+ 확장</span>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-dot"></div>
+        <div class="phase-card">
+          <div class="phase-period">2027</div>
+          <div class="phase-name">🏆 CFP<br>자격 취득</div>
+          <ul class="phase-items">
+            <li>CFP 공식 자격 취득 완성</li>
+            <li>미국 남부 스마트 제조 교육 핵심 파트너 지위 확보</li>
+            <li>한국 기업 인력 공급 파이프라인 완성</li>
+          </ul>
+          <span class="phase-tag">🎯 최종 목표 달성</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="goal-banner">
+    <div class="goal-trophy">🏆</div>
+    <div class="goal-text">
+      <h3>2027 CFP 자격 취득 달성</h3>
+      <p>인증 취득률 ↑ &nbsp;|&nbsp; 취업률 ↑ &nbsp;|&nbsp; 한국 기업 인력 공급 파이프라인 완성<br>
+      IEG = 미국 남부 커뮤니티 칼리지 스마트 제조 교육의 핵심 파트너</p>
+    </div>
+    <div class="goal-stats">
+      <div class="goal-stat">
+        <div class="goal-stat-val">10+</div>
+        <div class="goal-stat-label">목표 협약 대학</div>
+      </div>
+      <div class="goal-stat">
+        <div class="goal-stat-val">2</div>
+        <div class="goal-stat-label">한국 기업 LOI</div>
+      </div>
+      <div class="goal-stat">
+        <div class="goal-stat-val">2027</div>
+        <div class="goal-stat-label">CFP 취득 연도</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. HI-TEC -->
+<section class="section" id="hitec" style="background:var(--white);">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">HI-TEC 2026 현장 Action Plan</h2>
+  <p class="section-sub">HI-TEC은 CFP 취득 전략의 핵심 접점입니다. 교수(Professor)가 아닌 Dean급 의사결정자를 집중 공략합니다.</p>
+
+  <div class="hitec-grid">
+    <div class="hitec-card">
+      <div class="hitec-icon">🎪</div>
+      <div class="hitec-title">부스 구성 전략</div>
+      <ul class="hitec-list">
+        <li>단순 장비 전시 대신 <b>"SACA-Amazon MRA Curriculum Mapped"</b> 대형 배너 설치</li>
+        <li>매핑 시트와 LOI 사례를 현장에서 즉시 제공할 수 있는 자료 준비</li>
+        <li>실습 장비 체험 코너로 현장 설득력 강화</li>
+      </ul>
+    </div>
+    <div class="hitec-card">
+      <div class="hitec-icon">🎯</div>
+      <div class="hitec-title">상담 타겟 전략</div>
+      <ul class="hitec-list">
+        <li><b>Dean of Career/Technical Education</b> 명함 소지자 집중 공략</li>
+        <li><b>VP of Academic Affairs</b> 최우선 미팅 대상</li>
+        <li>장비 사양 설명보다 <b>'취업률 향상 솔루션'</b> 관점의 비즈니스 대화 주도</li>
+      </ul>
+    </div>
+    <div class="hitec-card">
+      <div class="hitec-icon">📋</div>
+      <div class="hitec-title">계약 목표</div>
+      <ul class="hitec-list">
+        <li>현장 미팅 최소 <b>3~5건</b> 파이프라인 확보</li>
+        <li>파일럿 도입 의향 <b>1~2건</b> 이상 LOI 또는 계약 체결</li>
+        <li>한국 기업 인사팀과 <b>공동 피칭</b> 기회 창출</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 7. WIN-WIN -->
+<section class="section" id="winwin">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">WIN-WIN-WIN 상생 모델 &amp; 결론</h2>
+  <p class="section-sub">IEG의 전략은 모든 이해관계자에게 명확한 가치를 동시에 제공하는 구조로 설계되었습니다.</p>
+
+  <div class="wins-grid">
+    <div class="win-card">
+      <div class="win-icon">🏫</div>
+      <div>
+        <div class="win-who">대학 (총장)</div>
+        <div class="win-what">예산 확보 명분</div>
+        <div class="win-detail">장비·커리큘럼 패키지의 명확한 ROI 제시. 주 정부 및 연방 보조금 신청 시 강력한 근거 자료로 활용 가능.</div>
+      </div>
+    </div>
+    <div class="win-card">
+      <div class="win-icon">📊</div>
+      <div>
+        <div class="win-who">총장 KPI</div>
+        <div class="win-what">정치적 성과 — 인증 취득률 &amp; 취업률 ↑</div>
+        <div class="win-detail">지역 사회와 글로벌 산업계 연결의 상징적 가시 성과. 다음 임기 재신임의 핵심 실적.</div>
+      </div>
+    </div>
+    <div class="win-card">
+      <div class="win-icon">👨‍🎓</div>
+      <div>
+        <div class="win-who">학생</div>
+        <div class="win-what">글로벌 기업 취업 — 현대차·SK온 인턴십</div>
+        <div class="win-detail">SACA 국제 인증 취득을 통한 경력 경쟁력 확보. 현지 한국 대기업 우선 채용 기회.</div>
+      </div>
+    </div>
+    <div class="win-card">
+      <div class="win-icon">🏭</div>
+      <div>
+        <div class="win-who">한국 기업 (현대차·SK온)</div>
+        <div class="win-what">즉시 투입 가능한 현지 인력 안정 공급</div>
+        <div class="win-detail">현지화 전략 강화 및 생산 안정성 확보. 지역 사회 기여 이미지 구축.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--navy);border-radius:16px;padding:36px 48px;margin-top:32px;border-left:6px solid var(--amber);">
+    <p style="font-size:18px;font-weight:700;color:var(--white);line-height:1.7;">
+      IEG는 2027년까지 미국 남부 커뮤니티 칼리지 시장에서 스마트 제조 교육의 핵심 파트너로 자리매김하고,<br>
+      <span style="color:var(--amber);">CFP 자격 취득</span>을 통해 시장 내 신뢰성과 경쟁 우위를 완성합니다.
+    </p>
+    <p style="font-size:13.5px;color:var(--ice);margin-top:16px;opacity:.8;">본 전략의 성공적 실행을 위한 임원진의 적극적인 지원과 의사결정을 요청드립니다.</p>
+  </div>
+</section>
+
+<footer>
+  <span>ⓒ 2025 IEG (아이지). All rights reserved. — CONFIDENTIAL</span>
+  <span>전략기획팀 &nbsp;|&nbsp; 2027 CFP 자격 취득 전략 로드맵</span>
+</footer>
+
+</body>
+</html>
