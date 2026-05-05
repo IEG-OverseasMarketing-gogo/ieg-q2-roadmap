@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emotii 도입 타당성 분석 — IEG 임원 보고서 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0f0d;
+  --ink-mid:#4a4a46;
+  --ink-light:#8a8a84;
+  --cream:#faf8f3;
+  --cream-dark:#f0ede4;
+  --border:#e0dbd0;
+  --teal:#1a7f62;
+  --teal-light:#e4f4ee;
+  --teal-mid:#2ea882;
+  --amber:#b86a00;
+  --amber-light:#fef3e0;
+  --coral:#c94820;
+  --coral-light:#fdeee9;
+  --dark:#0f0f0d;
+  --white:#ffffff;
+}
+
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.7;font-size:14px}
+.page{max-width:900px;margin:0 auto;padding:0 0 80px}
+
+/* ── COVER ── */
+.cover{background:var(--dark);color:var(--white);padding:64px 56px 56px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:var(--teal);opacity:.08}
+.cover::after{content:'';position:absolute;bottom:-40px;left:-40px;width:200px;height:200px;border-radius:50%;background:var(--teal-mid);opacity:.06}
+.cover-eyebrow{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal-mid);margin-bottom:16px}
+.cover-title{font-family:'DM Serif Display',serif;font-size:42px;line-height:1.1;color:var(--white);margin-bottom:8px}
+.cover-title em{font-style:italic;color:var(--teal-mid)}
+.cover-sub{font-size:15px;color:rgba(255,255,255,.6);margin-top:10px;line-height:1.6}
+.cover-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px;padding-top:28px;border-top:1px solid rgba(255,255,255,.12)}
+.meta-item{}
+.meta-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:3px}
+.meta-val{font-size:14px;font-weight:500;color:var(--white)}
+.meta-val.accent{color:var(--teal-mid)}
+.meta-val.danger{color:#ff8a75}
+
+/* ── EXEC SUMMARY ── */
+.exec-summary{background:var(--teal);color:var(--white);padding:32px 56px}
+.es-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:10px}
+.es-quote{font-family:'DM Serif Display',serif;font-size:20px;line-height:1.5;font-style:italic}
+.es-body{font-size:13px;opacity:.85;margin-top:14px;line-height:1.7}
+
+/* ── KPI STRIP ── */
+.kpi-strip{display:grid;grid-template-columns:repeat(3,1fr);background:var(--dark);border-bottom:4px solid var(--teal)}
+.kpi-item{padding:28px 24px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
+.kpi-item:last-child{border-right:none}
+.kpi-val{font-family:'DM Serif Display',serif;font-size:44px;color:var(--teal-mid);line-height:1}
+.kpi-label{font-size:11px;color:rgba(255,255,255,.5);margin-top:6px;letter-spacing:.5px}
+
+/* ── BODY CONTENT ── */
+.content{padding:0 56px}
+
+/* ── SECTION ── */
+.section{margin-top:52px}
+.section-number{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.section-title{font-family:'DM Serif Display',serif;font-size:26px;color:var(--ink);padding-bottom:10px;border-bottom:2px solid var(--teal);margin-bottom:20px}
+
+/* ── SUB SECTION ── */
+.sub-label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin:20px 0 8px}
+
+/* ── BODY TEXT ── */
+p.body{font-size:13.5px;color:var(--ink-mid);line-height:1.75;margin-bottom:10px}
+p.body strong{color:var(--ink)}
+
+/* ── HIGHLIGHT BOX ── */
+.highlight-amber{background:var(--amber-light);border-left:4px solid var(--amber);padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;font-size:13.5px;color:#412402;font-style:italic;line-height:1.7}
+.highlight-teal{background:var(--teal-light);border-left:4px solid var(--teal);padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;font-size:13.5px;color:#085041;line-height:1.7}
+
+/* ── BULLET LIST ── */
+.bullet-list{list-style:none;margin:8px 0 12px}
+.bullet-list li{display:flex;gap:10px;padding:5px 0;font-size:13px;color:var(--ink-mid);line-height:1.6;border-bottom:1px solid var(--border)}
+.bullet-list li:last-child{border-bottom:none}
+.bullet-list li::before{content:'→';color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px}
+.bullet-list li strong{color:var(--ink);font-weight:600}
+
+/* ── TABLE ── */
+.table-wrap{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead tr{background:var(--dark)}
+thead th{color:var(--white);font-weight:600;padding:10px 12px;text-align:center;font-size:11.5px;letter-spacing:.3px}
+thead th:first-child{text-align:left}
+tbody tr:nth-child(odd){background:var(--white)}
+tbody tr:nth-child(even){background:var(--cream-dark)}
+tbody td{padding:9px 12px;color:var(--ink-mid);border-bottom:1px solid var(--border);text-align:center}
+tbody td:first-child{text-align:left;font-weight:500;color:var(--ink)}
+tbody tr:last-child td{border-bottom:none}
+.td-green{color:#085041;font-weight:700}
+.td-savings{color:var(--teal);font-weight:700}
+tfoot tr{background:var(--teal-light)}
+tfoot td{padding:10px 12px;font-weight:700;color:#085041;border-top:2px solid var(--teal);text-align:center}
+tfoot td:first-child{text-align:left}
+tfoot td.total-savings{background:var(--teal);color:var(--white)}
+
+/* ── POC STEPS ── */
+.poc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.poc-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+.poc-card-num{font-family:'DM Serif Display',serif;font-size:32px;color:var(--teal);line-height:1;margin-bottom:6px}
+.poc-card-title{font-size:12px;font-weight:600;color:var(--ink);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.poc-card-body{font-size:12px;color:var(--ink-mid);line-height:1.65}
+.poc-card-body strong{color:var(--ink)}
+
+/* ── ROI ROADMAP ── */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:20px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.roadmap-step{padding:18px 16px;border-right:1px solid var(--border)}
+.roadmap-step:last-child{border-right:none}
+.rs-phase{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.rs-period{font-size:11px;color:var(--ink-light);margin-bottom:8px}
+.rs-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.rs-body{font-size:11px;color:var(--ink-mid);line-height:1.6}
+
+/* ── PRICING CARDS ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.price-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px 16px}
+.price-card.recommended{border-color:var(--teal);border-width:2px}
+.price-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;background:var(--teal);color:var(--white);display:inline-block;margin-bottom:8px;letter-spacing:.8px;text-transform:uppercase}
+.price-name{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.price-val{font-family:'DM Serif Display',serif;font-size:26px;color:var(--teal);margin:8px 0 4px}
+.price-period{font-size:11px;color:var(--ink-light)}
+.price-features{margin-top:10px;font-size:11.5px;color:var(--ink-mid);line-height:1.7}
+
+/* ── CONCLUSION ── */
+.conclusion{background:var(--dark);padding:36px 56px;margin-top:56px}
+.con-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal-mid);margin-bottom:10px}
+.con-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--white);margin-bottom:14px}
+.con-body{font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.75;font-style:italic}
+.con-action{margin-top:24px;background:var(--teal);color:var(--white);border-radius:8px;padding:16px 20px}
+.con-action-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;opacity:.8;margin-bottom:4px}
+.con-action-body{font-size:14px;font-weight:500;line-height:1.6}
+.con-footer{margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.35);text-align:right}
+
+/* ── PRINT BUTTON ── */
+.print-bar{background:var(--teal);padding:12px 56px;display:flex;align-items:center;justify-content:space-between}
+.print-bar span{font-size:12px;color:rgba(255,255,255,.7)}
+.print-btn{font-size:12px;font-weight:600;padding:7px 18px;background:var(--white);color:var(--teal);border:none;border-radius:6px;cursor:pointer;transition:opacity .15s}
+.print-btn:hover{opacity:.85}
+
+/* ── SPACER ── */
+.sp{margin-top:20px}
+.sp-lg{margin-top:32px}
+
+/* ── PRINT ── */
+@media print{
+  .print-bar{display:none}
+  .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .kpi-strip{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .exec-summary{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .conclusion{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+@media(max-width:640px){
+  .cover,.content,.exec-summary,.print-bar,.conclusion{padding-left:24px;padding-right:24px}
+  .cover-title{font-size:28px}
+  .kpi-strip,.poc-grid,.roadmap,.pricing-grid,.cover-meta{grid-template-columns:1fr}
+  .roadmap-step{border-right:none;border-bottom:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<!-- PRINT BAR -->
+<div class="print-bar">
+  <span>주식회사 아이지 (IEG Co., Ltd.) · 대외비 (CONFIDENTIAL)</span>
+  <button class="print-btn" onclick="window.print()">🖨 PDF 저장 / 인쇄</button>
+</div>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">Executive Report · 임원 보고서 · 2026년 4월</div>
+  <div class="cover-title">Emotii AI 솔루션<br><em>도입 타당성 분석</em></div>
+  <div class="cover-sub">글로벌 기술 전수 가속기 도입을 위한 ROI 분석 및 PoC(개념 검증) 전략<br>ADM 지작(우즈베키스탄) 현장 적용 시나리오 포함</div>
+  <div class="cover-meta">
+    <div class="meta-item"><div class="meta-label">작성부서</div><div class="meta-val">해외마케팅팀 (Overseas Marketing)</div></div>
+    <div class="meta-item"><div class="meta-label">보고일</div><div class="meta-val">2026년 4월</div></div>
+    <div class="meta-item"><div class="meta-label">보고대상</div><div class="meta-val">대표이사 및 경영진 (임원)</div></div>
+    <div class="meta-item"><div class="meta-label">보안등급</div><div class="meta-val danger">대외비 (CONFIDENTIAL)</div></div>
+  </div>
+</div>
+
+<!-- EXEC SUMMARY -->
+<div class="exec-summary">
+  <div class="es-label">Executive Summary</div>
+  <div class="es-quote">"Emotii 도입은 단순한 번역 도구가 아니라, IEG의 첨단 교육 장비(IEG3400)를 전 세계 어디든 언어의 장벽 없이 즉시 수출하고 교육할 수 있게 만드는 '글로벌 기술 전수 가속기'입니다."</div>
+  <div class="es-body">본 보고서는 AI 기반 실시간 다국어 동시통역 플랫폼 Emotii(이모티)의 도입 타당성을 분석하고, ADM 지작 현장 적용을 위한 PoC 전략을 보고드립니다. 단 4주의 PoC만으로 기존 통역 운영비 대비 약 95~98%의 비용 절감 효과를 실증할 수 있으며, 이는 IEG의 글로벌 장비 수출 경쟁력을 근본적으로 강화하는 전략적 투자입니다.</div>
+</div>
+
+<!-- KPI STRIP -->
+<div class="kpi-strip">
+  <div class="kpi-item"><div class="kpi-val">70+</div><div class="kpi-label">지원 언어 수</div></div>
+  <div class="kpi-item"><div class="kpi-val">98%</div><div class="kpi-label">통역 비용 절감율</div></div>
+  <div class="kpi-item"><div class="kpi-val">9개국</div><div class="kpi-label">즉시 적용 가능 시장</div></div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-number">Section 01</div>
+  <div class="section-title">핵심 기술 및 원리</div>
+
+  <div class="sub-label">1-1. 플랫폼 개요</div>
+  <p class="body">Emotii는 단순한 번역 도구를 넘어, 사용자의 <strong>감정 상태(Emotion)</strong>와 <strong>맥락(Context)</strong>을 실시간으로 분석하여 최적의 소통 방식으로 전달하는 AI 정서 지능(EQ) 기반 플랫폼입니다. 특정 AI에 종속되지 않는 <strong>Multi-LLM Agnostic Architecture</strong>를 채택하여 각 언어와 상황에 최적화된 여러 AI 모델을 실시간으로 조합합니다.</p>
+
+  <div class="sub-label">1-2. 핵심 기술 사양</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>기술 항목</th><th>사양 / 특징</th></tr></thead>
+      <tbody>
+        <tr><td>다국어 처리 엔진</td><td>70개+ 언어 · 문화적 맥락 및 관용 표현 반영</td></tr>
+        <tr><td>정서 분석 모듈</td><td>어조·속도·단어 선택 실시간 분석 · 8종 기본 / 24종 복합 감정 수치화</td></tr>
+        <tr><td>보이스 클로닝</td><td>교수자 목소리 톤·어조 학습 → 번역된 외국어를 교수자 목소리로 송출</td></tr>
+        <tr><td>지연 시간 (Latency)</td><td>500ms ~ 1초 이내 · 현장 교육 지장 없는 실시간 수준</td></tr>
+        <tr><td>플랫폼 호환성</td><td>iOS/Android · 웹 대시보드 · ERP·CRM·Slack·Teams 연동 API</td></tr>
+        <tr><td>보안</td><td>AES-256 암호화 · GDPR 등 국가별 개인정보 보호 규정 준수</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-label">1-3. 다국어 강의 실시간 수신 메커니즘</div>
+  <div class="poc-grid">
+    <div class="poc-card">
+      <div class="poc-card-num">①</div>
+      <div class="poc-card-title">음성 데이터 추출 (STT)</div>
+      <div class="poc-card-body">교수자 한국어 발화 → AI가 <strong>강조점·어조·전문 용어</strong>를 우선 파악 → 고품질 한국어 스크립트 생성</div>
+    </div>
+    <div class="poc-card">
+      <div class="poc-card-num">②</div>
+      <div class="poc-card-title">맥락 엔진 분석</div>
+      <div class="poc-card-body">관용구 변환 · 전문 용어 DB 대조 · 감정 상태 분석 → <strong>"의미(Meaning)" 추출</strong></div>
+    </div>
+    <div class="poc-card">
+      <div class="poc-card-num">③</div>
+      <div class="poc-card-title">학습자별 동시 송출</div>
+      <div class="poc-card-body">각 학습자 설정 모국어 채널로 <strong>동시 멀티 송출</strong> (자막 / 음성 / 텍스트)</div>
+    </div>
+    <div class="poc-card">
+      <div class="poc-card-num">④</div>
+      <div class="poc-card-title">양방향 질의응답</div>
+      <div class="poc-card-body">학습자 모국어 질문 → 한국어로 실시간 변환 → 교수자 답변 → 다시 모국어로 재전달</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>학습자 환경</th><th>이해 방식</th><th>특징</th></tr></thead>
+      <tbody>
+        <tr><td>스마트폰/태블릿</td><td>실시간 AI 자막 (Live Caption)</td><td>모국어 자막이 영화처럼 실시간 생성</td></tr>
+        <tr><td>이어폰/헤드셋</td><td>AI 동시통역 음성 (Voice Overlay)</td><td>원본 목소리 위로 모국어 통역 음성 오버레이</td></tr>
+        <tr><td>PC 웹 화면</td><td>멀티 스크립트 대화창</td><td>온라인 교실에서 다국어 동시 출력</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-number">Section 02</div>
+  <div class="section-title">ROI 분석 — 인적 통역사 vs. Emotii</div>
+
+  <div class="sub-label">2-1. 인적 통역사 운영 비용 분석 (우즈베키스탄 출장 기준, 1인/일)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>항목</th><th>상세 산출 근거</th><th>예상 비용 (1인/일)</th></tr></thead>
+      <tbody>
+        <tr><td>통역 일당</td><td>비즈니스/기술 통역 상급 기준</td><td>₩700,000 ~ 900,000</td></tr>
+        <tr><td>준비/이동 수당</td><td>출장 전후 이동 및 자료 검토</td><td>₩200,000</td></tr>
+        <tr><td>체재비</td><td>현지 숙박·식대·교통비</td><td>₩300,000</td></tr>
+        <tr><td>항공료</td><td>한국 동행 시 일할 계산</td><td>₩150,000</td></tr>
+        <tr><td><strong>합계 (1인/일)</strong></td><td><strong>통역사 1인 투입 고정 비용</strong></td><td><strong>₩1,350,000 ~ 1,550,000</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sub-label">2-2. ADM 지작 PoC 4주 절감 시뮬레이션</div>
+  <div class="highlight-teal">가정: 현지 기술자 20명 대상 4주(20일) IEG3400 교육. 통역사 1명으로 20명 밀착 케어 불가 → 최소 2인 운영 필요</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>구분</th><th>인적 통역사 (2인 운영)</th><th>Emotii 엔터프라이즈</th><th>절감액</th></tr></thead>
+      <tbody>
+        <tr><td>인건비 / 구독료</td><td>₩62,000,000 (155만원×2인×20일)</td><td>₩7,000,000</td><td class="td-green">₩55,000,000</td></tr>
+        <tr><td>부대비용 (항공·숙박)</td><td>₩12,000,000</td><td>₩0 (클라우드)</td><td class="td-green">₩12,000,000</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td><strong>총계</strong></td><td><strong>₩74,000,000</strong></td><td><strong>₩7,000,000</strong></td><td class="total-savings"><strong>₩67,000,000 절감</strong></td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="sub-label">2-3. 9개국 글로벌 ROI 비교 (1개월 기준, USD)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>대상 국가 (언어)</th><th>인적 통역 비용 (A)</th><th>Emotii 비용 (B)</th><th>절감액 (A-B)</th></tr></thead>
+      <tbody>
+        <tr><td>우즈베키스탄 (우즈벡어)</td><td>$25,000</td><td>$500</td><td class="td-savings">$24,500</td></tr>
+        <tr><td>카자흐스탄 (카자흐어)</td><td>$25,000</td><td>$500</td><td class="td-savings">$24,500</td></tr>
+        <tr><td>말레이시아 (말레이어)</td><td>$20,000</td><td>$500</td><td class="td-savings">$19,500</td></tr>
+        <tr><td>인도네시아 (인니어)</td><td>$18,000</td><td>$500</td><td class="td-savings">$17,500</td></tr>
+        <tr><td>브라질 (포르투갈어)</td><td>$30,000</td><td>$500</td><td class="td-savings">$29,500</td></tr>
+        <tr><td>엘살바도르/LatAm (스페인어)</td><td>$28,000</td><td>$500</td><td class="td-savings">$27,500</td></tr>
+        <tr><td>사우디아라비아/UAE (아랍어)</td><td>$35,000</td><td>$500</td><td class="td-savings">$34,500</td></tr>
+        <tr><td>미국/글로벌 (영어)</td><td>$22,000</td><td>$500</td><td class="td-savings">$21,500</td></tr>
+        <tr><td>일본 (일본어)</td><td>$24,000</td><td>$500</td><td class="td-savings">$23,500</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td><strong>합계 (9개국 동시 대응)</strong></td><td><strong>$227,000</strong></td><td><strong>$4,500</strong></td><td class="total-savings"><strong>$222,500 절감</strong></td></tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-number">Section 03</div>
+  <div class="section-title">핵심 ROI 지표 (KPIs)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>KPI 지표</th><th>수치</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>직접 비용 절감율</td><td class="td-savings">95% ~ 98%</td><td>클라우드 SaaS 전환으로 통역 고정비 대폭 절감</td></tr>
+        <tr><td>교육 가용성 (Scalability)</td><td class="td-savings">1:N 무제한</td><td>통역사는 소그룹 한계, Emotii는 70개 언어 동시 추가 비용 無</td></tr>
+        <tr><td>교육 시간 단축</td><td class="td-savings">50%</td><td>순차 통역(강의 2배 시간) 제거 → 실시간 동시통역</td></tr>
+        <tr><td>지식 자산화</td><td class="td-savings">100%</td><td>언어별 스크립트·영상 저장 → IEG 글로벌 교육 자산 구축</td></tr>
+        <tr><td>기술 보안</td><td class="td-savings">유출 리스크 Zero</td><td>외부 통역사 노출 없이 AI 엔진 내 처리</td></tr>
+        <tr><td>24/7 가용성</td><td class="td-savings">상시 제공</td><td>야간 작업자·복습 필요 직원에게 동일 품질 교육 상시 제공</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-number">Section 04</div>
+  <div class="section-title">ADM 지작 PoC 시나리오 — IEG3400 훈련</div>
+
+  <p class="body"><strong>PoC 명칭:</strong> AI 기반 다국적 실시간 기술 전수 검증<br>
+  <strong>대상:</strong> 우즈베키스탄 현지 기술자 20명 &nbsp;|&nbsp; <strong>기간:</strong> 4주 &nbsp;|&nbsp; <strong>장비:</strong> IEG3400 시리즈</p>
+
+  <div class="sub-label">① 준비 단계 (Setup)</div>
+  <ul class="bullet-list">
+    <li><strong>교수자:</strong> 한국인 엔지니어 — 마이크 내장 헤드셋 착용, IEG3400 장비 앞 위치</li>
+    <li><strong>학습자:</strong> 현지 우즈벡 기술자 20명 — 스마트폰 Emotii 앱 설치 + 이어폰 착용</li>
+    <li><strong>시스템 준비:</strong> IEG3400 전용 기술 용어(Glossary)를 Emotii 엔진에 사전 등록 → 번역 정확도 강화</li>
+    <li><strong>기술 용어 DB 구축:</strong> IEG(CSV 추출) + Emotii(엔터프라이즈 사전 업로드) 협업으로 완성</li>
+  </ul>
+
+  <div class="sub-label">② 훈련 진행 (Execution)</div>
+  <ul class="bullet-list">
+    <li><strong>실시간 가이드:</strong> 교수자 한국어 설명 "IEG3400의 메인 컨트롤러 전원을 켜고 통신 모듈을 확인하세요"</li>
+    <li><strong>개별 수신:</strong> 기술자들이 교수자 목소리 유사 AI 음성으로 우즈벡어 안내 "IEG3400 asosiy kontrollerini yoqing..." 수신</li>
+    <li><strong>즉각 질의응답:</strong> 우즈벡어 질문 → 한국어 실시간 변환 → 교수자 답변 → 우즈벡어 재전달</li>
+    <li><strong>정서 지능 활용:</strong> 학습자 망설임·목소리 떨림 감지 → "이해도 부족" 힌트를 교수자에게 자동 전달</li>
+  </ul>
+
+  <div class="sub-label">③ 검증 포인트 (Key Metrics)</div>
+  <ul class="bullet-list">
+    <li><strong>정확도:</strong> 전문 기술 용어가 현지어로 얼마나 정확하게 전달되는가?</li>
+    <li><strong>속도:</strong> 교수자 동작과 통역 음성 사이 지연 시간이 현장 작업에 지장 없는가?</li>
+    <li><strong>자립성:</strong> 통역사 없이 현지 인력만으로 장비 유지보수 매뉴얼을 숙지할 수 있는가?</li>
+  </ul>
+
+  <div class="sub-label">④ 추가 PoC 적용 가능 이벤트</div>
+  <div class="highlight-teal">엘살바도르 정부 대표단 방한 시 Emotii 스페인어 실시간 통역 PoC 동시 적용 가능 — IEG의 글로벌 교육 역량을 대외적으로 과시하는 최적의 시연 기회</div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-number">Section 05</div>
+  <div class="section-title">구독 모델 및 비용 구조</div>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Basic</div>
+      <div class="price-val">$2.99</div>
+      <div class="price-period">/ 월 · 개인·소규모</div>
+      <div class="price-features">실시간 통역(기본)<br>텍스트 감정 분석</div>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Premium</div>
+      <div class="price-val">$7.99</div>
+      <div class="price-period">/ 월 ($89 / 연)</div>
+      <div class="price-features">무제한 통역<br>음성 감정 인식<br>개인화 사전</div>
+    </div>
+    <div class="price-card recommended">
+      <div class="price-badge">권장</div>
+      <div class="price-name">Enterprise</div>
+      <div class="price-val">별도 협의</div>
+      <div class="price-period">SaaS 기반 · IEG 적합</div>
+      <div class="price-features">전용 API · 관리자 대시보드<br>맞춤형 훈련 프로그램 설계<br><strong>학습자 무제한 접속 코드 제공</strong></div>
+    </div>
+  </div>
+
+  <div class="highlight-teal"><strong>학습자 비용 부담 Zero</strong> — IEG가 Enterprise 구독료 지불 시, 수십~수백 명의 현지 학습자는 앱 다운로드 + 제공 코드 입력만으로 접속. 개인 별도 비용 불필요.</div>
+
+  <div class="sub-label">초기 셋팅 비용 (Enterprise PoC 기준)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>항목</th><th>내용</th><th>예상 비용</th></tr></thead>
+      <tbody>
+        <tr><td>초기 셋팅</td><td>계정 생성, 전용 사전 구축, 보이스 클로닝 셋업</td><td>$5,000 ~ $10,000</td></tr>
+        <tr><td>준비 기간</td><td>데이터 수집 및 엔진 최적화 테스트</td><td>2주 ~ 4주</td></tr>
+        <tr><td>월간 구독료</td><td>사용자 수 기반 (Enterprise 플랜)</td><td>별도 협의</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 6 -->
+<div class="section">
+  <div class="section-number">Section 06</div>
+  <div class="section-title">전략적 도입 제언</div>
+
+  <div class="sub-label">임원 설득 핵심 포인트</div>
+  <ul class="bullet-list">
+    <li><strong>글로벌 교육 표준화 선점:</strong> IEG3400 교육 성공 시 향후 어느 국가에 장비를 팔아도 "IEG 자체 AI 교육 솔루션"으로 패키징하여 판매 가능</li>
+    <li><strong>ROI 실증 데이터 확보:</strong> PoC 기간 절감 데이터로 본 사업 투자 대비 수익을 실제 수치로 증명</li>
+    <li><strong>2028 KOSDAQ IPO 브랜드 가치:</strong> 단순 교육 장비 업체 → Physical AI + 에듀테크 기업 이미지 구축으로 기업 가치 제고</li>
+    <li><strong>엘살바도르 즉시 연계:</strong> 방한 대표단 시연 시 Emotii 스페인어 PoC 동시 적용 → 즉각적 홍보 효과</li>
+  </ul>
+
+  <div class="sub-label">권장 도입 로드맵</div>
+  <div class="roadmap">
+    <div class="roadmap-step">
+      <div class="rs-phase">Phase 1</div>
+      <div class="rs-period">즉시 ~ 1개월</div>
+      <div class="rs-title">계약 및 셋팅</div>
+      <div class="rs-body">Enterprise 계약 협의 · 기술 용어 DB 구축 · 보이스 클로닝 셋업 완료</div>
+    </div>
+    <div class="roadmap-step">
+      <div class="rs-phase">Phase 2 — PoC</div>
+      <div class="rs-period">2개월</div>
+      <div class="rs-title">ADM 지작 실증</div>
+      <div class="rs-body">20명 기술자 대상 IEG3400 교육 · ROI 데이터 확보 · 검증 보고서 작성</div>
+    </div>
+    <div class="roadmap-step">
+      <div class="rs-phase">Phase 3 — 확대</div>
+      <div class="rs-period">3개월~</div>
+      <div class="rs-title">9개국 전사 적용</div>
+      <div class="rs-body">브라질·사우디·동남아 연계 · 엘살바도르 적용 · 표준 교육 솔루션 패키징</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<!-- CONCLUSION -->
+<div class="conclusion">
+  <div class="con-label">결론 및 의사결정 요청</div>
+  <div class="con-title">이것은 "하지 않을 이유가 없는 투자"입니다</div>
+  <div class="con-body">"본 PoC는 단순한 기술 테스트가 아닙니다. 단 4주의 검증만으로도 기존 통역 운영비 대비 약 6,700만 원의 직접 비용 절감 효과를 입증할 수 있으며, 이는 IEG가 전 세계 어디든 '통역사 없는 기술 전수' 시스템을 패키징하여 수출할 수 있는 강력한 비즈니스 모델을 확보하는 과정입니다. 다국적 인원이 섞일수록 인적 통역 비용은 기하급수적으로 증가하지만, Emotii의 비용은 수평적으로 유지됩니다."</div>
+  <div class="con-action">
+    <div class="con-action-label">의사결정 요청 사항</div>
+    <div class="con-action-body">Emotii Enterprise PoC 계약 승인 및 초기 셋팅 예산(USD 5,000~10,000) 집행 승인을 요청드립니다. 우즈베키스탄 ADM 지작을 시작으로 브라질, 사우디, 동남아시아로 IEG3400이 수출될 때, Emotii는 IEG의 글로벌 수익성을 수호하는 핵심 자산이 될 것입니다.</div>
+  </div>
+  <div class="con-footer">주식회사 아이지 해외마케팅팀 · Kelly Cho · 2026년 4월 · CONFIDENTIAL</div>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>
