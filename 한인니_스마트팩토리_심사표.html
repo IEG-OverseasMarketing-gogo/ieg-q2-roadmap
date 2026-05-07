@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>한-인니 스마트팩토리 현지 운영 홍보 사업 — 업체 평가 심사표</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0b2645;
+    --navy-mid: #163a6b;
+    --navy-light: #e8eef7;
+    --gold: #c8960c;
+    --gold-light: #fef8e6;
+    --gold-pale: #fdf3cc;
+    --teal: #0d6e6e;
+    --teal-light: #e4f4f4;
+    --red-light: #fdecea;
+    --red: #b52b2b;
+    --green: #1a6a35;
+    --green-light: #eaf5ee;
+    --blue-light: #e6f0fb;
+    --blue: #1a4a8a;
+    --border: #dde2ea;
+    --border-mid: #c5cdd8;
+    --text: #1a2535;
+    --text-sub: #4a5670;
+    --text-muted: #8090a8;
+    --bg: #f4f6fa;
+    --white: #ffffff;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  html { font-size: 15px; }
+  body {
+    font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── PAGE SHELL ── */
+  .page { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem 1.75rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 300px; height: 120px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-family: 'DM Mono', monospace;
+  }
+  .header-title {
+    font-size: 19px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+  }
+  .header-title span { color: var(--gold); }
+  .header-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+  }
+  .hf-group label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 5px;
+  }
+  .hf-group input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: var(--radius-sm);
+    padding: 9px 14px;
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .hf-group input::placeholder { color: rgba(255,255,255,0.28); }
+  .hf-group input:focus { outline: none; border-color: var(--gold); }
+  .total-badge {
+    background: rgba(200,150,12,0.15);
+    border: 1px solid rgba(200,150,12,0.35);
+    border-radius: var(--radius-sm);
+    padding: 10px 18px;
+    text-align: center;
+    min-width: 110px;
+  }
+  .tb-label { font-size: 10px; letter-spacing: 1px; color: rgba(255,255,255,0.4); font-family: 'DM Mono', monospace; }
+  .tb-score { font-size: 30px; font-weight: 600; color: var(--gold); line-height: 1.1; }
+  .tb-denom { font-size: 12px; color: rgba(255,255,255,0.35); }
+  .tb-grade {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+  }
+  .grade-A { background: #c1f0d0; color: #1a6a35; }
+  .grade-B { background: #d0e8ff; color: #1a4a8a; }
+  .grade-C { background: #fff0c0; color: #7a5800; }
+  .grade-D { background: #ffd0cc; color: #8a2020; }
+  .grade-none { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+
+  /* ── TIPS PANEL ── */
+  .tips-toggle {
+    width: 100%;
+    text-align: left;
+    border: 1px solid #e0c870;
+    background: var(--gold-light);
+    border-radius: var(--radius-sm);
+    padding: 11px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7a5c00;
+    margin-bottom: 1rem;
+    transition: background 0.15s;
+  }
+  .tips-toggle:hover { background: var(--gold-pale); }
+  .tips-toggle .arrow { font-size: 18px; transition: transform 0.25s; color: var(--gold); }
+  .tips-toggle.open .arrow { transform: rotate(180deg); }
+  .tips-panel {
+    border: 1px solid #e0c870;
+    border-top: none;
+    background: var(--gold-light);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    margin-top: -12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s ease, padding 0.25s;
+    padding: 0 18px;
+  }
+  .tips-panel.open { max-height: 600px; padding: 14px 18px; }
+  .tip-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(200,150,12,0.2);
+  }
+  .tip-item:last-child { border-bottom: none; padding-bottom: 4px; }
+  .tip-num {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .tip-body { font-size: 13px; color: #5a4500; line-height: 1.65; }
+  .tip-body strong { font-weight: 600; color: #3d2e00; }
+
+  /* ── EVALUATION SECTIONS ── */
+  .section-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 1.1rem;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .section-card:hover { box-shadow: 0 4px 20px rgba(11,38,69,0.07); }
+
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    background: var(--navy-light);
+    border-bottom: 1px solid var(--border);
+  }
+  .sec-badge {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+  }
+  .sec-title { font-size: 15px; font-weight: 600; color: var(--navy); flex: 1; }
+  .sec-max-tag {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--navy-mid);
+    background: rgba(11,38,69,0.08);
+    padding: 3px 11px;
+    border-radius: 99px;
+    border: 1px solid rgba(11,38,69,0.12);
+  }
+
+  .sec-body { padding: 16px 20px; }
+
+  .checklist { list-style: none; margin-bottom: 14px; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.55;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--navy-mid);
+    margin-top: 6px;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .scoring-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .bar-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    font-family: 'DM Mono', monospace;
+  }
+  .bar-track {
+    height: 7px;
+    background: var(--navy-light);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--navy-mid), #1a6bba);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  .score-input-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .score-input {
+    width: 68px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    padding: 7px 8px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border-mid);
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color 0.2s;
+    -moz-appearance: textfield;
+  }
+  .score-input::-webkit-outer-spin-button,
+  .score-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .score-input:focus { outline: none; border-color: var(--navy); }
+  .score-denom { font-size: 13px; color: var(--text-muted); font-family: 'DM Mono', monospace; }
+
+  .note-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+  }
+  .note-area {
+    width: 100%;
+    min-height: 56px;
+    font-size: 13px;
+    color: var(--text);
+    background: #f8f9fc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 9px 12px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+  }
+  .note-area::placeholder { color: var(--text-muted); font-size: 12px; }
+  .note-area:focus { outline: none; border-color: var(--navy-mid); background: var(--white); }
+
+  /* ── SUMMARY CARD ── */
+  .summary {
+    background: var(--navy);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .summary::before {
+    content: 'TOTAL';
+    position: absolute;
+    right: 1.5rem; top: 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.08);
+    font-weight: 500;
+  }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+  .sum-cell {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-sm);
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .sum-cell-name {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.3;
+    margin-bottom: 6px;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sum-cell-val {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    line-height: 1;
+  }
+  .sum-cell-max {
+    font-size: 10px;
+    color: rgba(255,255,255,0.28);
+    margin-top: 2px;
+    font-family: 'DM Mono', monospace;
+  }
+  .total-final-row {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+  }
+  .tf-label { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 400; }
+  .tf-right { display: flex; align-items: center; gap: 14px; }
+  .tf-score {
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    line-height: 1;
+  }
+  .tf-denom { font-size: 16px; color: rgba(255,255,255,0.3); font-family: 'DM Mono', monospace; }
+  .tf-grade {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 99px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── COMMENT SECTION ── */
+  .comment-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .comment-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .comment-header::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 16px;
+    background: var(--navy);
+    border-radius: 2px;
+  }
+  .template-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .tpl-btn {
+    border: 1px solid var(--border);
+    background: #f8f9fc;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--text-sub);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .tpl-btn:hover { background: var(--navy-light); border-color: var(--border-mid); }
+  .tpl-btn .tpl-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 3px;
+    display: block;
+  }
+  .tpl-btn.good .tpl-label { color: var(--green); }
+  .tpl-btn.poor .tpl-label { color: var(--red); }
+  .final-comment {
+    width: 100%;
+    min-height: 90px;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.7;
+  }
+  .final-comment::placeholder { color: var(--text-muted); font-size: 13px; }
+  .final-comment:focus { outline: none; border-color: var(--navy); }
+
+  /* ── SIGNATURE SECTION ── */
+  .sig-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  .sig-field label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .sig-line {
+    border-top: 1px solid var(--border-mid);
+    padding-top: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    min-height: 28px;
+  }
+
+  /* ── ACTIONS ── */
+  .action-bar {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .btn {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border-mid);
+    color: var(--text-sub);
+  }
+  .btn-ghost:hover { background: var(--navy-light); }
+  .btn-primary {
+    background: var(--navy);
+    border: 1px solid var(--navy);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--navy-mid); }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; }
+    .page { padding: 1rem; }
+    .tips-toggle, .tips-panel, .action-bar, .template-btns { display: none !important; }
+    .section-card, .comment-section, .sig-section { break-inside: avoid; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .summary { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-fields { grid-template-columns: 1fr 1fr; }
+    .total-badge { display: none; }
+    .summary-grid { grid-template-columns: repeat(3, 1fr); }
+    .template-btns { grid-template-columns: 1fr; }
+    .sig-section { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-eyebrow">Business Evaluation Form · 2026</div>
+    <div class="header-title">
+      <span>한-인니</span> 스마트팩토리 현지 운영 및 홍보 사업<br>업체 평가 심사표
+    </div>
+    <div class="header-fields">
+      <div class="hf-group">
+        <label>평가 대상 업체명</label>
+        <input type="text" id="company-name" placeholder="업체명 입력" autocomplete="off" />
+      </div>
+      <div class="hf-group">
+        <label>심사위원 성명</label>
+        <input type="text" id="evaluator-name" placeholder="성명 입력" autocomplete="off" />
+      </div>
+      <div class="total-badge">
+        <div class="tb-label">총점</div>
+        <div class="tb-score" id="header-total">0</div>
+        <div class="tb-denom">/ 100</div>
+        <div class="tb-grade grade-none" id="header-grade">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <button class="tips-toggle" id="tips-toggle" onclick="toggleTips()">
+    <span>💡 심사위원을 위한 '10분 컷' 평가 포인트 — 클릭하여 펼치기</span>
+    <span class="arrow">▾</span>
+  </button>
+  <div class="tips-panel" id="tips-panel">
+    <div class="tip-item">
+      <div class="tip-num">TIP 01 · 실행 역량 확인법</div>
+      <div class="tip-body">"해외 행사 많이 해봤다"는 말보다 <strong>"자카르타·비누스대 상주/협력 인력이 몇 명 있다"</strong>고 구체적으로 말하는 업체에 가점을 주십시오. 현지 상주 인력이 없으면 2억 예산 중 상당 부분이 항공료와 체류비로 낭비될 수 있습니다.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-num">TIP 02 · 콘텐츠 역량 구별법</div>
+      <div class="tip-body">포트폴리오 영상이 단순 '스케치 영상'인지, <strong>기술의 특장점을 설명하는 '기술 마케팅 영상'</strong>인지 반드시 구분하십시오. 생산기술 이해 없이 제작된 영상은 12개 수요기업 성과 창출이 불가합니다.</div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-num">TIP 03 · 사업 이해도 체크포인트</div>
+      <div class="tip-body">단순히 "월 1회 운영위원회를 열겠다"는 업체는 하점. <strong>회의 안건을 미리 설계하고 현지 정부 부처 의사결정권자를 어떻게 섭외하겠다</strong>는 시나리오가 있는 업체는 상점입니다.</div>
+    </div>
+  </div>
+
+  <!-- SECTIONS -->
+  <div id="sections-container"></div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="summary-grid" id="summary-grid"></div>
+    <div class="total-final-row">
+      <div class="tf-label">최종 합산 점수</div>
+      <div class="tf-right">
+        <span class="tf-score" id="total-score">0</span>
+        <span class="tf-denom">/ 100</span>
+        <span class="tf-grade grade-none" id="total-grade">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMENT -->
+  <div class="comment-section">
+    <div class="comment-header">객관적 총평 의견서</div>
+    <div class="template-btns">
+      <button class="tpl-btn good" onclick="applyTemplate('good')">
+        <span class="tpl-label">✓ 우수 업체 템플릿 적용</span>
+        현지 네트워크 탄탄 + 기술 이해도 높은 경우
+      </button>
+      <button class="tpl-btn poor" onclick="applyTemplate('poor')">
+        <span class="tpl-label">✗ 미흡 업체 템플릿 적용</span>
+        행사 경험만 있고 기술 전문성이 결여된 경우
+      </button>
+    </div>
+    <textarea class="final-comment" id="final-comment" placeholder="이 칸에 총평 의견을 직접 작성하거나, 위 템플릿 버튼을 클릭하여 자동 입력하세요."></textarea>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="sig-section">
+    <div class="sig-field">
+      <label>심사 일시</label>
+      <div class="sig-line" id="sig-date"></div>
+    </div>
+    <div class="sig-field">
+      <label>평가 대상 업체</label>
+      <div class="sig-line" id="sig-company">—</div>
+    </div>
+    <div class="sig-field">
+      <label>심사위원 서명</label>
+      <div class="sig-line">&nbsp;</div>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="action-bar">
+    <button class="btn btn-ghost" onclick="resetAll()">↺ &nbsp;초기화</button>
+    <button class="btn btn-primary" onclick="window.print()">⎙ &nbsp;인쇄 / PDF 저장</button>
+  </div>
+
+</div>
+
+<script>
+const SECTIONS = [
+  {
+    num: 1, title: "사업 이해도", max: 20,
+    checks: [
+      "사업의 목적(인도네시아 산업전환)을 정확히 이해하는가?",
+      "현지 파트너(비누스대, 정부)와의 협업 구조를 파악했는가?",
+      "월 운영위원회의 의제 설계 및 정부 부처 섭외 시나리오가 구체적인가?"
+    ],
+    placeholder: "예: 사업 목적에 대한 이해는 있으나, 현지 정부 의사결정권자 섭외 방안이 불명확함"
+  },
+  {
+    num: 2, title: "실행 역량", max: 30,
+    checks: [
+      "자카르타/비누스대 상주 또는 즉시 투입 가능한 현지 협력 인력 네트워크가 있는가?",
+      "기술교육센터 행정 및 시설 관리 능력이 검증되었는가?",
+      "해외 행사 운영 이력이 단순 용역 수행이 아닌 자체 인프라 보유 수준인가?"
+    ],
+    placeholder: "예: 자카르타 상주 인력 2명 보유 확인됨. 현지 행사 운영 실적 3건 구체적 제시"
+  },
+  {
+    num: 3, title: "콘텐츠 전문성", max: 25,
+    checks: [
+      "스마트팩토리/솔루션 기술을 이해하고 영상 및 홍보책자로 구현 가능한가?",
+      "단순 스케치 영상이 아닌 '기술 마케팅 영상' 제작 역량이 있는가?",
+      "12개 수요기업의 성과를 이끌어낼 마케팅 전략이 참신하고 실현 가능한가?"
+    ],
+    placeholder: "예: 제조업 기술 마케팅 영상 포트폴리오 3건 확인. 기술 이해도 양호하나 전략의 참신성 보통"
+  },
+  {
+    num: 4, title: "예산 및 관리", max: 15,
+    checks: [
+      "영세율 적용 및 국외 용역 정산 프로세스를 명확히 숙지하고 있는가?",
+      "예산 배분이 과업 대비 효율적이고 현실적인가?",
+      "항공·체류비 과다 편성 등 비효율적 예산 요소는 없는가?"
+    ],
+    placeholder: "예: 국외 용역 영세율 처리 경험 보유 확인. 예산 내 현지 인건비 비중 적절함"
+  },
+  {
+    num: 5, title: "기대 효과", max: 10,
+    checks: [
+      "용역 종료 후에도 한국 기술의 현지 확산 가능성을 구체적으로 제시했는가?",
+      "현지 행정 지연 등 발생 가능한 리스크 대응책이 구체적인가?"
+    ],
+    placeholder: "예: 사후 지속 확산 로드맵 제시됨. 다만 행정 지연 리스크 대응이 다소 추상적임"
+  }
+];
+
+function buildSections() {
+  const container = document.getElementById('sections-container');
+  const summaryGrid = document.getElementById('summary-grid');
+
+  SECTIONS.forEach(sec => {
+    // Section card
+    const card = document.createElement('div');
+    card.className = 'section-card';
+
+    const checksHtml = sec.checks.map(c =>
+      `<li><div class="check-dot"></div><span>${c}</span></li>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="sec-head">
+        <div class="sec-badge">${sec.num}</div>
+        <div class="sec-title">${sec.title}</div>
+        <div class="sec-max-tag">배점 ${sec.max}점</div>
+      </div>
+      <div class="sec-body">
+        <ul class="checklist">${checksHtml}</ul>
+        <div class="scoring-row">
+          <div>
+            <div class="bar-label">득점 현황</div>
+            <div class="bar-track"><div class="bar-fill" id="bar-${sec.num}"></div></div>
+          </div>
+          <div class="score-input-group">
+            <input type="number" class="score-input" id="score-${sec.num}"
+              min="0" max="${sec.max}" placeholder="0"
+              oninput="onScore(${sec.num}, ${sec.max})" />
+            <span class="score-denom">/ ${sec.max}</span>
+          </div>
+        </div>
+        <div class="note-label">비고 / 특이사항</div>
+        <textarea class="note-area" placeholder="${sec.placeholder}"></textarea>
+      </div>`;
+
+    container.appendChild(card);
+
+    // Summary cell
+    const cell = document.createElement('div');
+    cell.className = 'sum-cell';
+    cell.innerHTML = `
+      <div class="sum-cell-name">${sec.title}</div>
+      <div class="sum-cell-val" id="sum-${sec.num}">—</div>
+      <div class="sum-cell-max">/ ${sec.max}</div>`;
+    summaryGrid.appendChild(cell);
+  });
+}
+
+function onScore(num, max) {
+  const input = document.getElementById(`score-${num}`);
+  let val = parseInt(input.value);
+  if (isNaN(val) || val < 0) { val = 0; input.value = 0; }
+  if (val > max) { val = max; input.value = max; }
+
+  document.getElementById(`bar-${num}`).style.width = (val / max * 100) + '%';
+  document.getElementById(`sum-${num}`).textContent = val;
+  recalc();
+}
+
+function recalc() {
+  let total = 0;
+  SECTIONS.forEach(sec => {
+    const v = parseInt(document.getElementById(`score-${sec.num}`).value) || 0;
+    total += v;
+  });
+
+  document.getElementById('total-score').textContent = total;
+  document.getElementById('header-total').textContent = total;
+
+  let grade, gradeClass;
+  if (total >= 90)      { grade = 'A  우수'; gradeClass = 'grade-A'; }
+  else if (total >= 75) { grade = 'B  양호'; gradeClass = 'grade-B'; }
+  else if (total >= 60) { grade = 'C  보통'; gradeClass = 'grade-C'; }
+  else if (total > 0)   { grade = 'D  미흡'; gradeClass = 'grade-D'; }
+  else                  { grade = '—';      gradeClass = 'grade-none'; }
+
+  ['total-grade', 'header-grade'].forEach(id => {
+    const el = document.getElementById(id);
+    el.textContent = grade;
+    el.className = 'tf-grade ' + gradeClass;
+  });
+  document.getElementById('header-grade').className = 'tb-grade ' + gradeClass;
+}
+
+function toggleTips() {
+  const btn = document.getElementById('tips-toggle');
+  const panel = document.getElementById('tips-panel');
+  btn.classList.toggle('open');
+  panel.classList.toggle('open');
+}
+
+function applyTemplate(type) {
+  const co = document.getElementById('company-name').value.trim() || '해당 업체';
+  const t = {
+    good: `"${co}"는 인도네시아 현지 네트워크가 탄탄하고, 특히 스마트팩토리 기술에 대한 이해도가 높아 단순 행사 대행을 넘어 기술 확산의 교두보 역할을 수행할 것으로 기대됨. 예산 편성 또한 국외 용역의 특성을 잘 반영하고 있으며, 리스크 대응 시나리오가 구체적임.`,
+    poor: `"${co}"는 행사 운영 경험은 풍부하나 본 사업의 핵심인 스마트팩토리 기술 전문성이 결여되어 보임. 콘텐츠 제작 계획이 일반 홍보에 치중되어 있으며, 현지 리스크에 대한 구체적인 대응 방안이 부족함. 현지 상주 인력 확보 방안도 불명확하여 예산 효율성에 우려가 있음.`
+  };
+  document.getElementById('final-comment').value = t[type];
+}
+
+function resetAll() {
+  if (!confirm('모든 입력 내용을 초기화하시겠습니까?')) return;
+  document.getElementById('company-name').value = '';
+  document.getElementById('evaluator-name').value = '';
+  document.getElementById('final-comment').value = '';
+  document.getElementById('sig-company').textContent = '—';
+  document.querySelectorAll('.note-area').forEach(el => el.value = '');
+  SECTIONS.forEach(sec => {
+    document.getElementById(`score-${sec.num}`).value = '';
+    document.getElementById(`bar-${sec.num}`).style.width = '0%';
+    document.getElementById(`sum-${sec.num}`).textContent = '—';
+  });
+  document.getElementById('total-score').textContent = '0';
+  document.getElementById('header-total').textContent = '0';
+  ['total-grade', 'header-grade'].forEach(id => {
+    const el = document.getElementById(id);
+    el.textContent = '—';
+    el.className = (id === 'header-grade' ? 'tb-grade' : 'tf-grade') + ' grade-none';
+  });
+}
+
+// Signature date & company sync
+function initMeta() {
+  const now = new Date();
+  const d = `${now.getFullYear()}년 ${now.getMonth()+1}월 ${now.getDate()}일`;
+  document.getElementById('sig-date').textContent = d;
+
+  document.getElementById('company-name').addEventListener('input', function() {
+    document.getElementById('sig-company').textContent = this.value.trim() || '—';
+  });
+}
+
+buildSections();
+initMeta();
+</script>
+</body>
+</html>
