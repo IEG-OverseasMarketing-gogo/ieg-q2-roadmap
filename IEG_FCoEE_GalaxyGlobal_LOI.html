@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEG × FCoEE × Galaxy Global — LOI & R/R</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #0F2447;
+    --blue:   #1E4B8F;
+    --blue2:  #2E6FD9;
+    --lblue:  #D8E9F8;
+    --accent: #C8392B;
+    --gold:   #D4A227;
+    --green:  #1A6B3C;
+    --lgreen: #E3F3EB;
+    --lyellow:#FFF8E1;
+    --gray1:  #F6F8FB;
+    --gray2:  #E8EDF5;
+    --gray3:  #9BA8BF;
+    --dark:   #1C2130;
+    --text:   #2A3148;
+    --line:   #CBD5E8;
+    --white:  #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--gray1);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ── PRINT / PAGE BREAKS ───────────────────────── */
+  @media print {
+    body { background: white; }
+    .no-print { display: none; }
+    .page-break { page-break-before: always; }
+    .card { box-shadow: none; border: 1px solid #ddd; }
+  }
+
+  /* ── HEADER ────────────────────────────────────── */
+  .site-header {
+    background: linear-gradient(135deg, var(--navy) 0%, #1A3A6E 60%, #0D3B7A 100%);
+    color: white;
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(46,111,217,0.12);
+  }
+  .header-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.85);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-family: 'DM Mono', monospace;
+  }
+  .header-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .header-title span { color: #7EB8F7; }
+  .header-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+  .parties-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .party-card {
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 18px 20px;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+  }
+  .party-card:hover { background: rgba(255,255,255,0.14); }
+  .party-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 6px;
+  }
+  .party-name { font-size: 15px; font-weight: 700; color: white; margin-bottom: 2px; }
+  .party-loc  { font-size: 12px; color: rgba(255,255,255,0.55); }
+  .party-role { font-size: 12px; color: #7EB8F7; margin-top: 4px; }
+  .meta-line {
+    margin-top: 28px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    font-family: 'DM Mono', monospace;
+    display: flex; gap: 24px; flex-wrap: wrap;
+  }
+  .meta-line span { display: flex; align-items: center; gap: 6px; }
+
+  /* ── NAV TABS ───────────────────────────────────── */
+  .nav-wrap {
+    background: white;
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 16px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray3);
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-tab:hover { color: var(--blue); }
+  .nav-tab.active { color: var(--navy); border-bottom-color: var(--blue2); font-weight: 700; }
+  .nav-num {
+    width: 20px; height: 20px;
+    background: var(--gray2);
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+  }
+  .nav-tab.active .nav-num { background: var(--blue2); color: white; }
+
+  /* ── MAIN LAYOUT ────────────────────────────────── */
+  .main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── CARDS ──────────────────────────────────────── */
+  .card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(15,36,71,0.07);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .card-header {
+    padding: 20px 28px;
+    background: var(--navy);
+    color: white;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .card-header.blue  { background: var(--blue); }
+  .card-header.blue2 { background: var(--blue2); }
+  .card-header.green { background: var(--green); }
+  .card-icon { font-size: 22px; }
+  .card-title { font-family: 'Noto Serif KR', serif; font-size: 17px; font-weight: 700; }
+  .card-desc  { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+  .card-body  { padding: 28px; }
+
+  /* ── SECTION HEADING ─────────────────────────────── */
+  .sec-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .sec-num {
+    width: 36px; height: 36px;
+    background: var(--navy);
+    color: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .sec-sub { font-size: 13px; color: var(--gray3); margin-bottom: 28px; line-height: 1.6; }
+
+  /* ── MAPPING TABLE ───────────────────────────────── */
+  .map-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .map-table th {
+    background: var(--navy);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .map-table th:first-child { border-radius: 0; width: 160px; }
+  .map-table td { padding: 14px 16px; vertical-align: top; border-bottom: 1px solid var(--gray2); }
+  .map-table tr:last-child td { border-bottom: none; }
+  .map-table tr:nth-child(even) td { background: var(--gray1); }
+  .skill-cell {
+    background: var(--lblue) !important;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 13px;
+  }
+  .skill-cell .sub { font-size: 11px; color: var(--blue); font-weight: 400; margin-top: 2px; }
+  .equip-tag {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 2px 2px 2px 0;
+    font-weight: 500;
+  }
+  .equip-tag.alt { background: var(--blue2); }
+  .dot-list { list-style: none; padding: 0; }
+  .dot-list li { padding: 2px 0; color: var(--text); }
+  .dot-list li::before { content: "·"; color: var(--blue2); font-weight: 700; margin-right: 6px; }
+
+  /* ── BENEFIT CARDS ───────────────────────────────── */
+  .benefit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .benefit-item {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .benefit-item:hover { box-shadow: 0 6px 24px rgba(15,36,71,0.1); transform: translateY(-2px); }
+  .benefit-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue2), var(--navy));
+  }
+  .benefit-icon { font-size: 28px; margin-bottom: 10px; }
+  .benefit-cat { font-weight: 700; color: var(--navy); font-size: 14px; margin-bottom: 6px; }
+  .benefit-text { font-size: 13px; color: #4A5568; line-height: 1.6; }
+
+  /* ── CONTEXT BOX ─────────────────────────────────── */
+  .context-box {
+    background: linear-gradient(135deg, var(--lblue) 0%, #E8F4FF 100%);
+    border: 1px solid #B3D4F5;
+    border-left: 4px solid var(--blue2);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 24px;
+  }
+  .context-box h4 { color: var(--navy); font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+  .context-stat {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 8px; font-size: 13px; color: var(--text);
+  }
+  .stat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue2); margin-top: 7px; flex-shrink: 0; }
+  .stat-highlight { color: var(--accent); font-weight: 700; }
+
+  /* ── LOI TEXT ────────────────────────────────────── */
+  .loi-section { margin-bottom: 28px; }
+  .loi-label {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue2);
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .loi-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .loi-body {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--text);
+    padding: 20px 24px;
+    background: var(--gray1);
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .loi-body p { margin-bottom: 12px; }
+  .loi-body p:last-child { margin-bottom: 0; }
+  .scope-list { list-style: none; padding: 0; }
+  .scope-list li {
+    display: flex; gap: 14px; padding: 12px 16px;
+    border-bottom: 1px solid var(--gray2);
+    font-size: 13px;
+  }
+  .scope-list li:last-child { border-bottom: none; }
+  .scope-num {
+    width: 24px; height: 24px;
+    background: var(--blue2);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── NEXT STEPS TABLE ────────────────────────────── */
+  .steps-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .steps-table th {
+    background: var(--blue);
+    color: white;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .steps-table td { padding: 12px 14px; border-bottom: 1px solid var(--gray2); vertical-align: middle; }
+  .steps-table tr:last-child td { border-bottom: none; }
+  .steps-table tr:nth-child(even) td { background: var(--gray1); }
+  .step-num-cell {
+    width: 40px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--blue2) !important;
+    font-size: 14px;
+  }
+  .date-cell { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--blue2); white-space: nowrap; }
+  .owner-cell { font-size: 12px; color: var(--gray3); }
+
+  /* ── RR TABLE ────────────────────────────────────── */
+  .rr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .rr-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+  }
+  .rr-table th:nth-child(1) { background: var(--navy); }
+  .rr-table th:nth-child(2) { background: #1A5C9E; }
+  .rr-table th:nth-child(3) { background: var(--green); }
+  .rr-table th:nth-child(4) { background: #8B6914; }
+  .rr-table td { padding: 14px 16px; vertical-align: top; border-bottom: 1px solid var(--gray2); font-size: 13px; }
+  .rr-table tr:last-child td { border-bottom: none; }
+  .rr-area { font-weight: 700; color: var(--navy); background: var(--lblue) !important; }
+  .rr-list { list-style: none; padding: 0; }
+  .rr-list li { padding: 3px 0; }
+  .rr-list li::before { content: "▸ "; color: var(--blue2); font-size: 10px; }
+
+  /* ── KPI TABLE ───────────────────────────────────── */
+  .kpi-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .kpi-table th {
+    background: var(--blue2);
+    color: white;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .kpi-table td { padding: 13px 14px; border-bottom: 1px solid var(--gray2); }
+  .kpi-table tr:nth-child(even) td { background: var(--gray1); }
+  .kpi-table tr:last-child td { border-bottom: none; }
+  .kpi-target { font-weight: 700; color: var(--green); }
+
+  /* ── SIGNATURE BLOCK ─────────────────────────────── */
+  .sig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .sig-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .sig-header {
+    padding: 14px 18px;
+    font-weight: 700;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+  }
+  .sig-header.ieg    { background: var(--navy); }
+  .sig-header.fcoee  { background: var(--green); }
+  .sig-header.galaxy { background: #7B5E12; }
+  .sig-body { padding: 24px 18px; background: white; }
+  .sig-line { margin-bottom: 14px; }
+  .sig-field-label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--gray3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .sig-field-line { border-bottom: 1.5px solid var(--line); padding-bottom: 6px; min-height: 28px; }
+
+  /* ── DISCLAIMER BOX ──────────────────────────────── */
+  .disclaimer {
+    background: var(--gray1);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 24px;
+    font-size: 12px;
+    color: var(--gray3);
+    line-height: 1.8;
+    margin-top: 28px;
+  }
+  .disclaimer strong { color: var(--text); }
+
+  /* ── FOOTER ──────────────────────────────────────── */
+  .doc-footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--gray3);
+    font-family: 'DM Mono', monospace;
+    padding: 20px;
+    border-top: 1px solid var(--line);
+    margin-top: 20px;
+  }
+
+  /* ── PRINT BTN ───────────────────────────────────── */
+  .print-btn {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 13px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(15,36,71,0.3);
+    display: flex; align-items: center; gap: 8px;
+    transition: all 0.2s;
+    z-index: 200;
+  }
+  .print-btn:hover { background: var(--blue); transform: translateY(-2px); }
+
+  @media (max-width: 700px) {
+    .parties-grid { grid-template-columns: 1fr; }
+    .benefit-grid { grid-template-columns: 1fr; }
+    .sig-grid { grid-template-columns: 1fr; }
+    .site-header { padding: 32px 20px; }
+    .header-title { font-size: 24px; }
+    .main { padding: 24px 12px 60px; }
+    .map-table { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-badge">Letter of Intent · Roles &amp; Responsibilities · 2026</div>
+    <div class="header-title">IEG × FCoEE × <span>Galaxy Global</span></div>
+    <div class="header-sub">스마트 제조 인재 양성 파트너십 — Smart Manufacturing Talent Development Partnership</div>
+    <div class="parties-grid">
+      <div class="party-card">
+        <div class="party-label">갑 · Party A</div>
+        <div class="party-name">IEG Co., Ltd.</div>
+        <div class="party-loc">대한민국 / Republic of Korea</div>
+        <div class="party-role">스마트팩토리 실습장비 제조사</div>
+      </div>
+      <div class="party-card">
+        <div class="party-label">을 · Party B</div>
+        <div class="party-name">FCoEE</div>
+        <div class="party-loc">Penang, Malaysia</div>
+        <div class="party-role">기술직업교육 기관 (TVET)</div>
+      </div>
+      <div class="party-card">
+        <div class="party-label">병 · Party C</div>
+        <div class="party-name">Galaxy Global Sdn. Bhd.</div>
+        <div class="party-loc">Malaysia</div>
+        <div class="party-role">현지 유통·파트너십 전문사</div>
+      </div>
+    </div>
+    <div class="meta-line">
+      <span>📅 작성일 / Date: 30 June 2026</span>
+      <span>⏱ 유효기간: 12개월 (자동 갱신 협의)</span>
+      <span>🔒 Confidential – For Discussion Purposes Only</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── NAV ── -->
+<nav class="nav-wrap">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="showSection(0, this)">
+      <span class="nav-num">1</span> 스킬 매핑
+    </button>
+    <button class="nav-tab" onclick="showSection(1, this)">
+      <span class="nav-num">2</span> 졸업생 베네핏
+    </button>
+    <button class="nav-tab" onclick="showSection(2, this)">
+      <span class="nav-num">3</span> 협력의향서 (LOI)
+    </button>
+    <button class="nav-tab" onclick="showSection(3, this)">
+      <span class="nav-num">4</span> R/R 매트릭스
+    </button>
+    <button class="nav-tab" onclick="showSection(4, this)">
+      <span class="nav-num">5</span> 서명란
+    </button>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main class="main">
+
+  <!-- ── SECTION 1: SKILL MAPPING ── -->
+  <div class="section active" id="sec0">
+    <div class="sec-title"><div class="sec-num">1</div> Intel Penang 요구 기술 스킬 vs IEG 장비 매핑</div>
+    <p class="sec-sub">Intel, Broadcom, Western Digital 등 페낭 E&amp;E 제조사의 실제 채용 요건을 분석하고,<br>IEG 장비(3432/3430/6030)를 통해 FCoEE 학생이 해당 역량을 어떻게 습득하는지를 연결한 매핑 매트릭스입니다.</p>
+    <div class="card">
+      <div class="card-header">
+        <span class="card-icon">🔗</span>
+        <div>
+          <div class="card-title">채용 요건 ↔ IEG 장비 1:1 매핑 테이블</div>
+          <div class="card-desc">출처: PSDC 2024 vacancy data · Jobstreet 페낭 채용공고 분석 · Intel Malaysia 인재개발 발표 2025~2026</div>
+        </div>
+      </div>
+      <div class="card-body" style="padding:0; overflow-x:auto;">
+        <table class="map-table">
+          <thead>
+            <tr>
+              <th>Intel Penang 요구 스킬</th>
+              <th>상세 역량 요건</th>
+              <th>IEG 장비</th>
+              <th>FCoEE 실습 모듈</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="skill-cell">PLC 프로그래밍<br>&amp; 제어 로직<div class="sub">Control Logic</div></td>
+              <td><ul class="dot-list"><li>Ladder Logic / 구조화 텍스트 프로그래밍</li><li>제조 장비 자동화 시퀀스 설계</li><li>이상 감지 및 알람 로직 구현</li></ul></td>
+              <td><span class="equip-tag">IEG 3432</span><span class="equip-tag alt">IEG 3430</span></td>
+              <td><ul class="dot-list"><li>PLC 기초·심화 프로그래밍</li><li>I/O 제어 실습</li><li>다축 연동 시퀀스</li></ul></td>
+            </tr>
+            <tr>
+              <td class="skill-cell">센서 시스템<br>&amp; 계측<div class="sub">Sensor &amp; Instrumentation</div></td>
+              <td><ul class="dot-list"><li>온도·압력·진동·광학 센서 적용</li><li>아날로그/디지털 신호 처리</li><li>공정 데이터 실시간 모니터링</li></ul></td>
+              <td><span class="equip-tag">IEG 3432</span><span class="equip-tag alt">IEG 6030</span></td>
+              <td><ul class="dot-list"><li>센서 종류별 배선·교정</li><li>신호 처리 회로 실습</li><li>데이터 수집·분석</li></ul></td>
+            </tr>
+            <tr>
+              <td class="skill-cell">스마트팩토리<br>통합 운영<div class="sub">Smart Factory Integration</div></td>
+              <td><ul class="dot-list"><li>MES·SCADA 인터페이스 이해</li><li>HMI(터치패널) 조작 및 설정</li><li>생산 데이터 시각화</li></ul></td>
+              <td><span class="equip-tag alt">IEG 6030</span></td>
+              <td><ul class="dot-list"><li>스마트팩토리 아키텍처</li><li>HMI 화면 설계</li><li>OEE 지표 모니터링</li></ul></td>
+            </tr>
+            <tr>
+              <td class="skill-cell">자동화 공정<br>유지보수<div class="sub">Preventive Maintenance</div></td>
+              <td><ul class="dot-list"><li>예방 정비(PM) 절차 수행</li><li>트러블슈팅 및 RCA(근본원인분석)</li><li>설비 다운타임 최소화</li></ul></td>
+              <td><span class="equip-tag">IEG 3432</span><span class="equip-tag">IEG 3430</span><span class="equip-tag alt">IEG 6030</span></td>
+              <td><ul class="dot-list"><li>고장 시나리오 실습</li><li>교체·정비 순서 훈련</li><li>장비 점검 체크리스트</li></ul></td>
+            </tr>
+            <tr>
+              <td class="skill-cell">전기·전자<br>기초 역량<div class="sub">Electrical &amp; Electronics</div></td>
+              <td><ul class="dot-list"><li>회로 독해 및 배선 작업</li><li>전기 안전 규정 준수</li><li>PCB 어셈블리 기초</li></ul></td>
+              <td><span class="equip-tag">IEG 3430</span><span class="equip-tag">IEG 3432</span></td>
+              <td><ul class="dot-list"><li>배선 실습 모듈</li><li>안전 교육 시뮬레이션</li><li>계측기 사용법</li></ul></td>
+            </tr>
+            <tr>
+              <td class="skill-cell">품질 관리<br>&amp; SPC<div class="sub">Quality &amp; Process Control</div></td>
+              <td><ul class="dot-list"><li>통계적 공정 관리(SPC) 기초</li><li>불량 판별 및 검사 기준 적용</li><li>5S·린 제조 원칙</li></ul></td>
+              <td><span class="equip-tag alt">IEG 6030</span></td>
+              <td><ul class="dot-list"><li>공정 데이터 수집·분석</li><li>불량 패턴 인식 실습</li><li>린 제조 시뮬레이션</li></ul></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: BENEFITS ── -->
+  <div class="section" id="sec1">
+    <div class="sec-title"><div class="sec-num">2</div> FCoEE 졸업생이 받는 베네핏</div>
+    <p class="sec-sub">IEG 장비 기반 커리큘럼을 이수한 FCoEE 졸업생에게 제공되는 구체적 혜택입니다.</p>
+    <div class="benefit-grid">
+      <div class="benefit-item">
+        <div class="benefit-icon">🏭</div>
+        <div class="benefit-cat">취업 준비도 (Job Readiness)</div>
+        <div class="benefit-text">Intel, Broadcom, WD 등 페낭 E&amp;E 주요 기업이 요구하는 스킬셋을 재학 중 완성 → 즉시 전력화 가능한 인재로 졸업</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">📜</div>
+        <div class="benefit-cat">국제 인정 자격 (International Credential)</div>
+        <div class="benefit-text">IEG 장비 기반 이수증 발급. 한국 제조업 표준 커리큘럼 기반으로 국제 통용 레퍼런스 확보</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">💼</div>
+        <div class="benefit-cat">실습 중심 포트폴리오 (Hands-on Portfolio)</div>
+        <div class="benefit-text">PLC 프로젝트, 센서 회로 설계, HMI 화면 구성 등 실물 결과물을 채용 포트폴리오로 제출 가능</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🌐</div>
+        <div class="benefit-cat">취업 연계 네트워크 (Employment Network)</div>
+        <div class="benefit-text">Galaxy Global을 통한 페낭 E&amp;E 기업 채용 담당자 직접 연결. 인턴십·현장실습 우선 기회 제공</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">📈</div>
+        <div class="benefit-cat">연속 교육 경로 (Career Pathway)</div>
+        <div class="benefit-text">FCoEE Diploma → 추가 자격 취득 → 엔지니어 승급으로 이어지는 명확한 커리어 로드맵 제시</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🔬</div>
+        <div class="benefit-cat">산학 프로젝트 참여 (Industry Projects)</div>
+        <div class="benefit-text">IEG·Galaxy Global이 주관하는 산학 협력 프로젝트에 FCoEE 학생 우선 참여 기회 제공</div>
+      </div>
+    </div>
+    <div class="context-box">
+      <h4>📊 페낭 E&amp;E 인재 수요 현황 (2026)</h4>
+      <div class="context-stat"><div class="stat-dot"></div><div>2024년 페낭 E&amp;E 분야 승인 투자액: <strong>RM 20.8억 (USD 44억)</strong> — 전년 대비 35% 증가</div></div>
+      <div class="context-stat"><div class="stat-dot"></div><div>2026년 말까지 신규 기술직 수요: <strong>12,000~15,000개</strong> (PSDC 데이터)</div></div>
+      <div class="context-stat"><div class="stat-dot"></div><div>현재 공급 가능 인력: 수요의 60~65% → <span class="stat-highlight">35%는 인재 공백</span></div></div>
+      <div class="context-stat"><div class="stat-dot"></div><div>고급 패키징·자동화·PLC 전문 인력 <span class="stat-highlight">공석률 30% 초과</span> (2024 mid, PSDC)</div></div>
+      <div class="context-stat" style="margin-top:8px;"><div class="stat-dot" style="background:var(--accent)"></div><div><strong style="color:var(--accent)">→ FCoEE × IEG 파트너십이 직접 해결하는 갭입니다.</strong></div></div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: LOI ── -->
+  <div class="section" id="sec2">
+    <div class="sec-title"><div class="sec-num">3</div> 협력의향서 (Letter of Intent)</div>
+    <p class="sec-sub">본 LOI는 법적 구속력을 갖는 계약서가 아니며, 향후 정식 MOU 또는 계약 체결을 위한 협력 의사 표명 및 상호 이해를 목적으로 합니다.</p>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="loi-section">
+          <div class="loi-label">전문 · Preamble</div>
+          <div class="loi-body">
+            <p>IEG Co., Ltd. (이하 '갑'), FCoEE (이하 '을'), Galaxy Global Sdn. Bhd. (이하 '병')은 말레이시아 페낭 지역 전기·전자(E&amp;E) 제조업 분야의 기술 인재 양성을 위해 상호 협력할 의향이 있음을 이 문서를 통해 확인합니다.</p>
+            <p>본 LOI는 법적 구속력을 갖는 계약서가 아니며, 향후 정식 MOU 또는 계약 체결을 위한 협력 의사 표명 및 상호 이해를 목적으로 합니다.</p>
+          </div>
+        </div>
+
+        <div class="loi-section">
+          <div class="loi-label">협력 목적 · Purpose</div>
+          <ul class="scope-list" style="background:var(--gray1);border:1px solid var(--line);border-radius:10px;overflow:hidden;">
+            <li><div class="scope-num">①</div><div>IEG 스마트팩토리 실습장비(IEG 3432/3430, 6030) 기반 커리큘럼을 FCoEE에 도입</div></li>
+            <li><div class="scope-num">②</div><div>Intel, Broadcom, Western Digital 등 페낭 E&amp;E 기업이 요구하는 기술 인재를 체계적으로 양성</div></li>
+            <li><div class="scope-num">③</div><div>FCoEE 졸업생의 현지 E&amp;E 제조사 취업률 향상 및 Galaxy Global을 통한 취업 연계 실현</div></li>
+            <li><div class="scope-num">④</div><div>한국-말레이시아 간 기술교육 협력 모델 구축 및 지역 확산 가능성 탐색</div></li>
+          </ul>
+        </div>
+
+        <div class="loi-section">
+          <div class="loi-label">협력 범위 · Scope of Cooperation</div>
+          <ul class="scope-list" style="background:var(--gray1);border:1px solid var(--line);border-radius:10px;overflow:hidden;">
+            <li><div class="scope-num" style="background:var(--navy);">①</div><div><strong>장비 도입:</strong> IEG(갑)이 FCoEE(을)에게 스마트팩토리 실습장비를 공급하고, Galaxy Global(병)이 현지 물류·설치·사후지원을 담당한다.</div></li>
+            <li><div class="scope-num" style="background:var(--navy);">②</div><div><strong>커리큘럼 개발:</strong> 갑은 IEG 장비 기반 표준 커리큘럼을 제공하고, 을은 FCoEE 환경에 맞게 현지화하여 운영한다.</div></li>
+            <li><div class="scope-num" style="background:var(--navy);">③</div><div><strong>강사 역량 강화:</strong> 갑은 FCoEE 교·강사를 대상으로 Training of Trainers(ToT) 프로그램을 실시한다.</div></li>
+            <li><div class="scope-num" style="background:var(--navy);">④</div><div><strong>취업 연계:</strong> 병(Galaxy Global)은 페낭 E&amp;E 기업 채용 담당자와 FCoEE 졸업생을 연결하는 취업 매칭 플랫폼 역할을 수행한다.</div></li>
+            <li><div class="scope-num" style="background:var(--navy);">⑤</div><div><strong>성과 모니터링:</strong> 3자는 반기별로 취업률, 장비 가동률, 커리큘럼 이수율 등 KPI를 공동 검토한다.</div></li>
+          </ul>
+        </div>
+
+        <div class="loi-section">
+          <div class="loi-label">다음 단계 · Next Steps</div>
+          <div style="overflow-x:auto;">
+            <table class="steps-table">
+              <thead>
+                <tr>
+                  <th style="width:44px;text-align:center;">단계</th>
+                  <th>일정</th>
+                  <th>내용</th>
+                  <th>담당</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="step-num-cell">1</td><td class="date-cell">2026년 7월 중</td><td>Galaxy Global Sean Lim의 FCoEE 현장 방문 및 장비 도입 규모 확정</td><td class="owner-cell">Galaxy Global + FCoEE</td></tr>
+                <tr><td class="step-num-cell">2</td><td class="date-cell">2026년 8월 말</td><td>IEG 장비 사양 확정 및 견적서 발행</td><td class="owner-cell">IEG + FCoEE</td></tr>
+                <tr><td class="step-num-cell">3</td><td class="date-cell">2026년 9월</td><td>정식 MOU 및 장비 공급 계약 체결</td><td class="owner-cell">3자 공동</td></tr>
+                <tr><td class="step-num-cell">4</td><td class="date-cell">2026년 4분기</td><td>장비 납품·설치 및 교·강사 ToT 실시</td><td class="owner-cell">IEG + Galaxy Global</td></tr>
+                <tr><td class="step-num-cell">5</td><td class="date-cell">2027년 1학기</td><td>FCoEE 학생 대상 IEG 커리큘럼 첫 운영 개시</td><td class="owner-cell">FCoEE</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: R/R MATRIX ── -->
+  <div class="section" id="sec3">
+    <div class="sec-title"><div class="sec-num">4</div> 역할 &amp; 책임 매트릭스 (R/R Matrix)</div>
+    <p class="sec-sub">3자의 협력 영역별 역할과 책임을 아래와 같이 정의합니다.</p>
+    <div class="card">
+      <div class="card-body" style="padding:0;overflow-x:auto;">
+        <table class="rr-table">
+          <thead>
+            <tr>
+              <th style="width:160px;">협력 영역</th>
+              <th>🇰🇷 IEG Co., Ltd. (한국)<br><small style="font-weight:400;opacity:.8;">역할 &amp; 책임</small></th>
+              <th>🇲🇾 FCoEE (페낭)<br><small style="font-weight:400;opacity:.8;">역할 &amp; 책임</small></th>
+              <th>🇲🇾 Galaxy Global (말레이시아)<br><small style="font-weight:400;opacity:.8;">역할 &amp; 책임</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rr-area">장비 공급<br>&amp; 기술 지원</td>
+              <td><ul class="rr-list"><li>IEG 3432/3430, 6030 공급·설치·A/S 보장</li><li>장비 운영 매뉴얼 및 기술 자료 제공</li></ul></td>
+              <td><ul class="rr-list"><li>장비 도입 예산 확보</li><li>설치 공간·전기 인프라 준비 및 유지 관리</li></ul></td>
+              <td><ul class="rr-list"><li>도입 계약 중개 및 현지 물류·통관 지원</li><li>사후 서비스 코디네이션</li></ul></td>
+            </tr>
+            <tr>
+              <td class="rr-area">커리큘럼<br>개발·공급</td>
+              <td><ul class="rr-list"><li>IEG 장비 연계 표준 커리큘럼 패키지 제공</li><li>강사 역량 강화(ToT) 실시</li></ul></td>
+              <td><ul class="rr-list"><li>커리큘럼 FCoEE 환경 맞춤화 및 운영</li><li>강사진 ToT 참여</li></ul></td>
+              <td><ul class="rr-list"><li>현지 산업 수요 반영 자문 제공</li><li>KPI 모니터링 지원</li></ul></td>
+            </tr>
+            <tr>
+              <td class="rr-area">취업 연계<br>&amp; 네트워크</td>
+              <td><ul class="rr-list"><li>한국 파트너사 네트워크 정보 제공</li><li>기업 방문 프로그램 기획</li></ul></td>
+              <td><ul class="rr-list"><li>졸업생 취업 데이터 공유 및 추적</li><li>기업 방문 참여 독려</li></ul></td>
+              <td><ul class="rr-list"><li>페낭 E&amp;E 기업 채용 담당자 직접 연결</li><li>인턴십 MOU 체결 지원</li></ul></td>
+            </tr>
+            <tr>
+              <td class="rr-area">공동 마케팅<br>&amp; 홍보</td>
+              <td><ul class="rr-list"><li>한국 내 FCoEE 파트너십 사례 홍보</li><li>국제 전시 공동 참가</li></ul></td>
+              <td><ul class="rr-list"><li>말레이시아 내 IEG 장비 도입 우수사례 홍보</li><li>입학 홍보에 파트너십 활용</li></ul></td>
+              <td><ul class="rr-list"><li>말레이시아 업계·정부 대상 파트너십 홍보</li><li>MOHE 등 인증 지원</li></ul></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header blue2">
+        <span class="card-icon">📊</span>
+        <div>
+          <div class="card-title">공동 KPI (Key Performance Indicators)</div>
+          <div class="card-desc">반기별 3자 공동 검토 — 1년차 목표치 기준</div>
+        </div>
+      </div>
+      <div class="card-body" style="padding:0;overflow-x:auto;">
+        <table class="kpi-table">
+          <thead>
+            <tr>
+              <th>KPI 지표</th>
+              <th>목표치 (1년차)</th>
+              <th>측정 주체</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>FCoEE 졸업생 취업률 (E&amp;E 업종)</td><td class="kpi-target">70% 이상</td><td>Galaxy Global + FCoEE</td></tr>
+            <tr><td>IEG 장비 커리큘럼 이수 학생 수</td><td class="kpi-target">연간 60명 이상</td><td>FCoEE</td></tr>
+            <tr><td>E&amp;E 기업 인턴십 연계 건수</td><td class="kpi-target">연 10건 이상</td><td>Galaxy Global</td></tr>
+            <tr><td>강사 ToT 완료율</td><td class="kpi-target">담당 강사 100%</td><td>IEG</td></tr>
+            <tr><td>장비 가동률</td><td class="kpi-target">월 평균 85% 이상</td><td>FCoEE + IEG</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 5: SIGNATURE ── -->
+  <div class="section" id="sec4">
+    <div class="sec-title"><div class="sec-num">5</div> 서명란 (Signatures)</div>
+    <p class="sec-sub">본 LOI에 기재된 협력 의향 및 역할 분담에 동의하여 이에 서명합니다.<br>
+    <em>Signed in agreement with the partnership intent and roles described herein.</em></p>
+
+    <div class="sig-grid">
+      <div class="sig-card">
+        <div class="sig-header ieg">갑 (Party A) — IEG Co., Ltd.</div>
+        <div class="sig-body">
+          <div class="sig-line"><div class="sig-field-label">Signature / 서명</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Name / 성명</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Title / 직함</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Date / 서명일</div><div class="sig-field-line"></div></div>
+        </div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-header fcoee">을 (Party B) — FCoEE</div>
+        <div class="sig-body">
+          <div class="sig-line"><div class="sig-field-label">Signature / 서명</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Name / 성명</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Title / 직함</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Date / 서명일</div><div class="sig-field-line"></div></div>
+        </div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-header galaxy">병 (Party C) — Galaxy Global</div>
+        <div class="sig-body">
+          <div class="sig-line"><div class="sig-field-label">Signature / 서명</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Name / 성명</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Title / 직함</div><div class="sig-field-line"></div></div>
+          <div class="sig-line"><div class="sig-field-label">Date / 서명일</div><div class="sig-field-line"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>본 문서의 효력 및 해석에 관한 사항</strong><br>
+      • 본 LOI는 서명일로부터 12개월간 유효하며, 3자 합의에 의해 갱신될 수 있습니다.<br>
+      • 본 문서는 법적 구속력을 갖는 계약서가 아니며, 향후 정식 계약 체결의 전제 조건이 아닙니다.<br>
+      • 본 LOI와 관련된 분쟁은 3자 협의를 통해 우선 해결하며, 필요시 대한민국 법률에 따릅니다.<br>
+      • 각 당사자는 본 문서의 내용을 사전 서면 동의 없이 제3자에게 공개할 수 없습니다.
+    </div>
+  </div>
+
+</main>
+
+<div class="doc-footer no-print">
+  Confidential – For Discussion Purposes Only &nbsp;|&nbsp; IEG × FCoEE × Galaxy Global &nbsp;|&nbsp; Prepared for: 6/30 IEG HQ Meeting, Seoul
+</div>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ 인쇄 / Print</button>
+
+<script>
+function showSection(idx, btn) {
+  document.querySelectorAll('.section').forEach((s,i) => {
+    s.classList.toggle('active', i === idx);
+  });
+  document.querySelectorAll('.nav-tab').forEach((t,i) => {
+    t.classList.toggle('active', i === idx);
+  });
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
