@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STK 2026 · IEG 현장 미팅 키트</title>
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface2: #f0ede8;
+    --border: #d8d4cc;
+    --border2: #c8c4bc;
+    --text: #1a1916;
+    --text2: #5a5750;
+    --text3: #8a8680;
+    --blue-bg: #e8f0fb;
+    --blue-text: #1a3f7a;
+    --green-bg: #e4f0e0;
+    --green-text: #1a4a20;
+    --amber-bg: #faf0d8;
+    --amber-text: #6a3e08;
+    --red-bg: #fde8e8;
+    --red-text: #7a1a1a;
+    --purple-bg: #eeecfc;
+    --purple-text: #2e1a7a;
+    --accent: #2a2a2a;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; }
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── TOP NAV ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 1.5rem;
+    height: 52px;
+  }
+  .topbar-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: var(--text); }
+  .topbar-logo span { color: var(--text3); font-weight: 400; margin-left: 6px; }
+  .topbar-nav { display: flex; gap: 4px; }
+  .nav-btn {
+    font-size: 12px; padding: 5px 14px; border-radius: 20px;
+    border: 1px solid transparent; background: transparent;
+    color: var(--text2); cursor: pointer; transition: all 0.15s;
+    font-family: inherit;
+  }
+  .nav-btn.active { background: var(--text); color: #fff; }
+  .nav-btn:hover:not(.active) { background: var(--surface2); }
+
+  /* ── PAGE SECTIONS ── */
+  .page { display: none; padding: 2rem 1.5rem; max-width: 860px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* ── PAGE HEADER ── */
+  .page-header { margin-bottom: 2rem; }
+  .page-kicker { font-size: 11px; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .page-title { font-size: 22px; font-weight: 700; color: var(--text); }
+  .page-desc { font-size: 13px; color: var(--text2); margin-top: 4px; }
+
+  /* ── PROGRESS ── */
+  .progress-wrap { margin-bottom: 1.5rem; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text3); margin-bottom: 6px; }
+  .progress-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--text); border-radius: 2px; transition: width 0.3s ease; width: 0%; }
+
+  /* ── COMPANY TABS ── */
+  .company-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .ctab {
+    font-size: 12px; padding: 6px 16px; border-radius: 20px;
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text2); cursor: pointer; transition: all 0.15s;
+    font-family: inherit;
+  }
+  .ctab.active { background: var(--text); color: #fff; border-color: var(--text); }
+  .ctab:hover:not(.active) { background: var(--surface2); }
+
+  /* ── COMPANY PANEL ── */
+  .cpanel { display: none; }
+  .cpanel.active { display: block; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  }
+  .company-name { font-size: 17px; font-weight: 700; color: var(--text); }
+  .company-meta { font-size: 12px; color: var(--text3); margin-top: 3px; }
+  .company-synergy { font-size: 13px; color: var(--text2); margin-top: 6px; line-height: 1.55; }
+  .badge {
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-blue { background: var(--blue-bg); color: var(--blue-text); }
+  .badge-green { background: var(--green-bg); color: var(--green-text); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber-text); }
+  .badge-purple { background: var(--purple-bg); color: var(--purple-text); }
+
+  /* ── SECTION BLOCK ── */
+  .sblock { padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--border); }
+  .sblock:last-child { border-bottom: none; }
+  .slabel {
+    font-size: 11px; font-weight: 700; color: var(--text3);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+  }
+
+  /* ── QUESTIONS ── */
+  .q-item { display: flex; gap: 10px; margin-bottom: 12px; }
+  .q-item:last-child { margin-bottom: 0; }
+  .q-num {
+    font-size: 11px; font-weight: 700; color: var(--text3);
+    min-width: 20px; padding-top: 2px;
+  }
+  .q-text { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .q-note { font-size: 12px; color: var(--text3); margin-top: 3px; }
+
+  /* ── CHECKLIST ── */
+  .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .citem {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 12px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); cursor: pointer;
+    transition: all 0.13s; user-select: none;
+    background: var(--surface);
+  }
+  .citem:hover { background: var(--surface2); }
+  .citem.checked { background: var(--green-bg); border-color: #8fc89a; }
+  .cbox {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1.5px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.13s;
+    background: var(--surface);
+  }
+  .citem.checked .cbox { background: #2a7a3a; border-color: #2a7a3a; }
+  .ccheck { display: none; color: #fff; font-size: 11px; font-weight: 700; }
+  .citem.checked .ccheck { display: block; }
+  .clabel { font-size: 12px; color: var(--text); line-height: 1.4; }
+
+  /* ── EVAL ── */
+  .eval-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ecard {
+    padding: 10px; border-radius: var(--radius-sm);
+    border: 1px solid var(--border); text-align: center;
+    cursor: pointer; transition: all 0.13s; background: var(--surface);
+  }
+  .ecard:hover { background: var(--surface2); }
+  .ecard.sel-3 { background: var(--green-bg); border-color: #8fc89a; }
+  .ecard.sel-2 { background: var(--amber-bg); border-color: #d4a850; }
+  .ecard.sel-1 { background: var(--red-bg); border-color: #d49090; }
+  .escore { font-size: 18px; color: var(--text); }
+  .elabel { font-size: 11px; color: var(--text2); margin-top: 3px; }
+
+  /* ── MEMO ── */
+  .memo {
+    width: 100%; min-height: 90px; resize: vertical;
+    font-family: inherit; font-size: 13px; color: var(--text);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 12px; outline: none;
+    transition: border 0.13s;
+  }
+  .memo:focus { border-color: var(--border2); }
+
+  /* ── REPORT PAGE ── */
+  .report-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+  .report-date-wrap { display: flex; flex-direction: column; gap: 4px; }
+  .rlabel { font-size: 11px; color: var(--text3); margin-bottom: 2px; }
+  .rinput {
+    font-family: inherit; font-size: 13px; color: var(--text);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 7px 12px; outline: none;
+    transition: border 0.13s; width: 180px;
+  }
+  .rinput:focus { border-color: var(--border2); }
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .scard {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 14px 12px; text-align: center;
+  }
+  .scard-val { font-size: 24px; font-weight: 700; color: var(--text); }
+  .scard-lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .rcard {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden;
+  }
+  .rcard-header {
+    padding: 0.9rem 1.25rem; background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .rcard-name { font-size: 14px; font-weight: 700; }
+  .rcard-body { padding: 1rem 1.25rem; }
+  .rrow { display: grid; grid-template-columns: 100px 1fr; gap: 8px; margin-bottom: 10px; align-items: start; }
+  .rrow:last-child { margin-bottom: 0; }
+  .rlbl { font-size: 12px; color: var(--text3); padding-top: 2px; }
+  .rval-input {
+    font-family: inherit; font-size: 13px; color: var(--text);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 7px 10px; outline: none;
+    width: 100%; transition: border 0.13s;
+  }
+  .rval-input:focus { border-color: var(--border2); }
+  .rval-select {
+    font-family: inherit; font-size: 13px; color: var(--text);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 7px 10px; outline: none;
+    width: 100%; cursor: pointer;
+  }
+  .rtextarea {
+    font-family: inherit; font-size: 13px; color: var(--text);
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 8px 10px; outline: none;
+    width: 100%; min-height: 70px; resize: vertical; transition: border 0.13s;
+  }
+  .rtextarea:focus { border-color: var(--border2); }
+
+  /* ── PRINT BUTTON ── */
+  .btn-row { display: flex; gap: 10px; margin-top: 1.5rem; flex-wrap: wrap; }
+  .btn {
+    font-family: inherit; font-size: 13px; padding: 9px 20px;
+    border-radius: var(--radius-sm); border: 1px solid var(--border);
+    background: var(--surface); color: var(--text);
+    cursor: pointer; transition: all 0.13s; display: flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { background: var(--surface2); }
+  .btn-dark { background: var(--text); color: #fff; border-color: var(--text); }
+  .btn-dark:hover { background: #333; }
+
+  /* ── PRINT ── */
+  @media print {
+    .topbar, .company-tabs, .ctab, .btn-row, .nav-btn { display: none !important; }
+    .page { display: block !important; padding: 0; }
+    .cpanel { display: block !important; }
+    body { background: #fff; }
+    .card, .rcard { break-inside: avoid; }
+  }
+
+  @media (max-width: 600px) {
+    .checklist-grid { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+    .eval-grid { grid-template-columns: repeat(3,1fr); }
+    .page { padding: 1.2rem 1rem; }
+    .topbar { padding: 0 1rem; }
+    .topbar-logo span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<div class="topbar">
+  <div class="topbar-logo">IEG <span>× STK 2026 미팅 키트</span></div>
+  <div class="topbar-nav">
+    <button class="nav-btn active" onclick="showPage('p-smart')">스마트팩토리</button>
+    <button class="nav-btn" onclick="showPage('p-digital')">디지털 트윈</button>
+    <button class="nav-btn" onclick="showPage('p-report')">결과 보고서</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 1: 스마트 팩토리 협력군
+══════════════════════════════════════ -->
+<div class="page active" id="p-smart">
+  <div class="page-header">
+    <div class="page-kicker">▪ 협력군 A · 스마트 팩토리 & 자동화 교육 솔루션</div>
+    <div class="page-title">현장 미팅 질문지 & 체크리스트</div>
+    <div class="page-desc">IEG 스마트팩토리 교육 장비 연동 및 커리큘럼 구성 파트너 탐색</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span id="sf-prog-txt">체크리스트 진행률</span><span id="sf-prog-pct">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="sf-prog"></div></div>
+  </div>
+
+  <div class="company-tabs">
+    <button class="ctab active" onclick="switchC('sf',0)">No.20 링크제니시스</button>
+    <button class="ctab" onclick="switchC('sf',1)">No.48 알티엠</button>
+    <button class="ctab" onclick="switchC('sf',2)">No.231/34 시그봇·솔리드뷰</button>
+    <button class="ctab" onclick="switchC('sf',3)">No.369 큐이노텍</button>
+  </div>
+
+  <!-- 링크제니시스 -->
+  <div class="cpanel sf active" id="sf-0">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="company-name">링크제니시스</span>
+            <span class="badge badge-blue">스마트팩토리 SW</span>
+          </div>
+          <div class="company-meta">No. 20 · 반도체·디스플레이 장비 통신 SW</div>
+          <div class="company-synergy">IEG 반도체 교육 장비와 연동한 실무 SW 교육 패키지 구성 가능</div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 핵심 미팅 질문</div>
+        <div class="q-item"><div class="q-num">Q1</div><div><div class="q-text">반도체·디스플레이 장비 통신 SW가 교육용 환경(에뮬레이터 또는 축소 모델)에서도 동작 가능한가요?</div><div class="q-note">→ IEG 교육 장비 탑재 가능성 확인</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div><div class="q-text">SEMI 표준(SECS/GEM) 기반 통신 솔루션을 보유하고 있나요? 해외 수출 또는 ODA 프로젝트에 공급 레퍼런스가 있습니까?</div><div class="q-note">→ IEG 글로벌 TVET 센터 적용 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div><div class="q-text">스마트팩토리 솔루션을 커리큘럼화한 경험이 있으신가요? 교육기관 또는 훈련 센터 납품 사례가 있다면 공유 가능한가요?</div><div class="q-note">→ 공동 교육 콘텐츠 개발 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div><div class="q-text">IEG의 Physical AI 기반 스마트팩토리 교육 시스템에 귀사 SW를 '실무 레이어'로 통합하는 방식에 대해 어떻게 생각하시나요?</div><div class="q-note">→ 협력 구조 제안 및 반응 파악</div></div></div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 확인 체크리스트</div>
+        <div class="checklist-grid" data-group="sf">
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">교육용 라이선스 정책 확인</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">SECS/GEM 지원 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">해외 납품 레퍼런스 수집</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">API 연동 문서 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">담당자 명함 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">후속 미팅 일정 논의</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 협력 우선순위 평가</div>
+        <div class="eval-grid" data-eval="e-sf0">
+          <div class="ecard" onclick="selectEval(this,'e-sf0',3)"><div class="escore">★★★</div><div class="elabel">즉시 협력</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-sf0',2)"><div class="escore">★★</div><div class="elabel">추가 검토</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-sf0',1)"><div class="escore">★</div><div class="elabel">장기 관망</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 메모</div>
+        <textarea class="memo" placeholder="미팅 중 특이사항, 담당자 코멘트, 추가 파악 사항 등을 기록하세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 알티엠 -->
+  <div class="cpanel sf" id="sf-1">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="company-name">알티엠</span>
+            <span class="badge badge-green">AI 설비관리</span>
+          </div>
+          <div class="company-meta">No. 48 · AI 기반 설비 건강 관리(EHM) 솔루션</div>
+          <div class="company-synergy">IEG 스마트팩토리 교육 라인의 PdM(예지보전) 교육 모듈 고도화에 적합</div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 핵심 미팅 질문</div>
+        <div class="q-item"><div class="q-num">Q1</div><div><div class="q-text">EHM 솔루션의 데이터 수집 방식(센서 종류, 샘플링 주기)과 IEG 교육 장비에 부착 가능한 최소 구성이 어떻게 되나요?</div><div class="q-note">→ 교육 장비 연동 기술 검토</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div><div class="q-text">AI 예측 모델이 블랙박스 방식인가요, 아니면 학습 원리를 학생들에게 시각화·설명할 수 있는 구조인가요?</div><div class="q-note">→ 교육용 투명성(Explainable AI) 중요</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div><div class="q-text">해외 제조 현장 또는 ODA 프로젝트에 솔루션이 공급된 사례가 있나요? 어떤 언어권 국가였나요?</div><div class="q-note">→ IEG 글로벌 TVET 센터 적용 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div><div class="q-text">훈련생들이 직접 설비 이상을 탐지·진단하는 실습 시나리오를 귀사 솔루션으로 구성할 수 있을까요?</div><div class="q-note">→ 핸즈온 교육 콘텐츠 공동 개발 가능성</div></div></div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 확인 체크리스트</div>
+        <div class="checklist-grid" data-group="sf">
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">교육용 시범 키트 존재 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">XAI 지원 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">클라우드 vs 엣지 구동 방식</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">PLC 브랜드 호환성 리스트</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">담당자 명함 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">후속 미팅 일정 논의</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 협력 우선순위 평가</div>
+        <div class="eval-grid" data-eval="e-sf1">
+          <div class="ecard" onclick="selectEval(this,'e-sf1',3)"><div class="escore">★★★</div><div class="elabel">즉시 협력</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-sf1',2)"><div class="escore">★★</div><div class="elabel">추가 검토</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-sf1',1)"><div class="escore">★</div><div class="elabel">장기 관망</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 메모</div>
+        <textarea class="memo" placeholder="미팅 중 특이사항, 담당자 코멘트, 추가 파악 사항 등을 기록하세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시그봇·솔리드뷰 -->
+  <div class="cpanel sf" id="sf-2">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="company-name">시그봇 & 솔리드뷰</span>
+            <span class="badge badge-amber">LiDAR·3D 센서</span>
+          </div>
+          <div class="company-meta">No. 231 & No. 34 · LiDAR 및 2D/3D 비전 솔루션</div>
+          <div class="company-synergy">IEG 자율주행·물류 로봇 교육 장비의 핵심 인지 부품 협력사</div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 핵심 미팅 질문</div>
+        <div class="q-item"><div class="q-num">Q1</div><div><div class="q-text">교육용 소형 AMR/AGV에 탑재 가능한 저가형 LiDAR 또는 2D 비전 모듈을 공급하고 있나요? 가격대와 MOQ는 어떻게 되나요?</div><div class="q-note">→ IEG 교육 로봇 장비 BOM 구성 검토</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div><div class="q-text">ROS2 또는 주요 로봇 미들웨어와 드라이버 호환성이 확보되어 있나요? SDK 및 예제 코드 제공 여부는요?</div><div class="q-note">→ 교육용 오픈소스 연동 환경 확인</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div><div class="q-text">센서 데이터를 디지털 트윈 플랫폼(Unity, Unreal, NVIDIA Omniverse 등)으로 실시간 스트리밍하는 레퍼런스가 있나요?</div><div class="q-note">→ IEG 디지털 트윈 TVET 시스템 연동</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div><div class="q-text">OEM/ODM 공급 또는 화이트라벨 형태로 IEG 교육 장비에 부품을 탑재하는 방식에 협조 가능하신가요?</div><div class="q-note">→ 장기 부품 파트너십 구조 논의</div></div></div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 확인 체크리스트</div>
+        <div class="checklist-grid" data-group="sf">
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">ROS2 드라이버 지원 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">교육용 소형 모듈 카탈로그</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">디지털 트윈 연동 레퍼런스</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">OEM 공급 가능 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">담당자 명함 수령 (양 사)</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">가격·납기 조건 초안 수령</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 협력 우선순위 평가</div>
+        <div class="eval-grid" data-eval="e-sf2">
+          <div class="ecard" onclick="selectEval(this,'e-sf2',3)"><div class="escore">★★★</div><div class="elabel">즉시 협력</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-sf2',2)"><div class="escore">★★</div><div class="elabel">추가 검토</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-sf2',1)"><div class="escore">★</div><div class="elabel">장기 관망</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 메모</div>
+        <textarea class="memo" placeholder="미팅 중 특이사항, 담당자 코멘트, 추가 파악 사항 등을 기록하세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 큐이노텍 (도쿄 전시 질문 제거) -->
+  <div class="cpanel sf" id="sf-3">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="company-name">큐이노텍</span>
+            <span class="badge badge-purple">Physical AI</span>
+          </div>
+          <div class="company-meta">No. 369 · Physical AI 솔루션</div>
+          <div class="company-synergy">IEG의 Physical AI 지향점과 일치 — 공동 연구 및 교육 플랫폼 협력 기대</div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 핵심 미팅 질문</div>
+        <div class="q-item"><div class="q-num">Q1</div><div><div class="q-text">귀사가 정의하는 'Physical AI'의 핵심 기술 스택은 무엇인가요? 실제 구동 하드웨어는 어디까지 포함하나요?</div><div class="q-note">→ IEG 장비와 기술 지향점 정렬 확인</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div><div class="q-text">AI 추론 모델을 엣지 디바이스(NVIDIA Jetson 계열 또는 NPU 탑재 SBC)에서 동작시키는 사례가 있나요?</div><div class="q-note">→ IEG 교육 장비 내 온디바이스 AI 구현 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div><div class="q-text">현재 기술을 '직업훈련' 또는 '기술 교육' 맥락에 적용한 경험이 있나요? 교육부·고용노동부 연계 과제 수행 여부는요?</div><div class="q-note">→ IEG TVET/ODA 사업 연계 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div><div class="q-text">IEG와의 공동 R&D 또는 기술 라이선싱 협력에 관심이 있으신가요? 우선 검토 가능한 협력 형태는 무엇인가요?</div><div class="q-note">→ 중장기 파트너십 구조 탐색</div></div></div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 확인 체크리스트</div>
+        <div class="checklist-grid" data-group="sf">
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">기술 스택 및 HW 구성 파악</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">엣지 AI 동작 데모 확인</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">정부 과제 수행 이력 확인</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">공동 R&D 관심도 탐색</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">담당자 명함 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">기술 자료 또는 카탈로그 수령</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 협력 우선순위 평가</div>
+        <div class="eval-grid" data-eval="e-sf3">
+          <div class="ecard" onclick="selectEval(this,'e-sf3',3)"><div class="escore">★★★</div><div class="elabel">즉시 협력</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-sf3',2)"><div class="escore">★★</div><div class="elabel">추가 검토</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-sf3',1)"><div class="escore">★</div><div class="elabel">장기 관망</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 메모</div>
+        <textarea class="memo" placeholder="미팅 중 특이사항, 담당자 코멘트, 추가 파악 사항 등을 기록하세요..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     PAGE 2: 디지털 트윈 협력군
+══════════════════════════════════════ -->
+<div class="page" id="p-digital">
+  <div class="page-header">
+    <div class="page-kicker">▪ 협력군 B · 디지털 트윈 & XR 메타버스 교육</div>
+    <div class="page-title">현장 미팅 질문지 & 체크리스트</div>
+    <div class="page-desc">IEG 디지털 트윈 기반 TVET 현대화 프로젝트 기술 완성도 강화 파트너 탐색</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span id="dt-prog-txt">체크리스트 진행률</span><span id="dt-prog-pct">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="dt-prog"></div></div>
+  </div>
+
+  <div class="company-tabs">
+    <button class="ctab active" onclick="switchC('dt',0)">No.131 브이피케이</button>
+    <button class="ctab" onclick="switchC('dt',1)">No.428 이노시뮬레이션</button>
+    <button class="ctab" onclick="switchC('dt',2)">No.401 레티널</button>
+    <button class="ctab" onclick="switchC('dt',3)">No.77 코난테크놀로지</button>
+  </div>
+
+  <!-- 브이피케이 -->
+  <div class="cpanel dt active" id="dt-0">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="company-name">브이피케이</span>
+            <span class="badge badge-blue">PLM·디지털 트윈</span>
+          </div>
+          <div class="company-meta">No. 131 · CATIA, PLM, Digital Twin 솔루션</div>
+          <div class="company-synergy">IEG 장비의 가상 시뮬레이션 환경 구축 및 설계 교육 커리큘럼 강화에 유리</div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 핵심 미팅 질문</div>
+        <div class="q-item"><div class="q-num">Q1</div><div><div class="q-text">CATIA 또는 PLM 솔루션의 교육용 라이선스(학생·훈련생 계정) 정책이 어떻게 되나요? 해외 훈련 센터에 적용 가능한 클라우드 기반 옵션이 있나요?</div><div class="q-note">→ IEG 글로벌 TVET 센터 SW 환경 구성 검토</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div><div class="q-text">IEG 스마트팩토리 교육 장비의 3D CAD 데이터를 입수해 디지털 트윈을 구축하는 작업을 귀사와 공동으로 수행할 수 있나요?</div><div class="q-note">→ 장비 디지털화 프로젝트 협력 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div><div class="q-text">구축된 디지털 트윈 모델을 Unity/Unreal 또는 NVIDIA Omniverse로 Export하는 파이프라인을 보유하고 있나요?</div><div class="q-note">→ IEG XR 교육 콘텐츠 연동 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div><div class="q-text">정부 ODA 또는 코이카(KOICA) 연계 프로젝트에 SW 솔루션을 공급한 레퍼런스가 있나요?</div><div class="q-note">→ IEG 해외 B2G 사업 공동 추진 가능성</div></div></div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 확인 체크리스트</div>
+        <div class="checklist-grid" data-group="dt">
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">교육용 라이선스 정책 확인</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">클라우드 기반 옵션 유무</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">Omniverse/Unity Export 지원</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">ODA 납품 레퍼런스 수집</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">담당자 명함 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">후속 미팅 일정 논의</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 협력 우선순위 평가</div>
+        <div class="eval-grid" data-eval="e-dt0">
+          <div class="ecard" onclick="selectEval(this,'e-dt0',3)"><div class="escore">★★★</div><div class="elabel">즉시 협력</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-dt0',2)"><div class="escore">★★</div><div class="elabel">추가 검토</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-dt0',1)"><div class="escore">★</div><div class="elabel">장기 관망</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 메모</div>
+        <textarea class="memo" placeholder="미팅 중 특이사항, 담당자 코멘트, 추가 파악 사항 등을 기록하세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이노시뮬레이션 -->
+  <div class="cpanel dt" id="dt-1">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="company-name">이노시뮬레이션</span>
+            <span class="badge badge-purple">XR 시뮬레이터</span>
+          </div>
+          <div class="company-meta">No. 428 · XR 솔루션 및 시뮬레이터 전문</div>
+          <div class="company-synergy">해외 직업 훈련 센터 공급용 가상 실습 시스템 공동 개발 가능</div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 핵심 미팅 질문</div>
+        <div class="q-item"><div class="q-num">Q1</div><div><div class="q-text">현재 보유한 XR 시뮬레이터의 콘텐츠 커스터마이징 범위는 어디까지 인가요? IEG 장비 기반 맞춤형 실습 시나리오 개발이 가능한가요?</div><div class="q-note">→ TVET 맞춤 콘텐츠 공동 개발 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div><div class="q-text">오프라인 환경(인터넷 불안정 지역)에서도 동작 가능한 스탠드얼론 XR 솔루션이 있나요? 하드웨어 사양 요구 조건은 어떻게 되나요?</div><div class="q-note">→ 개발도상국 TVET 센터 적용 가능성 (ODA 핵심 고려사항)</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div><div class="q-text">학습자 실습 결과 데이터(완료율, 오류 횟수, 소요 시간)를 LMS와 연동하거나 외부 API로 추출할 수 있나요?</div><div class="q-note">→ IEG 교육 플랫폼 데이터 파이프라인 연동</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div><div class="q-text">해외 납품 또는 ODA 프로젝트에서 현지 언어 현지화(다국어 지원)를 수행한 경험이 있나요? 지원 언어 범위는요?</div><div class="q-note">→ IEG 글로벌 TVET 다국어 지원 적합성 확인</div></div></div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 확인 체크리스트</div>
+        <div class="checklist-grid" data-group="dt">
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">콘텐츠 커스터마이징 범위</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">스탠드얼론(오프라인) 동작 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">LMS 연동 API 존재 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">다국어 현지화 경험</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">담당자 명함 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">데모 영상 또는 자료 수령</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 협력 우선순위 평가</div>
+        <div class="eval-grid" data-eval="e-dt1">
+          <div class="ecard" onclick="selectEval(this,'e-dt1',3)"><div class="escore">★★★</div><div class="elabel">즉시 협력</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-dt1',2)"><div class="escore">★★</div><div class="elabel">추가 검토</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-dt1',1)"><div class="escore">★</div><div class="elabel">장기 관망</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 메모</div>
+        <textarea class="memo" placeholder="미팅 중 특이사항, 담당자 코멘트, 추가 파악 사항 등을 기록하세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 레티널 -->
+  <div class="cpanel dt" id="dt-2">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="company-name">레티널</span>
+            <span class="badge badge-amber">AR 글래스</span>
+          </div>
+          <div class="company-meta">No. 401 · AR 글래스 기술</div>
+          <div class="company-synergy">IEG '원격 기술 지원' 및 'AR 가상 정비 교육' 솔루션에 활용도 높음</div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 핵심 미팅 질문</div>
+        <div class="q-item"><div class="q-num">Q1</div><div><div class="q-text">현재 AR 글래스의 FOV, 해상도, 무게, 연속 사용 가능 시간(배터리) 스펙이 어떻게 되나요? 산업 현장 또는 훈련 환경에서의 내구성은요?</div><div class="q-note">→ 교육 현장 적합성 기본 검토</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div><div class="q-text">원격 전문가가 훈련생의 AR 글래스 시점을 보면서 실시간으로 가이드하는 '원격 지원(Remote Assist)' 기능이 있나요?</div><div class="q-note">→ IEG 원격 기술 지원 교육 모듈 핵심 기능</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div><div class="q-text">AR 콘텐츠(3D 오버레이, 작업 지시서 등)를 외부 콘텐츠 제작 툴(Unity, 자체 CMS 등)로 제작·업로드할 수 있나요?</div><div class="q-note">→ IEG 자체 교육 콘텐츠 탑재 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div><div class="q-text">해외 현장(인터넷 품질이 낮은 지역)에서의 원격 지원 솔루션 운용 경험이 있나요? 저지연 통신 방식은 무엇을 사용하나요?</div><div class="q-note">→ 개발도상국 ODA 현장 적용 가능성</div></div></div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 확인 체크리스트</div>
+        <div class="checklist-grid" data-group="dt">
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">디바이스 스펙 시트 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">Remote Assist 기능 확인</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">콘텐츠 제작 도구(CMS) 확인</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">저대역폭 환경 지원 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">담당자 명함 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">데모 체험 또는 현장 시연 일정</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 협력 우선순위 평가</div>
+        <div class="eval-grid" data-eval="e-dt2">
+          <div class="ecard" onclick="selectEval(this,'e-dt2',3)"><div class="escore">★★★</div><div class="elabel">즉시 협력</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-dt2',2)"><div class="escore">★★</div><div class="elabel">추가 검토</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-dt2',1)"><div class="escore">★</div><div class="elabel">장기 관망</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 메모</div>
+        <textarea class="memo" placeholder="미팅 중 특이사항, 담당자 코멘트, 추가 파악 사항 등을 기록하세요..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- 코난테크놀로지 -->
+  <div class="cpanel dt" id="dt-3">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span class="company-name">코난테크놀로지</span>
+            <span class="badge badge-green">AI·AR 분석</span>
+          </div>
+          <div class="company-meta">No. 77 · AI/AR 글래스 및 영상 AI 분석 기술</div>
+          <div class="company-synergy">IEG 'AR 가상 정비 교육' 및 AI 기반 훈련생 행동 분석 솔루션에 활용 가능</div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 핵심 미팅 질문</div>
+        <div class="q-item"><div class="q-num">Q1</div><div><div class="q-text">영상 AI 분석 기술을 활용해 훈련생의 작업 동작(자세, 순서, 오류)을 실시간으로 평가·피드백하는 기능이 구현 가능한가요?</div><div class="q-note">→ IEG 교육 품질 자동화 평가 모듈 핵심</div></div></div>
+        <div class="q-item"><div class="q-num">Q2</div><div><div class="q-text">AR 글래스와 영상 AI 분석을 결합한 통합 솔루션이 있나요? 아니면 두 기술을 별도로 공급하는 구조인가요?</div><div class="q-note">→ IEG 도입 구조 및 비용 설계 검토</div></div></div>
+        <div class="q-item"><div class="q-num">Q3</div><div><div class="q-text">분석 데이터(학습 이력, 오류 패턴 등)를 외부 LMS 또는 데이터 플랫폼으로 내보낼 수 있는 API나 표준 포맷(xAPI 등)을 지원하나요?</div><div class="q-note">→ IEG 교육 데이터 플랫폼 연동 가능성</div></div></div>
+        <div class="q-item"><div class="q-num">Q4</div><div><div class="q-text">온프레미스(폐쇄망) 환경에서의 솔루션 운용이 가능한가요? 개발도상국 현지 서버 설치 방식도 지원하나요?</div><div class="q-note">→ ODA 현장 보안·인프라 요구 충족 여부</div></div></div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 확인 체크리스트</div>
+        <div class="checklist-grid" data-group="dt">
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">동작 인식 AI 정확도 데이터</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">AR+AI 통합 솔루션 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">xAPI / LMS 연동 지원 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">온프레미스 설치 가능 여부</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">담당자 명함 수령</div></div>
+          <div class="citem" onclick="toggleCheck(this)"><div class="cbox"><span class="ccheck">✓</span></div><div class="clabel">기술 자료 및 API 문서 수령</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 협력 우선순위 평가</div>
+        <div class="eval-grid" data-eval="e-dt3">
+          <div class="ecard" onclick="selectEval(this,'e-dt3',3)"><div class="escore">★★★</div><div class="elabel">즉시 협력</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-dt3',2)"><div class="escore">★★</div><div class="elabel">추가 검토</div></div>
+          <div class="ecard" onclick="selectEval(this,'e-dt3',1)"><div class="escore">★</div><div class="elabel">장기 관망</div></div>
+        </div>
+      </div>
+      <div class="sblock">
+        <div class="slabel">▸ 현장 메모</div>
+        <textarea class="memo" placeholder="미팅 중 특이사항, 담당자 코멘트, 추가 파악 사항 등을 기록하세요..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     PAGE 3: 결과 보고서
+══════════════════════════════════════ -->
+<div class="page" id="p-report">
+  <div class="page-header">
+    <div class="page-kicker">▪ 전시회 종료 후 · 미팅 결과 보고서</div>
+    <div class="page-title">STK 2026 파트너 탐색 결과 정리</div>
+    <div class="page-desc">현장 미팅 내용을 정리하여 내부 공유 및 후속 액션 계획 수립에 활용하세요.</div>
+  </div>
+
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="sblock">
+      <div class="slabel">▸ 기본 정보</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+        <div><div class="rlabel">전시회명</div><input class="rinput" style="width:100%" value="STK 2026 (스마트테크 코리아)" readonly></div>
+        <div><div class="rlabel">방문일</div><input class="rinput" type="date" style="width:100%"></div>
+        <div><div class="rlabel">작성자</div><input class="rinput" placeholder="성명 입력" style="width:100%"></div>
+      </div>
+    </div>
+    <div class="sblock">
+      <div class="slabel">▸ 전체 미팅 요약</div>
+      <div class="summary-grid">
+        <div class="scard"><div class="scard-val" id="r-total">8</div><div class="scard-lbl">총 접촉 기업</div></div>
+        <div class="scard"><div class="scard-val" id="r-a1">—</div><div class="scard-lbl">즉시 협력 (★★★)</div></div>
+        <div class="scard"><div class="scard-val" id="r-a2">—</div><div class="scard-lbl">추가 검토 (★★)</div></div>
+        <div class="scard"><div class="scard-val" id="r-a3">—</div><div class="scard-lbl">장기 관망 (★)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 기업별 결과 카드 -->
+  <div id="report-cards">
+    <!-- 스마트팩토리 -->
+    <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin:1.2rem 0 0.6rem;">협력군 A · 스마트 팩토리</div>
+    <div class="rcard">
+      <div class="rcard-header"><span class="rcard-name">링크제니시스 <small style="font-weight:400;color:var(--text3)">No.20</small></span><span class="badge badge-blue">스마트팩토리 SW</span></div>
+      <div class="rcard-body">
+        <div class="rrow"><span class="rlbl">미팅 여부</span><select class="rval-select"><option>미팅 완료</option><option>부재중</option><option>미팅 취소</option><option>미방문</option></select></div>
+        <div class="rrow"><span class="rlbl">담당자</span><input class="rval-input" placeholder="성명 / 직책"></div>
+        <div class="rrow"><span class="rlbl">핵심 발견</span><textarea class="rtextarea" placeholder="미팅에서 확인한 주요 사실, 기술 수준, 협력 가능 여부 등"></textarea></div>
+        <div class="rrow"><span class="rlbl">협력 우선순위</span><select class="rval-select"><option value="">선택</option><option>★★★ 즉시 협력</option><option>★★ 추가 검토</option><option>★ 장기 관망</option></select></div>
+        <div class="rrow"><span class="rlbl">후속 액션</span><input class="rval-input" placeholder="ex) 2주 내 기술 미팅 요청 / 제안서 발송"></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header"><span class="rcard-name">알티엠 <small style="font-weight:400;color:var(--text3)">No.48</small></span><span class="badge badge-green">AI 설비관리</span></div>
+      <div class="rcard-body">
+        <div class="rrow"><span class="rlbl">미팅 여부</span><select class="rval-select"><option>미팅 완료</option><option>부재중</option><option>미팅 취소</option><option>미방문</option></select></div>
+        <div class="rrow"><span class="rlbl">담당자</span><input class="rval-input" placeholder="성명 / 직책"></div>
+        <div class="rrow"><span class="rlbl">핵심 발견</span><textarea class="rtextarea" placeholder="미팅에서 확인한 주요 사실, 기술 수준, 협력 가능 여부 등"></textarea></div>
+        <div class="rrow"><span class="rlbl">협력 우선순위</span><select class="rval-select"><option value="">선택</option><option>★★★ 즉시 협력</option><option>★★ 추가 검토</option><option>★ 장기 관망</option></select></div>
+        <div class="rrow"><span class="rlbl">후속 액션</span><input class="rval-input" placeholder="ex) 2주 내 기술 미팅 요청 / 제안서 발송"></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header"><span class="rcard-name">시그봇 & 솔리드뷰 <small style="font-weight:400;color:var(--text3)">No.231/34</small></span><span class="badge badge-amber">LiDAR·3D</span></div>
+      <div class="rcard-body">
+        <div class="rrow"><span class="rlbl">미팅 여부</span><select class="rval-select"><option>미팅 완료</option><option>부재중</option><option>미팅 취소</option><option>미방문</option></select></div>
+        <div class="rrow"><span class="rlbl">담당자</span><input class="rval-input" placeholder="성명 / 직책"></div>
+        <div class="rrow"><span class="rlbl">핵심 발견</span><textarea class="rtextarea" placeholder="미팅에서 확인한 주요 사실, 기술 수준, 협력 가능 여부 등"></textarea></div>
+        <div class="rrow"><span class="rlbl">협력 우선순위</span><select class="rval-select"><option value="">선택</option><option>★★★ 즉시 협력</option><option>★★ 추가 검토</option><option>★ 장기 관망</option></select></div>
+        <div class="rrow"><span class="rlbl">후속 액션</span><input class="rval-input" placeholder="ex) 2주 내 기술 미팅 요청 / 제안서 발송"></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header"><span class="rcard-name">큐이노텍 <small style="font-weight:400;color:var(--text3)">No.369</small></span><span class="badge badge-purple">Physical AI</span></div>
+      <div class="rcard-body">
+        <div class="rrow"><span class="rlbl">미팅 여부</span><select class="rval-select"><option>미팅 완료</option><option>부재중</option><option>미팅 취소</option><option>미방문</option></select></div>
+        <div class="rrow"><span class="rlbl">담당자</span><input class="rval-input" placeholder="성명 / 직책"></div>
+        <div class="rrow"><span class="rlbl">핵심 발견</span><textarea class="rtextarea" placeholder="미팅에서 확인한 주요 사실, 기술 수준, 협력 가능 여부 등"></textarea></div>
+        <div class="rrow"><span class="rlbl">협력 우선순위</span><select class="rval-select"><option value="">선택</option><option>★★★ 즉시 협력</option><option>★★ 추가 검토</option><option>★ 장기 관망</option></select></div>
+        <div class="rrow"><span class="rlbl">후속 액션</span><input class="rval-input" placeholder="ex) 2주 내 기술 미팅 요청 / 제안서 발송"></div>
+      </div>
+    </div>
+
+    <!-- 디지털 트윈 -->
+    <div style="font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin:1.5rem 0 0.6rem;">협력군 B · 디지털 트윈 & XR</div>
+    <div class="rcard">
+      <div class="rcard-header"><span class="rcard-name">브이피케이 <small style="font-weight:400;color:var(--text3)">No.131</small></span><span class="badge badge-blue">PLM·디지털 트윈</span></div>
+      <div class="rcard-body">
+        <div class="rrow"><span class="rlbl">미팅 여부</span><select class="rval-select"><option>미팅 완료</option><option>부재중</option><option>미팅 취소</option><option>미방문</option></select></div>
+        <div class="rrow"><span class="rlbl">담당자</span><input class="rval-input" placeholder="성명 / 직책"></div>
+        <div class="rrow"><span class="rlbl">핵심 발견</span><textarea class="rtextarea" placeholder="미팅에서 확인한 주요 사실, 기술 수준, 협력 가능 여부 등"></textarea></div>
+        <div class="rrow"><span class="rlbl">협력 우선순위</span><select class="rval-select"><option value="">선택</option><option>★★★ 즉시 협력</option><option>★★ 추가 검토</option><option>★ 장기 관망</option></select></div>
+        <div class="rrow"><span class="rlbl">후속 액션</span><input class="rval-input" placeholder="ex) 2주 내 기술 미팅 요청 / 제안서 발송"></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header"><span class="rcard-name">이노시뮬레이션 <small style="font-weight:400;color:var(--text3)">No.428</small></span><span class="badge badge-purple">XR 시뮬레이터</span></div>
+      <div class="rcard-body">
+        <div class="rrow"><span class="rlbl">미팅 여부</span><select class="rval-select"><option>미팅 완료</option><option>부재중</option><option>미팅 취소</option><option>미방문</option></select></div>
+        <div class="rrow"><span class="rlbl">담당자</span><input class="rval-input" placeholder="성명 / 직책"></div>
+        <div class="rrow"><span class="rlbl">핵심 발견</span><textarea class="rtextarea" placeholder="미팅에서 확인한 주요 사실, 기술 수준, 협력 가능 여부 등"></textarea></div>
+        <div class="rrow"><span class="rlbl">협력 우선순위</span><select class="rval-select"><option value="">선택</option><option>★★★ 즉시 협력</option><option>★★ 추가 검토</option><option>★ 장기 관망</option></select></div>
+        <div class="rrow"><span class="rlbl">후속 액션</span><input class="rval-input" placeholder="ex) 2주 내 기술 미팅 요청 / 제안서 발송"></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header"><span class="rcard-name">레티널 <small style="font-weight:400;color:var(--text3)">No.401</small></span><span class="badge badge-amber">AR 글래스</span></div>
+      <div class="rcard-body">
+        <div class="rrow"><span class="rlbl">미팅 여부</span><select class="rval-select"><option>미팅 완료</option><option>부재중</option><option>미팅 취소</option><option>미방문</option></select></div>
+        <div class="rrow"><span class="rlbl">담당자</span><input class="rval-input" placeholder="성명 / 직책"></div>
+        <div class="rrow"><span class="rlbl">핵심 발견</span><textarea class="rtextarea" placeholder="미팅에서 확인한 주요 사실, 기술 수준, 협력 가능 여부 등"></textarea></div>
+        <div class="rrow"><span class="rlbl">협력 우선순위</span><select class="rval-select"><option value="">선택</option><option>★★★ 즉시 협력</option><option>★★ 추가 검토</option><option>★ 장기 관망</option></select></div>
+        <div class="rrow"><span class="rlbl">후속 액션</span><input class="rval-input" placeholder="ex) 2주 내 기술 미팅 요청 / 제안서 발송"></div>
+      </div>
+    </div>
+    <div class="rcard">
+      <div class="rcard-header"><span class="rcard-name">코난테크놀로지 <small style="font-weight:400;color:var(--text3)">No.77</small></span><span class="badge badge-green">AI·AR 분석</span></div>
+      <div class="rcard-body">
+        <div class="rrow"><span class="rlbl">미팅 여부</span><select class="rval-select"><option>미팅 완료</option><option>부재중</option><option>미팅 취소</option><option>미방문</option></select></div>
+        <div class="rrow"><span class="rlbl">담당자</span><input class="rval-input" placeholder="성명 / 직책"></div>
+        <div class="rrow"><span class="rlbl">핵심 발견</span><textarea class="rtextarea" placeholder="미팅에서 확인한 주요 사실, 기술 수준, 협력 가능 여부 등"></textarea></div>
+        <div class="rrow"><span class="rlbl">협력 우선순위</span><select class="rval-select"><option value="">선택</option><option>★★★ 즉시 협력</option><option>★★ 추가 검토</option><option>★ 장기 관망</option></select></div>
+        <div class="rrow"><span class="rlbl">후속 액션</span><input class="rval-input" placeholder="ex) 2주 내 기술 미팅 요청 / 제안서 발송"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 종합 의견 -->
+  <div class="card" style="margin-top:1rem;">
+    <div class="sblock">
+      <div class="slabel">▸ 전시회 종합 의견 및 시사점</div>
+      <textarea class="memo" style="min-height:120px;" placeholder="전반적인 시장 트렌드 관찰, 경쟁사 동향, IEG 전략에 대한 시사점 등을 자유롭게 기술하세요..."></textarea>
+    </div>
+    <div class="sblock">
+      <div class="slabel">▸ 최우선 후속 조치 (Top 3)</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;font-weight:700;color:var(--text3);min-width:20px;">①</span><input class="rval-input" placeholder="1순위 액션 아이템"></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;font-weight:700;color:var(--text3);min-width:20px;">②</span><input class="rval-input" placeholder="2순위 액션 아이템"></div>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:12px;font-weight:700;color:var(--text3);min-width:20px;">③</span><input class="rval-input" placeholder="3순위 액션 아이템"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-dark" onclick="window.print()">🖨 인쇄 / PDF 저장</button>
+  </div>
+</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const idx = ['p-smart','p-digital','p-report'].indexOf(id);
+    document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  }
+
+  function switchC(group, idx) {
+    document.querySelectorAll('.cpanel.'+group).forEach((p,i) => p.classList.toggle('active', i===idx));
+    const tabs = document.querySelectorAll('#p-'+(group==='sf'?'smart':'digital')+' .ctab');
+    tabs.forEach((b,i) => b.classList.toggle('active', i===idx));
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    updateAllProgress();
+  }
+
+  function selectEval(el, evalId, score) {
+    document.querySelectorAll('[data-eval="'+evalId+'"] .ecard').forEach(c => {
+      c.className = 'ecard';
+    });
+    el.classList.add('sel-'+score);
+    updateSummary();
+  }
+
+  function updateAllProgress() {
+    ['sf','dt'].forEach(function(group) {
+      const pageId = group === 'sf' ? 'p-smart' : 'p-digital';
+      const page = document.getElementById(pageId);
+      const total = page.querySelectorAll('.citem').length;
+      const done = page.querySelectorAll('.citem.checked').length;
+      const pct = total > 0 ? Math.round(done/total*100) : 0;
+      document.getElementById(group+'-prog').style.width = pct+'%';
+      document.getElementById(group+'-prog-pct').textContent = pct+'%';
+    });
+  }
+
+  function updateSummary() {
+    const all = document.querySelectorAll('.ecard.sel-3, .ecard.sel-2, .ecard.sel-1');
+    let a1=0, a2=0, a3=0;
+    document.querySelectorAll('.ecard.sel-3').forEach(() => a1++);
+    document.querySelectorAll('.ecard.sel-2').forEach(() => a2++);
+    document.querySelectorAll('.ecard.sel-1').forEach(() => a3++);
+    document.getElementById('r-a1').textContent = a1 || '—';
+    document.getElementById('r-a2').textContent = a2 || '—';
+    document.getElementById('r-a3').textContent = a3 || '—';
+  }
+</script>
+</body>
+</html>
