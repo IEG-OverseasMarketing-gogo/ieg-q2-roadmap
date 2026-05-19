@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IEG × TESDA EIM NC II/III — 32-Week Curriculum Alignment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#0B1F3A; --ink2:#1E3557; --ink3:#2C4A6E;
+  --accent:#1565C0; --accent2:#1976D2; --gold:#E8A000;
+  --nc2:#1B6CA8; --nc3:#0D4F8C;
+  --eq1:#2E7D32; --eq2:#1565C0; --eq3:#6A1B9A;
+  --eq4:#AD1457; --eq5:#E65100;
+  --white:#fff; --off:#F7F9FC; --border:#DDE4EE; --muted:#8898B0;
+  --shadow:0 2px 16px rgba(11,31,58,.09);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--off);
+  color:var(--ink);
+  font-size:14px;
+  line-height:1.65;
+}
+
+/* ── COVER ── */
+.cover{
+  background:linear-gradient(160deg,var(--ink) 0%,var(--ink2) 55%,var(--ink3) 100%);
+  color:white;
+  padding:64px 48px 56px;
+  position:relative;
+  overflow:hidden;
+}
+.cover::after{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:400px;height:400px;border-radius:50%;
+  background:rgba(255,255,255,.03);pointer-events:none;
+}
+.cover-label{
+  font-family:'DM Mono',monospace;font-size:10.5px;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+}
+.cover-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,4vw,40px);
+  font-weight:700;line-height:1.18;
+  margin-bottom:10px;
+}
+.cover-title em{color:var(--gold);font-style:normal;}
+.cover-sub{
+  font-size:15px;color:rgba(255,255,255,.65);
+  max-width:580px;margin-bottom:36px;
+}
+.cover-chips{display:flex;gap:10px;flex-wrap:wrap;}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.07);
+  color:rgba(255,255,255,.85);
+  font-size:12px;font-weight:500;
+  padding:6px 14px;border-radius:20px;
+}
+.chip b{color:var(--gold);}
+
+/* ── EQUIPMENT LEGEND ── */
+.legend-bar{
+  background:white;
+  border-bottom:2px solid var(--border);
+  padding:16px 48px;
+  display:flex;gap:20px;flex-wrap:wrap;align-items:center;
+  position:sticky;top:0;z-index:50;
+  box-shadow:0 2px 12px rgba(11,31,58,.07);
+}
+.legend-label{
+  font-family:'DM Mono',monospace;
+  font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--muted);
+  flex-shrink:0;
+}
+.eq-chip{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:12px;font-weight:600;
+  padding:5px 12px;border-radius:20px;
+  border:1px solid currentColor;opacity:.85;
+  cursor:default;
+  transition:opacity .15s;
+}
+.eq-chip:hover{opacity:1;}
+.eq-dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+/* ── MAIN LAYOUT ── */
+main{max-width:1100px;margin:0 auto;padding:40px 32px 80px;}
+
+/* ── SECTION ── */
+.section{margin-bottom:48px;}
+.section-head{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:20px;padding-bottom:10px;
+  border-bottom:2px solid var(--border);
+}
+.nc-badge{
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;
+  padding:5px 14px;border-radius:20px;
+  letter-spacing:.5px;flex-shrink:0;
+}
+.nc2-badge{background:rgba(27,108,168,.12);color:var(--nc2);border:1px solid rgba(27,108,168,.25);}
+.nc3-badge{background:rgba(13,79,140,.12);color:var(--nc3);border:1px solid rgba(13,79,140,.25);}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-weight:600;color:var(--ink);
+}
+.section-meta{font-size:12px;color:var(--muted);margin-left:auto;font-weight:500;white-space:nowrap;}
+
+/* ── COMPETENCY OVERVIEW ── */
+.comp-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:12px;
+  margin-bottom:28px;
+}
+.comp-card{
+  background:white;border-radius:12px;
+  border:1px solid var(--border);
+  padding:14px 16px;
+  box-shadow:var(--shadow);
+}
+.comp-code{
+  font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:1px;color:var(--muted);
+  margin-bottom:4px;
+}
+.comp-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.35;}
+.comp-equip{
+  display:flex;flex-wrap:wrap;gap:5px;
+}
+.eq-tag{
+  font-size:10.5px;font-weight:600;
+  padding:2px 8px;border-radius:10px;
+  border:1px solid currentColor;
+}
+
+/* ── WEEK TABLE ── */
+.week-table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);}
+.week-table thead tr{background:var(--ink);}
+.week-table thead th{
+  color:white;font-weight:600;font-size:12px;
+  padding:12px 16px;text-align:left;
+  font-family:'DM Sans',sans-serif;letter-spacing:.3px;
+}
+.week-table thead th:first-child{width:90px;text-align:center;}
+.week-table thead th:nth-child(2){width:200px;}
+.week-table tbody tr{border-bottom:1px solid var(--border);transition:background .1s;}
+.week-table tbody tr:last-child{border-bottom:none;}
+.week-table tbody tr:hover{background:var(--off);}
+.week-num{
+  text-align:center;
+  font-family:'DM Mono',monospace;font-size:12px;
+  font-weight:500;color:var(--muted);
+  padding:12px 8px;
+}
+.week-topic{
+  font-weight:600;font-size:13px;color:var(--ink);
+  padding:12px 16px;
+}
+.week-topic small{
+  display:block;font-weight:400;font-size:11.5px;
+  color:var(--muted);margin-top:3px;line-height:1.4;
+}
+.week-equip{padding:12px 16px;}
+.week-outcomes{padding:12px 16px;font-size:12.5px;color:#3A4F6A;line-height:1.55;}
+.week-assessment{padding:12px 16px;text-align:center;}
+.assess-tag{
+  font-size:11px;font-weight:600;
+  padding:3px 10px;border-radius:10px;
+  display:inline-block;
+}
+.assess-practical{background:rgba(46,125,50,.1);color:#2E7D32;}
+.assess-written{background:rgba(21,101,192,.1);color:#1565C0;}
+.assess-both{background:rgba(230,81,0,.1);color:#E65100;}
+.assess-cert{background:rgba(183,28,28,.1);color:#B71C1C;font-weight:700;}
+
+/* milestone row */
+.milestone-row td{
+  background:linear-gradient(90deg,rgba(232,160,0,.08),rgba(232,160,0,.03));
+  border-top:2px solid rgba(232,160,0,.4);
+  border-bottom:2px solid rgba(232,160,0,.4);
+}
+.milestone-cell{
+  padding:14px 16px;
+  font-family:'Playfair Display',serif;
+  font-size:14px;font-weight:600;color:var(--gold);
+  letter-spacing:.3px;
+}
+
+/* ── EQUIPMENT DETAIL CARDS ── */
+.equip-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:14px;
+}
+.equip-card{
+  background:white;border-radius:12px;
+  border:1px solid var(--border);
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.equip-card-head{
+  padding:14px 16px 10px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.equip-icon{
+  width:38px;height:38px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;flex-shrink:0;
+}
+.equip-model{
+  font-family:'DM Mono',monospace;font-size:11px;
+  font-weight:500;color:var(--muted);margin-bottom:2px;
+}
+.equip-name{font-size:13px;font-weight:600;color:var(--ink);line-height:1.3;}
+.equip-card-body{padding:0 16px 14px;}
+.equip-covers{list-style:none;padding:0;}
+.equip-covers li{
+  font-size:11.5px;color:#3A4F6A;
+  padding:3px 0;display:flex;gap:6px;
+  border-bottom:1px solid var(--border);
+  line-height:1.4;
+}
+.equip-covers li:last-child{border-bottom:none;}
+.cover-arrow{color:var(--muted);flex-shrink:0;font-size:10px;margin-top:3px;}
+.nc-scope{
+  display:inline-block;font-size:10px;font-weight:700;
+  padding:2px 8px;border-radius:10px;margin-top:8px;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);color:rgba(255,255,255,.45);
+  text-align:center;padding:28px;font-size:12px;
+}
+footer strong{color:var(--gold);}
+
+/* colors per equipment */
+.c1{color:var(--eq1);}
+.c2{color:var(--eq2);}
+.c3{color:var(--eq3);}
+.c4{color:var(--eq4);}
+.c5{color:var(--eq5);}
+.bg1{background:rgba(46,125,50,.1);}
+.bg2{background:rgba(21,101,192,.1);}
+.bg3{background:rgba(106,27,154,.1);}
+.bg4{background:rgba(173,20,87,.1);}
+.bg5{background:rgba(230,81,0,.1);}
+.icon-bg1{background:rgba(46,125,50,.12);}
+.icon-bg2{background:rgba(21,101,192,.12);}
+.icon-bg3{background:rgba(106,27,154,.12);}
+.icon-bg4{background:rgba(173,20,87,.12);}
+.icon-bg5{background:rgba(230,81,0,.12);}
+
+@media(max-width:680px){
+  .cover{padding:40px 20px 36px;}
+  main{padding:24px 16px 60px;}
+  .legend-bar{padding:12px 16px;}
+  .week-table thead th:nth-child(4){display:none;}
+  .week-table tbody td:nth-child(4){display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-label">IEG Co., Ltd. × TESDA Philippines</div>
+  <h1 class="cover-title">
+    Smart Factory TVET<br/>
+    <em>32-Week Curriculum Alignment</em>
+  </h1>
+  <p class="cover-sub">
+    A complete equipment-to-competency mapping for TESDA EIM NC II and NC III, delivered exclusively through IEG training equipment — without DX Labeler.
+  </p>
+  <div class="cover-chips">
+    <span class="chip"><b>NC II</b> Weeks 1–16 · 4 Core Units</span>
+    <span class="chip"><b>NC III</b> Weeks 17–32 · 5 Core Units</span>
+    <span class="chip">5 IEG Equipment Types</span>
+    <span class="chip">KOICA IBS · Philippines</span>
+  </div>
+</div>
+
+<!-- EQUIPMENT LEGEND (sticky) -->
+<div class="legend-bar">
+  <span class="legend-label">Equipment</span>
+  <span class="eq-chip c1"><span class="eq-dot"></span>IEG 6030 — Electrical Machine</span>
+  <span class="eq-chip c2"><span class="eq-dot"></span>IEG 4000 — Pneumatics</span>
+  <span class="eq-chip c3"><span class="eq-dot"></span>IEG 3430 — Mechatronics I</span>
+  <span class="eq-chip c4"><span class="eq-dot"></span>IEG 3432 — Mechatronics II</span>
+  <span class="eq-chip c5"><span class="eq-dot"></span>IEG 6050 — Smart Factory</span>
+</div>
+
+<main>
+
+  <!-- ── EQUIPMENT OVERVIEW ── -->
+  <div class="section" id="equipment">
+    <div class="section-head">
+      <span class="nc-badge" style="background:rgba(11,31,58,.08);color:var(--ink2);border-color:var(--border);">EQUIPMENT</span>
+      <h2 class="section-title">5 Equipment Types · Full NC II/III Coverage</h2>
+    </div>
+    <div class="equip-grid">
+
+      <div class="equip-card">
+        <div class="equip-card-head">
+          <div class="equip-icon icon-bg1">⚡</div>
+          <div>
+            <div class="equip-model">IEG 6030</div>
+            <div class="equip-name">Electrical Machine Structure Trainer</div>
+          </div>
+        </div>
+        <div class="equip-card-body">
+          <ul class="equip-covers">
+            <li><span class="cover-arrow">→</span>AC/DC motor wiring & control</li>
+            <li><span class="cover-arrow">→</span>Contactor, overload relay circuits</li>
+            <li><span class="cover-arrow">→</span>Low-voltage panel wiring</li>
+            <li><span class="cover-arrow">→</span>Electrical fault diagnosis</li>
+          </ul>
+          <span class="nc-scope nc2-badge">EIM NC II · Weeks 1–8</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-card-head">
+          <div class="equip-icon icon-bg2">🔩</div>
+          <div>
+            <div class="equip-model">IEG 4000</div>
+            <div class="equip-name">Pneumatics Trainer</div>
+          </div>
+        </div>
+        <div class="equip-card-body">
+          <ul class="equip-covers">
+            <li><span class="cover-arrow">→</span>Pneumatic circuit design</li>
+            <li><span class="cover-arrow">→</span>Directional control valves</li>
+            <li><span class="cover-arrow">→</span>Electropneumatic control</li>
+            <li><span class="cover-arrow">→</span>Pneumatic system maintenance</li>
+          </ul>
+          <span class="nc-scope nc2-badge">EIM NC II · Weeks 9–13</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-card-head">
+          <div class="equip-icon icon-bg3">🤖</div>
+          <div>
+            <div class="equip-model">IEG 3430</div>
+            <div class="equip-name">Mechatronics System Trainer I</div>
+          </div>
+        </div>
+        <div class="equip-card-body">
+          <ul class="equip-covers">
+            <li><span class="cover-arrow">→</span>Basic PLC ladder logic</li>
+            <li><span class="cover-arrow">→</span>Sensor integration (proximity, photo)</li>
+            <li><span class="cover-arrow">→</span>Sequential control programs</li>
+            <li><span class="cover-arrow">→</span>HMI basic operations</li>
+          </ul>
+          <span class="nc-scope nc2-badge">EIM NC II · Weeks 14–16</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-card-head">
+          <div class="equip-icon icon-bg4">🛠</div>
+          <div>
+            <div class="equip-model">IEG 3432</div>
+            <div class="equip-name">Mechatronics System Trainer II</div>
+          </div>
+        </div>
+        <div class="equip-card-body">
+          <ul class="equip-covers">
+            <li><span class="cover-arrow">→</span>Advanced PLC — FBD, ST, SFC</li>
+            <li><span class="cover-arrow">→</span>Industrial instrumentation & calibration</li>
+            <li><span class="cover-arrow">→</span>VFD (Variable Frequency Drive) control</li>
+            <li><span class="cover-arrow">→</span>System troubleshooting & fault analysis</li>
+          </ul>
+          <span class="nc-scope nc3-badge">EIM NC III · Weeks 17–23, 30–31</span>
+        </div>
+      </div>
+
+      <div class="equip-card">
+        <div class="equip-card-head">
+          <div class="equip-icon icon-bg5">🏭</div>
+          <div>
+            <div class="equip-model">IEG 6050</div>
+            <div class="equip-name">Smart Factory Training Equipment</div>
+          </div>
+        </div>
+        <div class="equip-card-body">
+          <ul class="equip-covers">
+            <li><span class="cover-arrow">→</span>OPC-UA industrial networking</li>
+            <li><span class="cover-arrow">→</span>Collaborative robot (cobot) ops</li>
+            <li><span class="cover-arrow">→</span>Color vision inspection system</li>
+            <li><span class="cover-arrow">→</span>SCADA/HMI process control</li>
+            <li><span class="cover-arrow">→</span>Conveyor & process integration</li>
+          </ul>
+          <span class="nc-scope nc3-badge">EIM NC III · Weeks 24–32</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── NC II ── -->
+  <div class="section" id="nc2">
+    <div class="section-head">
+      <span class="nc-badge nc2-badge">EIM NC II</span>
+      <h2 class="section-title">Competency Units Covered</h2>
+      <span class="section-meta">Weeks 1–16 · 4 Core Units</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-code">EIM NC II · UNIT 1</div>
+        <div class="comp-name">Install and Terminate Wires, Cables & Related Devices</div>
+        <div class="comp-equip">
+          <span class="eq-tag c1 bg1">IEG 6030</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">EIM NC II · UNIT 2</div>
+        <div class="comp-name">Install and Maintain Low-Voltage Electrical Systems & Motor Controls</div>
+        <div class="comp-equip">
+          <span class="eq-tag c1 bg1">IEG 6030</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">EIM NC II · UNIT 3</div>
+        <div class="comp-name">Install and Maintain Pneumatic / Electropneumatic Systems</div>
+        <div class="comp-equip">
+          <span class="eq-tag c2 bg2">IEG 4000</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">EIM NC II · UNIT 4</div>
+        <div class="comp-name">Perform PLC-Based Control System Operations</div>
+        <div class="comp-equip">
+          <span class="eq-tag c3 bg3">IEG 3430</span>
+        </div>
+      </div>
+    </div>
+
+    <table class="week-table">
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Topic</th>
+          <th>Equipment</th>
+          <th>Learning Outcomes</th>
+          <th>Assessment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="week-num">1</td>
+          <td class="week-topic">Program Orientation & Electrical Safety<small>OSHA/DOLE electrical safety standards, PPE, lockout/tagout</small></td>
+          <td class="week-equip"><span class="eq-tag c1 bg1">IEG 6030</span></td>
+          <td class="week-outcomes">Apply safety protocols; identify electrical hazards; demonstrate correct PPE usage</td>
+          <td class="week-assessment"><span class="assess-tag assess-written">Written</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">2</td>
+          <td class="week-topic">Electrical Fundamentals Review<small>Ohm's Law, AC/DC theory, circuit analysis, multimeter use</small></td>
+          <td class="week-equip"><span class="eq-tag c1 bg1">IEG 6030</span></td>
+          <td class="week-outcomes">Measure voltage, current, resistance; interpret circuit diagrams; troubleshoot basic faults</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">3</td>
+          <td class="week-topic">Wire Termination & Cable Routing<small>Stripping, crimping, lug installation, cable management best practices</small></td>
+          <td class="week-equip"><span class="eq-tag c1 bg1">IEG 6030</span></td>
+          <td class="week-outcomes">Terminate wires to terminal blocks; route cables per PEC standards; label and document wiring</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">4</td>
+          <td class="week-topic">Motor Control Fundamentals<small>Contactors, overload relays, DOL starter wiring, motor nameplates</small></td>
+          <td class="week-equip"><span class="eq-tag c1 bg1">IEG 6030</span></td>
+          <td class="week-outcomes">Wire DOL motor starter; set overload relay; test forward/reverse control circuit</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">5</td>
+          <td class="week-topic">Low-Voltage Panel Wiring<small>MCB, MCCB, RCCB installation; panelboard layout; earthing systems</small></td>
+          <td class="week-equip"><span class="eq-tag c1 bg1">IEG 6030</span></td>
+          <td class="week-outcomes">Install and test panelboard components; verify protection device ratings; perform earth continuity test</td>
+          <td class="week-assessment"><span class="assess-tag assess-both">Both</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">6</td>
+          <td class="week-topic">AC Motor Types & Applications<small>Induction, synchronous, single-phase; nameplate data; speed-torque characteristics</small></td>
+          <td class="week-equip"><span class="eq-tag c1 bg1">IEG 6030</span></td>
+          <td class="week-outcomes">Identify motor types; connect 3-phase induction motor; measure speed and current under load</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">7</td>
+          <td class="week-topic">Electrical Fault Diagnosis<small>Insulation resistance, phase imbalance, fault simulation, megger testing</small></td>
+          <td class="week-equip"><span class="eq-tag c1 bg1">IEG 6030</span></td>
+          <td class="week-outcomes">Diagnose motor and wiring faults; perform megger test; report and document findings</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">8</td>
+          <td class="week-topic">Electrical Systems Maintenance<small>PM schedules, inspection checklist, thermal imaging concepts, record-keeping</small></td>
+          <td class="week-equip"><span class="eq-tag c1 bg1">IEG 6030</span></td>
+          <td class="week-outcomes">Execute PM checklist; identify worn components; complete maintenance logbook</td>
+          <td class="week-assessment"><span class="assess-tag assess-both">Both</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">9</td>
+          <td class="week-topic">Pneumatic System Components<small>Compressors, FRL units, actuators, valves; pneumatic symbol reading</small></td>
+          <td class="week-equip"><span class="eq-tag c2 bg2">IEG 4000</span></td>
+          <td class="week-outcomes">Identify and connect pneumatic components; read and draw ISO 1219 circuit diagrams</td>
+          <td class="week-assessment"><span class="assess-tag assess-written">Written</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">10</td>
+          <td class="week-topic">Directional Control Valves & Actuator Control<small>5/2, 4/2 valves; cylinder extension/retraction sequences; flow control</small></td>
+          <td class="week-equip"><span class="eq-tag c2 bg2">IEG 4000</span></td>
+          <td class="week-outcomes">Assemble single/double-acting cylinder circuit; control speed via flow valves; verify sequence</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">11</td>
+          <td class="week-topic">Multi-Actuator Pneumatic Circuits<small>Cascade control, step-counter method, signal overlap elimination</small></td>
+          <td class="week-equip"><span class="eq-tag c2 bg2">IEG 4000</span></td>
+          <td class="week-outcomes">Design and build 3-actuator sequential circuit; eliminate signal conflicts; document circuit</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">12</td>
+          <td class="week-topic">Electropneumatic Control<small>Solenoid valves, relay logic, limit switches, push-button control panels</small></td>
+          <td class="week-equip"><span class="eq-tag c2 bg2">IEG 4000</span></td>
+          <td class="week-outcomes">Wire solenoid valve to relay control panel; implement auto/manual selector; test safety interlocks</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">13</td>
+          <td class="week-topic">Pneumatic System Maintenance<small>Leak detection, filter replacement, cylinder seal inspection, pressure testing</small></td>
+          <td class="week-equip"><span class="eq-tag c2 bg2">IEG 4000</span></td>
+          <td class="week-outcomes">Perform leak test using soapy water & pressure gauge; replace filter element; complete service report</td>
+          <td class="week-assessment"><span class="assess-tag assess-both">Both</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">14</td>
+          <td class="week-topic">PLC Hardware & Basic Ladder Logic<small>CPU, I/O modules, power supply; LD programming: NO/NC contacts, coils, timers</small></td>
+          <td class="week-equip"><span class="eq-tag c3 bg3">IEG 3430</span></td>
+          <td class="week-outcomes">Wire I/O modules; write 10-rung ladder program; upload and monitor on PLC</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">15</td>
+          <td class="week-topic">Sensor Integration & Counter Applications<small>Proximity, photoelectric, capacitive sensors; counter/timer instructions</small></td>
+          <td class="week-equip"><span class="eq-tag c3 bg3">IEG 3430</span></td>
+          <td class="week-outcomes">Connect and configure 3 sensor types; implement batch counting program; display count on HMI</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr class="milestone-row">
+          <td colspan="5"><div class="milestone-cell">🏅 NC II COMPETENCY ASSESSMENT — TESDA EIM NC II Certification Examination (Week 16)</div></td>
+        </tr>
+        <tr>
+          <td class="week-num">16</td>
+          <td class="week-topic">NC II Capstone & Assessment<small>Integrated project: electrical panel + pneumatic actuator + PLC sequence control</small></td>
+          <td class="week-equip">
+            <span class="eq-tag c1 bg1">IEG 6030</span>
+            <span class="eq-tag c2 bg2">IEG 4000</span>
+            <span class="eq-tag c3 bg3">IEG 3430</span>
+          </td>
+          <td class="week-outcomes">Complete integrated automation system; demonstrate all NC II competencies under assessor observation</td>
+          <td class="week-assessment"><span class="assess-tag assess-cert">NC II CERT</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── NC III ── -->
+  <div class="section" id="nc3">
+    <div class="section-head">
+      <span class="nc-badge nc3-badge">EIM NC III</span>
+      <h2 class="section-title">Competency Units Covered</h2>
+      <span class="section-meta">Weeks 17–32 · 5 Core Units</span>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-code">EIM NC III · UNIT 1</div>
+        <div class="comp-name">Perform Advanced PLC Programming (FBD, ST, SFC)</div>
+        <div class="comp-equip">
+          <span class="eq-tag c4 bg4">IEG 3432</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">EIM NC III · UNIT 2</div>
+        <div class="comp-name">Calibrate Industrial Instruments & Maintain VFD Systems</div>
+        <div class="comp-equip">
+          <span class="eq-tag c4 bg4">IEG 3432</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">EIM NC III · UNIT 3</div>
+        <div class="comp-name">Install and Maintain Hydraulic Systems</div>
+        <div class="comp-equip">
+          <span class="eq-tag c4 bg4">IEG 3432</span>
+          <span class="eq-tag" style="color:#AD1457;background:rgba(173,20,87,.08);border-color:#AD1457;font-size:10.5px;padding:2px 8px;border-radius:10px;font-weight:600;">IEG 4100</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">EIM NC III · UNIT 4</div>
+        <div class="comp-name">Operate Smart Factory Systems (Cobot, Vision, OPC-UA, SCADA)</div>
+        <div class="comp-equip">
+          <span class="eq-tag c5 bg5">IEG 6050</span>
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-code">EIM NC III · UNIT 5</div>
+        <div class="comp-name">Troubleshoot & Integrate Industrial Control Systems</div>
+        <div class="comp-equip">
+          <span class="eq-tag c4 bg4">IEG 3432</span>
+          <span class="eq-tag c5 bg5">IEG 6050</span>
+        </div>
+      </div>
+    </div>
+
+    <table class="week-table">
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Topic</th>
+          <th>Equipment</th>
+          <th>Learning Outcomes</th>
+          <th>Assessment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="week-num">17</td>
+          <td class="week-topic">Advanced PLC — Function Block Diagram (FBD)<small>Standard function blocks, data types, structured data handling, EN/ENO</small></td>
+          <td class="week-equip"><span class="eq-tag c4 bg4">IEG 3432</span></td>
+          <td class="week-outcomes">Create FBD program with 5+ function blocks; manage Boolean and integer data types</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">18</td>
+          <td class="week-topic">Advanced PLC — Structured Text (ST) & SFC<small>IF/CASE/FOR/WHILE statements; Sequential Function Chart for batch control</small></td>
+          <td class="week-equip"><span class="eq-tag c4 bg4">IEG 3432</span></td>
+          <td class="week-outcomes">Write ST program with loops and conditions; convert LD to SFC; simulate batch process</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">19</td>
+          <td class="week-topic">Variable Frequency Drive (VFD) Control<small>V/f control, parameter setting, communication interface, energy efficiency</small></td>
+          <td class="week-equip"><span class="eq-tag c4 bg4">IEG 3432</span></td>
+          <td class="week-outcomes">Configure VFD parameters; control motor speed via PLC analog output; log speed vs. energy data</td>
+          <td class="week-assessment"><span class="assess-tag assess-both">Both</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">20</td>
+          <td class="week-topic">Industrial Instrumentation — Calibration<small>4–20 mA loops, pressure/temperature transmitters, calibrator use, HART protocol</small></td>
+          <td class="week-equip"><span class="eq-tag c4 bg4">IEG 3432</span></td>
+          <td class="week-outcomes">Calibrate pressure transmitter ±0.5%; perform 5-point calibration; issue calibration certificate</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">21</td>
+          <td class="week-topic">Hydraulic System Principles<small>Pascal's law, pump types, directional/pressure/flow control valves, hydraulic symbols</small></td>
+          <td class="week-equip"><span class="eq-tag c4 bg4" style="font-size:10.5px">IEG 3432</span> <span class="eq-tag" style="color:#AD1457;background:rgba(173,20,87,.08);border-color:#AD1457;font-size:10.5px;padding:2px 8px;border-radius:10px;font-weight:600;">IEG 4100</span></td>
+          <td class="week-outcomes">Read hydraulic circuit drawings; identify valve types and symbols; calculate system pressure</td>
+          <td class="week-assessment"><span class="assess-tag assess-written">Written</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">22</td>
+          <td class="week-topic">Hydraulic Circuit Assembly & Cylinder Control<small>Build load-holding circuit, regenerative circuit; counterbalance valve application</small></td>
+          <td class="week-equip"><span class="eq-tag" style="color:#AD1457;background:rgba(173,20,87,.08);border-color:#AD1457;font-size:10.5px;padding:2px 8px;border-radius:10px;font-weight:600;">IEG 4100</span></td>
+          <td class="week-outcomes">Assemble 3-actuator hydraulic circuit; set relief valve; test under full load; measure flow rate</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">23</td>
+          <td class="week-topic">Hydraulic System Maintenance & Fault Diagnosis<small>Oil analysis, seal replacement, pump efficiency test, contamination control</small></td>
+          <td class="week-equip"><span class="eq-tag" style="color:#AD1457;background:rgba(173,20,87,.08);border-color:#AD1457;font-size:10.5px;padding:2px 8px;border-radius:10px;font-weight:600;">IEG 4100</span></td>
+          <td class="week-outcomes">Diagnose 5 induced hydraulic faults; replace cylinder seals; complete hydraulic service report</td>
+          <td class="week-assessment"><span class="assess-tag assess-both">Both</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">24</td>
+          <td class="week-topic">Smart Factory Overview & Conveyor Systems<small>Industry 4.0 architecture, conveyor control, product routing, station integration</small></td>
+          <td class="week-equip"><span class="eq-tag c5 bg5">IEG 6050</span></td>
+          <td class="week-outcomes">Operate conveyor system; program routing logic based on product type; monitor via HMI</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">25</td>
+          <td class="week-topic">Color Vision Inspection System<small>Camera setup, lighting conditions, object detection, defect rejection logic</small></td>
+          <td class="week-equip"><span class="eq-tag c5 bg5">IEG 6050</span></td>
+          <td class="week-outcomes">Configure vision system for 3 product types; achieve ≥95% detection accuracy; integrate reject signal to conveyor</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">26</td>
+          <td class="week-topic">Collaborative Robot (Cobot) Operations<small>Safety zones, TCP configuration, teach pendant, pick-and-place program</small></td>
+          <td class="week-equip"><span class="eq-tag c5 bg5">IEG 6050</span></td>
+          <td class="week-outcomes">Configure cobot safety zones; program pick-and-place task with vision trigger; run unassisted cycle</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">27</td>
+          <td class="week-topic">OPC-UA Industrial Networking<small>Client-server model, node configuration, data subscription, cybersecurity basics</small></td>
+          <td class="week-equip"><span class="eq-tag c5 bg5">IEG 6050</span></td>
+          <td class="week-outcomes">Connect 3 devices via OPC-UA; read real-time tags; configure alarm subscription</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">28</td>
+          <td class="week-topic">SCADA / HMI System Configuration<small>Screen design, alarm management, trending, historian, remote monitoring</small></td>
+          <td class="week-equip"><span class="eq-tag c5 bg5">IEG 6050</span></td>
+          <td class="week-outcomes">Build 4-screen SCADA interface; configure alarm priority levels; generate shift production report</td>
+          <td class="week-assessment"><span class="assess-tag assess-both">Both</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">29</td>
+          <td class="week-topic">Smart Factory System Integration<small>End-to-end line: conveyor + vision + cobot + SCADA + OPC-UA live data flow</small></td>
+          <td class="week-equip"><span class="eq-tag c5 bg5">IEG 6050</span></td>
+          <td class="week-outcomes">Operate fully integrated smart factory line; respond to live alarm events; optimize OEE metric</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">30</td>
+          <td class="week-topic">Advanced Troubleshooting — Integrated Systems<small>Fault tree analysis, FMEA, systematic diagnostic approach across all systems</small></td>
+          <td class="week-equip">
+            <span class="eq-tag c4 bg4">IEG 3432</span>
+            <span class="eq-tag c5 bg5">IEG 6050</span>
+          </td>
+          <td class="week-outcomes">Diagnose 8 induced cross-system faults; apply FMEA methodology; present root-cause report</td>
+          <td class="week-assessment"><span class="assess-tag assess-both">Both</span></td>
+        </tr>
+        <tr>
+          <td class="week-num">31</td>
+          <td class="week-topic">NC III Capstone Preparation<small>Capstone project briefing, team assignment, documentation preparation, dry run</small></td>
+          <td class="week-equip">
+            <span class="eq-tag c4 bg4">IEG 3432</span>
+            <span class="eq-tag c5 bg5">IEG 6050</span>
+          </td>
+          <td class="week-outcomes">Complete capstone project plan; deliver 5-minute presentation to trainer panel; receive feedback</td>
+          <td class="week-assessment"><span class="assess-tag assess-practical">Practical</span></td>
+        </tr>
+        <tr class="milestone-row">
+          <td colspan="5"><div class="milestone-cell">🏆 NC III COMPETENCY ASSESSMENT — TESDA EIM NC III Certification Examination (Week 32)</div></td>
+        </tr>
+        <tr>
+          <td class="week-num">32</td>
+          <td class="week-topic">NC III Capstone & Final Assessment<small>Full smart factory commissioning project: all systems integrated, TESDA assessor observation</small></td>
+          <td class="week-equip">
+            <span class="eq-tag c1 bg1">IEG 6030</span>
+            <span class="eq-tag c2 bg2">IEG 4000</span>
+            <span class="eq-tag c3 bg3">IEG 3430</span>
+            <span class="eq-tag c4 bg4">IEG 3432</span>
+            <span class="eq-tag c5 bg5">IEG 6050</span>
+          </td>
+          <td class="week-outcomes">Commission integrated smart factory system; demonstrate all NC III competencies; pass TESDA national assessment</td>
+          <td class="week-assessment"><span class="assess-tag assess-cert">NC III CERT</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>
+  <strong>IEG Co., Ltd.</strong> · Kelly Cho · kellycho824@ieg.kr · +82-1644-3263<br/>
+  TESDA EIM NC II/III Curriculum Alignment — KOICA IBS Philippines · May 2026 · For TESDA Review
+</footer>
+
+</body>
+</html>
