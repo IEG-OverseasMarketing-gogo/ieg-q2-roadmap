@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IEG × KOICA IBS Philippines — Partnership Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:    #0D1F3C;
+    --navy2:   #162847;
+    --navy3:   #1E3A5F;
+    --gold:    #F0A500;
+    --gold2:   #FFB830;
+    --cream:   #FDF8EF;
+    --white:   #FFFFFF;
+    --smoke:   #F4F6FA;
+    --muted:   #8A99B3;
+    --border:  #D8E2F0;
+    --text:    #1A2B45;
+    --green:   #1E8A5E;
+    --red:     #C0392B;
+    --teal:    #1A7A8A;
+    --purple:  #5B4FCF;
+
+    /* partner colors */
+    --ieg:     #0D5CA6;
+    --innobiz: #2E7D32;
+    --tesda:   #C62828;
+    --hytec:   #E65100;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,.3);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 5px 11px;
+    border-radius: 6px;
+    letter-spacing: .5px;
+  }
+  .header-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,.75);
+    letter-spacing: .3px;
+  }
+  .header-nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .nav-btn {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    color: rgba(255,255,255,.8);
+    font-family: 'Sora', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 13px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all .2s;
+    text-decoration: none;
+  }
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 60%, #1A4A6E 100%);
+    color: white;
+    padding: 64px 32px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(240,165,0,.08);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 10%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(240,165,0,.05);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,.72);
+    max-width: 640px;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-chip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.18);
+    padding: 7px 14px;
+    border-radius: 24px;
+    font-size: 12.5px;
+    color: rgba(255,255,255,.9);
+  }
+  .hero-chip .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .deadline-chip {
+    background: rgba(240,165,0,.2);
+    border-color: var(--gold);
+    color: var(--gold2);
+    font-weight: 600;
+  }
+
+  /* ── MAIN ── */
+  main { max-width: 1200px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-top: 52px;
+    scroll-margin-top: 80px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    background: var(--navy);
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  .section-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* ── PARTNER CARDS ── */
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .partner-card {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(13,31,60,.06);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .partner-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(13,31,60,.12);
+  }
+  .partner-header {
+    padding: 18px 20px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .partner-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .partner-name {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .partner-role-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .partner-body {
+    padding: 0 20px 18px;
+  }
+  .partner-tag {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    letter-spacing: .3px;
+  }
+  .rr-list { list-style: none; padding: 0; }
+  .rr-list li {
+    display: flex;
+    gap: 8px;
+    padding: 5px 0;
+    font-size: 12.5px;
+    border-bottom: 1px solid var(--smoke);
+    line-height: 1.5;
+  }
+  .rr-list li:last-child { border-bottom: none; }
+  .rr-bullet {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* ── IEG ── */
+  .pc-ieg .partner-icon { background: rgba(13,92,166,.12); color: var(--ieg); }
+  .pc-ieg .partner-tag { background: rgba(13,92,166,.1); color: var(--ieg); }
+  .pc-ieg .rr-bullet { background: var(--ieg); }
+  .pc-ieg { border-top: 3px solid var(--ieg); }
+
+  /* ── INNOBIZ ── */
+  .pc-innobiz .partner-icon { background: rgba(46,125,50,.12); color: var(--innobiz); }
+  .pc-innobiz .partner-tag { background: rgba(46,125,50,.1); color: var(--innobiz); }
+  .pc-innobiz .rr-bullet { background: var(--innobiz); }
+  .pc-innobiz { border-top: 3px solid var(--innobiz); }
+
+  /* ── TESDA ── */
+  .pc-tesda .partner-icon { background: rgba(198,40,40,.12); color: var(--tesda); }
+  .pc-tesda .partner-tag { background: rgba(198,40,40,.1); color: var(--tesda); }
+  .pc-tesda .rr-bullet { background: var(--tesda); }
+  .pc-tesda { border-top: 3px solid var(--tesda); }
+
+  /* ── HYTEC ── */
+  .pc-hytec .partner-icon { background: rgba(230,81,0,.12); color: var(--hytec); }
+  .pc-hytec .partner-tag { background: rgba(230,81,0,.1); color: var(--hytec); }
+  .pc-hytec .rr-bullet { background: var(--hytec); }
+  .pc-hytec { border-top: 3px solid var(--hytec); }
+
+  /* ── ROADMAP ── */
+  .roadmap { display: flex; flex-direction: column; gap: 16px; }
+  .phase-card {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(13,31,60,.05);
+    overflow: hidden;
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s;
+  }
+  .phase-header:hover { background: var(--smoke); }
+  .phase-num-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .phase-title-block { flex: 1; }
+  .phase-name {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+  }
+  .phase-dates {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .phase-urgency {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+  .urgent { background: rgba(192,57,43,.1); color: var(--red); }
+  .normal { background: rgba(30,138,94,.1); color: var(--green); }
+  .future { background: rgba(91,79,207,.1); color: var(--purple); }
+  .phase-toggle {
+    font-size: 16px;
+    color: var(--muted);
+    transition: transform .25s;
+    flex-shrink: 0;
+  }
+  .phase-toggle.open { transform: rotate(180deg); }
+  .phase-body {
+    display: none;
+    padding: 0 24px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .phase-body.open { display: block; }
+
+  /* gantt-lite */
+  .gantt-bar-wrap {
+    margin: 16px 0 20px;
+    background: var(--smoke);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+  .gantt-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .gantt-row:last-child { margin-bottom: 0; }
+  .gantt-label {
+    width: 130px;
+    flex-shrink: 0;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .gantt-track {
+    flex: 1;
+    height: 20px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .gantt-fill {
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: width .6s ease;
+  }
+
+  .tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .task-item {
+    background: var(--smoke);
+    border-radius: 10px;
+    padding: 12px 14px;
+    border-left: 3px solid var(--border);
+  }
+  .task-who {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 5px;
+  }
+  .task-item ul { list-style: none; padding: 0; }
+  .task-item ul li {
+    font-size: 12px;
+    color: var(--text);
+    padding: 2px 0;
+    padding-left: 12px;
+    position: relative;
+  }
+  .task-item ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 10px;
+  }
+
+  .task-ieg    { border-left-color: var(--ieg);     }
+  .task-innobiz{ border-left-color: var(--innobiz); }
+  .task-tesda  { border-left-color: var(--tesda);   }
+  .task-hytec  { border-left-color: var(--hytec);   }
+  .task-koica  { border-left-color: var(--purple);  }
+
+  .who-ieg     { color: var(--ieg);     }
+  .who-innobiz { color: var(--innobiz); }
+  .who-tesda   { color: var(--tesda);   }
+  .who-hytec   { color: var(--hytec);   }
+  .who-koica   { color: var(--purple);  }
+
+  /* ── DOCUMENTS ── */
+  .doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .doc-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: box-shadow .2s;
+  }
+  .doc-card:hover { box-shadow: 0 4px 16px rgba(13,31,60,.1); }
+  .doc-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--smoke);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+  .doc-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--navy);
+    margin-bottom: 3px;
+  }
+  .doc-meta {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .doc-status {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .status-ready    { background: rgba(30,138,94,.1);  color: var(--green);  }
+  .status-draft    { background: rgba(240,165,0,.15); color: #B8860B;       }
+  .status-needed   { background: rgba(192,57,43,.1);  color: var(--red);    }
+
+  /* ── BUDGET ── */
+  .budget-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 680px) { .budget-wrap { grid-template-columns: 1fr; } }
+  .budget-table {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .bt-head {
+    background: var(--navy);
+    color: white;
+    padding: 12px 20px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .bt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--smoke);
+    font-size: 13px;
+  }
+  .bt-row:last-child { border-bottom: none; }
+  .bt-total {
+    background: var(--smoke);
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .bt-amount { font-weight: 600; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; }
+  .bt-label { color: var(--text); }
+  .bt-sub { font-size: 11px; color: var(--muted); }
+
+  .donut-wrap {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .donut-title {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--navy);
+    align-self: flex-start;
+  }
+  .donut-legend {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .legend-left { display: flex; align-items: center; gap: 8px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .legend-name { font-size: 12.5px; }
+  .legend-pct  { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; }
+  .legend-bar-wrap { width: 100%; height: 6px; background: var(--border); border-radius: 6px; margin-top: 3px; }
+  .legend-bar { height: 100%; border-radius: 6px; }
+
+  /* ── COOPERATING ORGS ── */
+  .org-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .org-card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 16px;
+    text-align: center;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .org-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(13,31,60,.1);
+  }
+  .org-icon { font-size: 28px; margin-bottom: 8px; }
+  .org-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 13px; color: var(--navy); margin-bottom: 4px; }
+  .org-desc { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+  .org-type {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .type-gov  { background: rgba(13,92,166,.1);  color: var(--ieg);     }
+  .type-priv { background: rgba(46,125,50,.1);  color: var(--innobiz); }
+  .type-intl { background: rgba(91,79,207,.1);  color: var(--purple);  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,.5);
+    text-align: center;
+    padding: 28px 32px;
+    font-size: 12px;
+    margin-top: 80px;
+  }
+  footer strong { color: var(--gold); }
+
+  /* ── responsive ── */
+  @media (max-width: 700px) {
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .hero { padding: 40px 20px 36px; }
+    main { padding: 0 16px 60px; }
+    .partner-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-logo">
+      <span class="logo-badge">IEG</span>
+      <span class="header-title">KOICA IBS Philippines · Partnership Roadmap 2026–2028</span>
+    </div>
+    <nav class="header-nav">
+      <a class="nav-btn" href="#rr">R/R Matrix</a>
+      <a class="nav-btn" href="#roadmap">Roadmap</a>
+      <a class="nav-btn" href="#documents">Documents</a>
+      <a class="nav-btn" href="#budget">Budget</a>
+      <a class="nav-btn" href="#orgs">Partners</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">▸ KOICA IBS · Inclusive Business Solution Program</div>
+    <h1 class="hero-title">
+      Philippines Smart Factory<br/>
+      <span>TVET Workforce Development</span>
+    </h1>
+    <p class="hero-subtitle">
+      A four-partner consortium bringing Korean smart factory training technology to BOP youth in the Philippines — aligned to TESDA EIM NC II/III and powered by KOICA ODA financing.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-chip"><span class="dot"></span>Base of the Pyramid (BOP) Target: 500+ Youth / Year</div>
+      <div class="hero-chip"><span class="dot"></span>Target Country: Republic of the Philippines</div>
+      <div class="hero-chip"><span class="dot"></span>Program: KOICA IBS (Inclusive Business Solution)</div>
+      <div class="hero-chip deadline-chip">⚡ Internal Prep Deadline: June 15, 2026</div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ══ 1. BOP DEFINITION ══ -->
+  <section class="section" id="bop">
+    <div class="section-header">
+      <span class="section-num">CONTEXT</span>
+      <h2 class="section-title">What is BOP in this Program?</h2>
+    </div>
+    <div style="background:var(--white); border-radius:14px; border:1px solid var(--border); padding:24px 28px; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;">
+      <div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-bottom:8px;">📌 Definition</div>
+        <p style="font-size:13px; line-height:1.7; color:var(--text);">
+          <strong>Base of the Pyramid (BOP)</strong> refers to the global population earning under <strong>USD 3,000/year</strong> — roughly 4 billion people. In the KOICA IBS framework, BOP youth are the <em>primary training beneficiaries</em>: those excluded from conventional higher education who gain pathways out of poverty through practical technical skills.
+        </p>
+      </div>
+      <div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-bottom:8px;">🇵🇭 Philippines Context</div>
+        <p style="font-size:13px; line-height:1.7; color:var(--text);">
+          ~43% of the Philippine population falls in the BOP bracket. Target trainees are <strong>aged 18–30</strong>, from low-income households in urban-fringe and rural areas, who cannot afford private technical training (avg. cost: USD 800–2,500/course) but have access to TESDA public institutions.
+        </p>
+      </div>
+      <div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-bottom:8px;">🎯 IBS Objective</div>
+        <p style="font-size:13px; line-height:1.7; color:var(--text);">
+          IEG equipment + KOICA ODA funding creates a <strong>zero-cost or subsidized</strong> training pathway. Trainees gain <strong>TESDA EIM NC II/III certification</strong>, enter manufacturing employment, and achieve a projected <strong>+40–60% income increase</strong>. This is the core social value proposition for KOICA evaluation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2. R/R MATRIX ══ -->
+  <section class="section" id="rr">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Roles & Responsibilities by Partner</h2>
+    </div>
+    <div class="partner-grid">
+
+      <!-- IEG -->
+      <div class="partner-card pc-ieg">
+        <div class="partner-header">
+          <div class="partner-icon">🏭</div>
+          <div>
+            <div class="partner-name">IEG Co., Ltd.<br/>(주식회사 아이지)</div>
+            <div class="partner-role-label">Lead Applicant · Equipment & Curriculum Provider</div>
+          </div>
+        </div>
+        <div class="partner-body">
+          <span class="partner-tag" style="background:rgba(13,92,166,.1);color:var(--ieg);">Korean SME · TVET Equipment OEM</span>
+          <ul class="rr-list">
+            <li><span class="rr-bullet" style="background:var(--ieg)"></span>Lead KOICA IBS application and consortium management</li>
+            <li><span class="rr-bullet" style="background:var(--ieg)"></span>Supply smart factory training equipment (IEG 6030, 6050, DX Labeler™)</li>
+            <li><span class="rr-bullet" style="background:var(--ieg)"></span>Provide 32-week EIM NC II/III-aligned curriculum</li>
+            <li><span class="rr-bullet" style="background:var(--ieg)"></span>Conduct trainer capacity building (2-week Korea HQ training)</li>
+            <li><span class="rr-bullet" style="background:var(--ieg)"></span>Manage equipment installation, calibration, and after-service</li>
+            <li><span class="rr-bullet" style="background:var(--ieg)"></span>Report project KPIs and financial accountability to KOICA</li>
+            <li><span class="rr-bullet" style="background:var(--ieg)"></span>Develop sustainability plan for post-project equipment sales</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- INNO-BIZ -->
+      <div class="partner-card pc-innobiz">
+        <div class="partner-header">
+          <div class="partner-icon">🤝</div>
+          <div>
+            <div class="partner-name">Inno-biz Association<br/>(이노비즈협회)</div>
+            <div class="partner-role-label">Consortium Co-Partner · SME Network Coordinator</div>
+          </div>
+        </div>
+        <div class="partner-body">
+          <span class="partner-tag" style="background:rgba(46,125,50,.1);color:var(--innobiz);">Korean SME Association · K-SmartTVET™ Co-Brand</span>
+          <ul class="rr-list">
+            <li><span class="rr-bullet" style="background:var(--innobiz)"></span>Co-lead consortium under K-SmartTVET™ brand framework</li>
+            <li><span class="rr-bullet" style="background:var(--innobiz)"></span>Mobilize Inno-biz member companies for supplementary equipment (pneumatics, sensors, welding)</li>
+            <li><span class="rr-bullet" style="background:var(--innobiz)"></span>Coordinate with Korean government agencies (MOTIE, MSIT) for policy backing</li>
+            <li><span class="rr-bullet" style="background:var(--innobiz)"></span>Support KOICA application documentation and consortium credibility</li>
+            <li><span class="rr-bullet" style="background:var(--innobiz)"></span>Facilitate Korea-Philippines B2B networking events</li>
+            <li><span class="rr-bullet" style="background:var(--innobiz)"></span>Co-develop marketing materials and Korean press releases</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TESDA -->
+      <div class="partner-card pc-tesda">
+        <div class="partner-header">
+          <div class="partner-icon">🏛</div>
+          <div>
+            <div class="partner-name">TESDA Philippines<br/>(Technical Education & Skills Development Authority)</div>
+            <div class="partner-role-label">Official Curriculum Validator · Certification Authority</div>
+          </div>
+        </div>
+        <div class="partner-body">
+          <span class="partner-tag" style="background:rgba(198,40,40,.1);color:var(--tesda);">PH Government Agency · EIM NC II/III Authority</span>
+          <ul class="rr-list">
+            <li><span class="rr-bullet" style="background:var(--tesda)"></span>Validate IEG 32-week curriculum against EIM NC II/III competency standards</li>
+            <li><span class="rr-bullet" style="background:var(--tesda)"></span>Accredit pilot training institution(s) as TESDA-registered program</li>
+            <li><span class="rr-bullet" style="background:var(--tesda)"></span>Issue official TESDA NC II/III certificates to program graduates</li>
+            <li><span class="rr-bullet" style="background:var(--tesda)"></span>Provide access to TESDA-accredited training centers as pilot sites</li>
+            <li><span class="rr-bullet" style="background:var(--tesda)"></span>Support beneficiary recruitment targeting BOP youth</li>
+            <li><span class="rr-bullet" style="background:var(--tesda)"></span>Co-sign MOU confirming program alignment and cooperation</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- HYTEC -->
+      <div class="partner-card pc-hytec">
+        <div class="partner-header">
+          <div class="partner-icon">⚡</div>
+          <div>
+            <div class="partner-name">HYTEC Power Inc.</div>
+            <div class="partner-role-label">Local Industry Partner · OJT & Employment Pipeline</div>
+          </div>
+        </div>
+        <div class="partner-body">
+          <span class="partner-tag" style="background:rgba(230,81,0,.1);color:var(--hytec);">PH Industrial Company · On-Ground Implementation</span>
+          <ul class="rr-list">
+            <li><span class="rr-bullet" style="background:var(--hytec)"></span>Provide OJT (On-the-Job Training) placements for program trainees</li>
+            <li><span class="rr-bullet" style="background:var(--hytec)"></span>Serve as local fiscal/operational agent for on-ground project activities</li>
+            <li><span class="rr-bullet" style="background:var(--hytec)"></span>Manage trainee recruitment, screening, and welfare support</li>
+            <li><span class="rr-bullet" style="background:var(--hytec)"></span>Connect graduates to local manufacturing employment networks</li>
+            <li><span class="rr-bullet" style="background:var(--hytec)"></span>Provide in-kind contribution: training facility space and utilities</li>
+            <li><span class="rr-bullet" style="background:var(--hytec)"></span>Collect and report beneficiary outcome data (employment, income)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ 3. ROADMAP ══ -->
+  <section class="section" id="roadmap">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Partnership Roadmap</h2>
+    </div>
+    <div class="roadmap">
+
+      <!-- PHASE 0 -->
+      <div class="phase-card">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <span class="phase-num-badge" style="background:rgba(192,57,43,.12);color:var(--red);">PHASE 0</span>
+          <div class="phase-title-block">
+            <div class="phase-name">Internal Alignment & Document Preparation</div>
+            <div class="phase-dates">May 19 – June 15, 2026 &nbsp;(27 days remaining)</div>
+          </div>
+          <span class="phase-urgency urgent">🔥 IMMEDIATE</span>
+          <span class="phase-toggle">▼</span>
+        </div>
+        <div class="phase-body open">
+          <div class="gantt-bar-wrap">
+            <div class="gantt-row"><span class="gantt-label">IEG Internal</span><div class="gantt-track"><div class="gantt-fill" style="width:100%;background:var(--ieg);">Full Sprint</div></div></div>
+            <div class="gantt-row"><span class="gantt-label">Inno-biz Coord.</span><div class="gantt-track"><div class="gantt-fill" style="width:80%;background:var(--innobiz);">Align</div></div></div>
+            <div class="gantt-row"><span class="gantt-label">TESDA Outreach</span><div class="gantt-track"><div class="gantt-fill" style="width:50%;background:var(--tesda);">Initial contact</div></div></div>
+            <div class="gantt-row"><span class="gantt-label">HYTEC Confirm</span><div class="gantt-track"><div class="gantt-fill" style="width:60%;background:var(--hytec);">MOU draft</div></div></div>
+          </div>
+          <div class="tasks-grid">
+            <div class="task-item task-ieg"><div class="task-who who-ieg">IEG</div><ul>
+              <li>Finalize 32-week EIM NC II/III curriculum deck (EN)</li>
+              <li>Prepare IEG company profile & equipment brochure (EN)</li>
+              <li>Draft IBS PCP (Project Concept Paper) v1</li>
+              <li>Prepare equipment specification sheets (IEG 6030, 6050, DX Labeler)</li>
+            </ul></div>
+            <div class="task-item task-innobiz"><div class="task-who who-innobiz">Inno-biz</div><ul>
+              <li>Confirm consortium participation (internal approval)</li>
+              <li>Identify 2–3 member companies for supplementary equipment</li>
+              <li>Provide association letter of support</li>
+            </ul></div>
+            <div class="task-item task-tesda"><div class="task-who who-tesda">TESDA</div><ul>
+              <li>Send introductory email via KOICA PHL office channel</li>
+              <li>Request TESDA EIM curriculum review meeting</li>
+              <li>Prepare curriculum alignment mapping document</li>
+            </ul></div>
+            <div class="task-item task-hytec"><div class="task-who who-hytec">HYTEC Power</div><ul>
+              <li>Confirm OJT capacity (seats, facility, timeline)</li>
+              <li>Draft MOU with IEG on in-kind contributions</li>
+              <li>Provide company profile & local registration docs</li>
+            </ul></div>
+            <div class="task-item task-koica"><div class="task-who who-koica">KOICA (via IEG)</div><ul>
+              <li>Contact KOICA Philippines office for TESDA introduction</li>
+              <li>Review IBS PCP submission requirements & checklist</li>
+              <li>Confirm IBS 2026 application window dates</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 1 -->
+      <div class="phase-card">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <span class="phase-num-badge" style="background:rgba(240,165,0,.15);color:#9a6900;">PHASE 1</span>
+          <div class="phase-title-block">
+            <div class="phase-name">Formal Partnership & KOICA IBS Application</div>
+            <div class="phase-dates">July – October 2026</div>
+          </div>
+          <span class="phase-urgency normal">📋 IN SCOPE</span>
+          <span class="phase-toggle">▼</span>
+        </div>
+        <div class="phase-body">
+          <div class="gantt-bar-wrap">
+            <div class="gantt-row"><span class="gantt-label">MOU Signing</span><div class="gantt-track"><div class="gantt-fill" style="width:35%;background:var(--ieg);">July</div></div></div>
+            <div class="gantt-row"><span class="gantt-label">TESDA Validation</span><div class="gantt-track"><div class="gantt-fill" style="width:55%;background:var(--tesda);">Aug–Sep</div></div></div>
+            <div class="gantt-row"><span class="gantt-label">IBS Submission</span><div class="gantt-track"><div class="gantt-fill" style="width:80%;background:var(--purple);">October</div></div></div>
+          </div>
+          <div class="tasks-grid">
+            <div class="task-item task-ieg"><div class="task-who who-ieg">IEG</div><ul>
+              <li>Submit IBS PCP to KOICA Korea HQ</li>
+              <li>Finalize consortium MOU (IEG ↔ Inno-biz ↔ HYTEC)</li>
+              <li>Prepare financial plan & BOP impact model</li>
+              <li>Arrange TESDA curriculum review workshop</li>
+            </ul></div>
+            <div class="task-item task-innobiz"><div class="task-who who-innobiz">Inno-biz</div><ul>
+              <li>Sign consortium agreement with IEG</li>
+              <li>Provide formal equipment supply commitment letter</li>
+              <li>Joint press release with IEG for IBS application</li>
+            </ul></div>
+            <div class="task-item task-tesda"><div class="task-who who-tesda">TESDA</div><ul>
+              <li>Formal curriculum alignment review (EIM NC II/III)</li>
+              <li>Issue Letter of Support / co-sign MOU</li>
+              <li>Designate pilot training institution(s)</li>
+            </ul></div>
+            <div class="task-item task-hytec"><div class="task-who who-hytec">HYTEC Power</div><ul>
+              <li>Finalize OJT agreement & beneficiary intake plan</li>
+              <li>Set up project coordination office (local PMO)</li>
+              <li>Begin BOP trainee pre-screening</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-card">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <span class="phase-num-badge" style="background:rgba(30,138,94,.12);color:var(--green);">PHASE 2</span>
+          <div class="phase-title-block">
+            <div class="phase-name">Pilot Implementation — Year 1</div>
+            <div class="phase-dates">January – December 2027</div>
+          </div>
+          <span class="phase-urgency future">🚀 YEAR 1</span>
+          <span class="phase-toggle">▼</span>
+        </div>
+        <div class="phase-body">
+          <div class="tasks-grid">
+            <div class="task-item task-ieg"><div class="task-who who-ieg">IEG</div><ul>
+              <li>Ship & install equipment at pilot TESDA-accredited site</li>
+              <li>Conduct 2-week Korea HQ trainer program (5 Filipino trainers)</li>
+              <li>Launch first training cohort: 120 BOP trainees</li>
+              <li>Monitor curriculum delivery & collect training data</li>
+            </ul></div>
+            <div class="task-item task-innobiz"><div class="task-who who-innobiz">Inno-biz</div><ul>
+              <li>Deliver supplementary equipment from member companies</li>
+              <li>Facilitate Korea–Philippines B2B site visit</li>
+            </ul></div>
+            <div class="task-item task-tesda"><div class="task-who who-tesda">TESDA</div><ul>
+              <li>Conduct NC II/III competency assessments</li>
+              <li>Issue certifications to successful trainees</li>
+              <li>Provide monthly enrollment & outcome data</li>
+            </ul></div>
+            <div class="task-item task-hytec"><div class="task-who who-hytec">HYTEC Power</div><ul>
+              <li>Manage OJT placements for graduating trainees</li>
+              <li>Track employment outcomes at 3 & 6 months</li>
+              <li>Submit KOICA quarterly beneficiary reports</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-card">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <span class="phase-num-badge" style="background:rgba(91,79,207,.12);color:var(--purple);">PHASE 3</span>
+          <div class="phase-title-block">
+            <div class="phase-name">Scale-Up & Sustainability — Years 2–3</div>
+            <div class="phase-dates">January 2028 – December 2028 (+ beyond)</div>
+          </div>
+          <span class="phase-urgency future">🌏 SCALE</span>
+          <span class="phase-toggle">▼</span>
+        </div>
+        <div class="phase-body">
+          <div class="tasks-grid">
+            <div class="task-item task-ieg"><div class="task-who who-ieg">IEG</div><ul>
+              <li>Expand to 3–5 additional TESDA sites (350–500 trainees/yr)</li>
+              <li>Launch local distributor (Prince Valiant / Sigmatech) equipment sales</li>
+              <li>Establish consumables & maintenance revenue stream</li>
+              <li>Prepare KOSDAQ IPO reference: Philippines impact data</li>
+            </ul></div>
+            <div class="task-item task-innobiz"><div class="task-who who-innobiz">Inno-biz</div><ul>
+              <li>Explore IBS model replication in Indonesia / Vietnam (Year 3)</li>
+              <li>K-SmartTVET™ brand promotion at international TVET events</li>
+            </ul></div>
+            <div class="task-item task-tesda"><div class="task-who who-tesda">TESDA</div><ul>
+              <li>Integrate IEG curriculum into TESDA national TVET catalog</li>
+              <li>Co-present program outcomes at ASEAN TVET forums</li>
+            </ul></div>
+            <div class="task-item task-hytec"><div class="task-who who-hytec">HYTEC Power</div><ul>
+              <li>Transition to self-sustaining local training operator</li>
+              <li>Establish job placement agreement with local manufacturers</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ 4. DOCUMENTS ══ -->
+  <section class="section" id="documents">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Required Documents Checklist (by June 15)</h2>
+    </div>
+    <div class="doc-grid">
+
+      <div class="doc-card">
+        <div class="doc-icon">📄</div>
+        <div>
+          <div class="doc-name">IBS Project Concept Paper (PCP)</div>
+          <div class="doc-meta">Core KOICA IBS application document. 10 sections incl. BOP analysis, IBS model, budget, development impact.<br/>Owner: IEG</div>
+          <span class="doc-status status-draft">In Draft</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📘</div>
+        <div>
+          <div class="doc-name">32-Week Curriculum Outline (EN)</div>
+          <div class="doc-meta">TESDA EIM NC II/III aligned. Weekly module breakdown with learning outcomes, equipment used, assessment method.<br/>Owner: IEG</div>
+          <span class="doc-status status-ready">Ready</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">🏢</div>
+        <div>
+          <div class="doc-name">IEG Company Profile (EN)</div>
+          <div class="doc-meta">Corporate overview, product portfolio, domestic & international references, certifications, financials summary.<br/>Owner: IEG</div>
+          <span class="doc-status status-draft">Update Needed</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📑</div>
+        <div>
+          <div class="doc-name">Consortium MOU (IEG ↔ Inno-biz)</div>
+          <div class="doc-meta">Defines roles, financial responsibilities, IP ownership, and co-branding under K-SmartTVET™.<br/>Owner: IEG + Inno-biz</div>
+          <span class="doc-status status-needed">Needed</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📑</div>
+        <div>
+          <div class="doc-name">MOU: IEG ↔ HYTEC Power Inc.</div>
+          <div class="doc-meta">Local partnership agreement covering OJT provision, facility in-kind, beneficiary management, reporting obligations.<br/>Owner: IEG + HYTEC</div>
+          <span class="doc-status status-needed">Needed</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📋</div>
+        <div>
+          <div class="doc-name">TESDA Letter of Support</div>
+          <div class="doc-meta">Official TESDA acknowledgment of IEG curriculum alignment and intent to cooperate. Critical for IBS scoring.<br/>Owner: TESDA (IEG to request)</div>
+          <span class="doc-status status-needed">Must Request</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">💰</div>
+        <div>
+          <div class="doc-name">3-Year Budget Plan (USD)</div>
+          <div class="doc-meta">Itemized budget: equipment, curriculum, training operations, personnel, travel, M&E. KOICA vs IEG vs in-kind breakdown.<br/>Owner: IEG</div>
+          <span class="doc-status status-draft">In Draft</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📊</div>
+        <div>
+          <div class="doc-name">BOP Impact Analysis</div>
+          <div class="doc-meta">Baseline income data, target beneficiary profile, employment rate projection, SDG indicators (SDG 4, 8, 9, 10).<br/>Owner: IEG + HYTEC</div>
+          <span class="doc-status status-needed">Needed</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">🔧</div>
+        <div>
+          <div class="doc-name">Equipment Specification Sheets (EN)</div>
+          <div class="doc-meta">IEG 6030, IEG 6050, DX Labeler™ — technical specs, photos, unit price, comparison vs European equivalents.<br/>Owner: IEG</div>
+          <span class="doc-status status-ready">Ready</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">🌐</div>
+        <div>
+          <div class="doc-name">Inno-biz Support Letter</div>
+          <div class="doc-meta">Official association letter endorsing IEG's IBS application and confirming member company equipment participation.<br/>Owner: Inno-biz</div>
+          <span class="doc-status status-needed">Request by Jun 1</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">📈</div>
+        <div>
+          <div class="doc-name">Financial Sustainability Model</div>
+          <div class="doc-meta">Post-KOICA revenue projections: equipment sales, consumables, maintenance contracts, distributor channel margins.<br/>Owner: IEG</div>
+          <span class="doc-status status-draft">In Draft</span>
+        </div>
+      </div>
+
+      <div class="doc-card">
+        <div class="doc-icon">🗺</div>
+        <div>
+          <div class="doc-name">Pilot Site Selection Report</div>
+          <div class="doc-meta">Assessment of 2–3 candidate TESDA-accredited institutions: location, existing facilities, trainee pipeline capacity.<br/>Owner: HYTEC + IEG</div>
+          <span class="doc-status status-needed">Needed</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Status legend -->
+    <div style="display:flex; gap:16px; margin-top:18px; flex-wrap:wrap; align-items:center;">
+      <span style="font-size:12px; color:var(--muted); font-weight:600;">Legend:</span>
+      <span class="doc-status status-ready">Ready</span><span style="font-size:12px; color:var(--muted);">= Complete</span>
+      <span class="doc-status status-draft">In Draft</span><span style="font-size:12px; color:var(--muted);">= Needs finalization</span>
+      <span class="doc-status status-needed">Needed</span><span style="font-size:12px; color:var(--muted);">= Must be created before Jun 15</span>
+    </div>
+  </section>
+
+  <!-- ══ 5. BUDGET ══ -->
+  <section class="section" id="budget">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">3-Year Budget Overview</h2>
+    </div>
+    <div class="budget-wrap">
+      <div class="budget-table">
+        <div class="bt-head">Budget by Category (3-Year Total)</div>
+        <div class="bt-row"><span class="bt-label">Equipment Supply (IEG 6030, 6050, DX Labeler™)<br/><span class="bt-sub">1 pilot site + 2 scale-up sites</span></span><span class="bt-amount">$360,000</span></div>
+        <div class="bt-row"><span class="bt-label">Curriculum Development & Licensing<br/><span class="bt-sub">32-week EIM NC II/III aligned package</span></span><span class="bt-amount">$45,000</span></div>
+        <div class="bt-row"><span class="bt-label">Trainer Capacity Building<br/><span class="bt-sub">Korea HQ 2-week program × 10 trainers</span></span><span class="bt-amount">$55,000</span></div>
+        <div class="bt-row"><span class="bt-label">Training Operations (3 yrs)<br/><span class="bt-sub">Consumables, assessment, admin</span></span><span class="bt-amount">$120,000</span></div>
+        <div class="bt-row"><span class="bt-label">Local Project Management (HYTEC)<br/><span class="bt-sub">PMO personnel, beneficiary support</span></span><span class="bt-amount">$90,000</span></div>
+        <div class="bt-row"><span class="bt-label">Monitoring & Evaluation (M&E)<br/><span class="bt-sub">Outcome tracking, KOICA reporting</span></span><span class="bt-amount">$40,000</span></div>
+        <div class="bt-row"><span class="bt-label">Travel & Coordination<br/><span class="bt-sub">Korea–PHL missions, consortium meetings</span></span><span class="bt-amount">$55,000</span></div>
+        <div class="bt-row bt-total"><span class="bt-label">Total Project Budget</span><span class="bt-amount">$765,000</span></div>
+      </div>
+
+      <div>
+        <div class="budget-table" style="margin-bottom:16px;">
+          <div class="bt-head">Funding Source Breakdown</div>
+          <div class="bt-row"><span class="bt-label" style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--purple);flex-shrink:0;"></span>KOICA ODA Grant</span><span class="bt-amount" style="color:var(--purple);">$520,000 <span style="font-size:11px;color:var(--muted)">(68%)</span></span></div>
+          <div class="bt-row"><span class="bt-label" style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--ieg);flex-shrink:0;"></span>IEG Cash + Equipment</span><span class="bt-amount" style="color:var(--ieg);">$165,000 <span style="font-size:11px;color:var(--muted)">(22%)</span></span></div>
+          <div class="bt-row"><span class="bt-label" style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--innobiz);flex-shrink:0;"></span>Inno-biz (In-kind)</span><span class="bt-amount" style="color:var(--innobiz);">$40,000 <span style="font-size:11px;color:var(--muted)">(5%)</span></span></div>
+          <div class="bt-row"><span class="bt-label" style="display:flex;align-items:center;gap:8px;"><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--hytec);flex-shrink:0;"></span>HYTEC In-kind (Facility)</span><span class="bt-amount" style="color:var(--hytec);">$40,000 <span style="font-size:11px;color:var(--muted)">(5%)</span></span></div>
+          <div class="bt-row bt-total"><span class="bt-label">Total</span><span class="bt-amount">$765,000</span></div>
+        </div>
+
+        <div style="background:var(--white); border-radius:14px; border:1px solid var(--border); padding:18px 20px;">
+          <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:13px; color:var(--navy); margin-bottom:12px;">📌 IBS Funding Rule</div>
+          <p style="font-size:12.5px; line-height:1.7; color:var(--text);">
+            KOICA IBS requires a <strong>minimum 20% private-sector co-investment</strong> (cash or in-kind). This plan meets the requirement with IEG + partner in-kind totaling <strong>32%</strong>, exceeding the threshold and strengthening the application's competitiveness.
+          </p>
+          <div style="margin-top:12px; padding:10px 14px; background:rgba(240,165,0,.1); border-radius:8px; border-left:3px solid var(--gold);">
+            <div style="font-size:12px; font-weight:600; color:#8a6000;">Post-Project Revenue Projection</div>
+            <div style="font-size:12px; color:var(--text); margin-top:4px;">Equipment + consumables + maintenance contracts → est. <strong>$280,000–380,000/yr</strong> from Year 3 onward</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. COOPERATING ORGS ══ -->
+  <section class="section" id="orgs">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Cooperating Organizations</h2>
+    </div>
+    <div class="org-grid">
+      <div class="org-card">
+        <div class="org-icon">🇰🇷</div>
+        <div class="org-name">KOICA</div>
+        <div class="org-desc">Korea International Cooperation Agency. ODA grant provider and IBS program administrator.</div>
+        <span class="org-type type-intl">ODA Funder</span>
+      </div>
+      <div class="org-card">
+        <div class="org-icon">🏛</div>
+        <div class="org-name">TESDA</div>
+        <div class="org-desc">Technical Education & Skills Development Authority. Philippines national TVET standard-setter and certification body.</div>
+        <span class="org-type type-gov">PH Gov't</span>
+      </div>
+      <div class="org-card">
+        <div class="org-icon">⚡</div>
+        <div class="org-name">HYTEC Power Inc.</div>
+        <div class="org-desc">Philippine industrial company. Local PMO, OJT provider, and employment pipeline partner.</div>
+        <span class="org-type type-priv">PH Private</span>
+      </div>
+      <div class="org-card">
+        <div class="org-icon">🤝</div>
+        <div class="org-name">Inno-biz Association</div>
+        <div class="org-desc">Korean SME innovation association. Consortium co-leader, K-SmartTVET™ co-brand, member company equipment mobilizer.</div>
+        <span class="org-type type-priv">KR Association</span>
+      </div>
+      <div class="org-card">
+        <div class="org-icon">🚢</div>
+        <div class="org-name">HD Hyundai Heavy Industries</div>
+        <div class="org-desc">Recently signed TESDA MOU (March 2026). Strategic door-opener for IEG's TESDA engagement.</div>
+        <span class="org-type type-priv">KR Corporate</span>
+      </div>
+      <div class="org-card">
+        <div class="org-icon">🏫</div>
+        <div class="org-name">TESDA Training Centers</div>
+        <div class="org-desc">TESDA-accredited public training institutions. Pilot implementation sites for equipment installation and trainee enrollment.</div>
+        <span class="org-type type-gov">PH Gov't</span>
+      </div>
+      <div class="org-card">
+        <div class="org-icon">🔩</div>
+        <div class="org-name">Prince Valiant / Sigmatech</div>
+        <div class="org-desc">Priority Philippine distributors identified for post-project IEG equipment self-sustaining sales channel.</div>
+        <span class="org-type type-priv">PH Distributor</span>
+      </div>
+      <div class="org-card">
+        <div class="org-icon">🇵🇭</div>
+        <div class="org-name">KOICA Philippines Office</div>
+        <div class="org-desc">In-country KOICA representative. Key intermediary for TESDA engagement and local project oversight.</div>
+        <span class="org-type type-intl">ODA In-Country</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ACTION ITEMS ══ -->
+  <section class="section" id="actions">
+    <div class="section-header">
+      <span class="section-num">⚡</span>
+      <h2 class="section-title">Immediate Action Items — Before June 15</h2>
+    </div>
+    <div style="background:var(--navy); border-radius:14px; padding:28px 32px; color:white;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:1.5px; margin-bottom:10px;">IEG · THIS WEEK</div>
+          <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:8px;">
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">①</span>Email KOICA Philippines office requesting TESDA introduction</li>
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">②</span>Begin IBS PCP draft based on Philippines context</li>
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">③</span>Translate curriculum outline to English final version</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:1.5px; margin-bottom:10px;">INNO-BIZ · BY JUN 1</div>
+          <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:8px;">
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">①</span>Confirm internal consortium participation (김효준 대리)</li>
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">②</span>Issue letter of support for IBS application</li>
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">③</span>Identify member companies for equipment contribution</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:1.5px; margin-bottom:10px;">HYTEC POWER · BY JUN 10</div>
+          <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:8px;">
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">①</span>Confirm OJT seat capacity & facility availability</li>
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">②</span>Provide company profile & local registration docs to IEG</li>
+            <li style="font-size:13px; color:rgba(255,255,255,.85); display:flex; gap:8px;"><span style="color:var(--gold); flex-shrink:0;">③</span>Draft MOU outline for IEG review</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Prepared by <strong>Kelly Cho</strong> · IEG Co., Ltd. (주식회사 아이지) · kellycho824@ieg.kr · +82-1644-3263<br/>
+  KOICA IBS Philippines Partnership Roadmap · Internal working document · May 2026
+</footer>
+
+<script>
+function togglePhase(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.phase-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+// Activate nav on scroll
+const sections = document.querySelectorAll('section[id]');
+const navBtns = document.querySelectorAll('.nav-btn');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navBtns.forEach(b => {
+    b.classList.toggle('active', b.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>
