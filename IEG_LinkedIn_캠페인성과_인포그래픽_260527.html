@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEG LinkedIn 캠페인 성과 — 2026년 4~5월</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f5f3;
+    color: #1a1a1a;
+    padding: 32px 24px;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 840px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 40px 40px;
+    border: 0.5px solid #e0dfd8;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #eceae3;
+  }
+  .header-left {}
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0f6e56;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .main-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .sub-title {
+    font-size: 11px;
+    color: #888;
+  }
+  .header-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .logo-box {
+    background: #0f6e56;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 6px;
+    letter-spacing: .04em;
+    margin-bottom: 5px;
+    display: inline-block;
+  }
+  .report-date {
+    font-size: 10px;
+    color: #aaa;
+  }
+
+  /* ── Verdict ── */
+  .verdict {
+    background: #e1f5ee;
+    border-radius: 10px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .verdict-badge {
+    background: #1d9e75;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 4px 10px;
+    white-space: nowrap;
+    letter-spacing: .03em;
+  }
+  .verdict-text {
+    font-size: 11.5px;
+    color: #085041;
+    line-height: 1.6;
+  }
+  .verdict-text strong { font-weight: 700; }
+
+  /* ── KPI Row ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .kpi {
+    background: #f7f6f2;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .kpi-lbl {
+    font-size: 10px;
+    color: #888;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .kpi-val {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.1;
+  }
+  .kpi-val.green { color: #0f6e56; }
+  .kpi-note {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: 4px;
+  }
+
+  /* ── CPL Compare ── */
+  .cpl-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .cpl-item {
+    border: 0.5px solid #e0dfd8;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .cpl-item.ieg-item { border-color: #9fe1cb; background: #f2fcf8; }
+  .cpl-ch { font-size: 10px; color: #888; margin-bottom: 4px; }
+  .cpl-val { font-size: 16px; font-weight: 700; color: #111; }
+  .cpl-val.green { color: #0f6e56; }
+  .cpl-val.gray { color: #888; }
+  .cpl-sub { font-size: 9px; color: #aaa; margin-top: 2px; }
+
+  /* ── Mid grid ── */
+  .mid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .card {
+    background: #fff;
+    border: 0.5px solid #e0dfd8;
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .card-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444;
+    margin-bottom: 12px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  /* Bar chart */
+  .bar-wrap { margin-bottom: 9px; }
+  .bar-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    margin-bottom: 3px;
+  }
+  .bar-label-row .nm { color: #555; }
+  .bar-label-row .vl { color: #111; font-weight: 500; }
+  .bar-track {
+    height: 11px;
+    background: #f0ede8;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .bar-fill { height: 100%; border-radius: 99px; }
+  .bar-note {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 0.5px solid #eceae3;
+    font-size: 10px;
+    color: #999;
+  }
+  .bar-note span { color: #0f6e56; font-weight: 700; }
+
+  /* Insight list */
+  .insight-list { display: flex; flex-direction: column; gap: 8px; }
+  .insight-item { display: flex; gap: 8px; align-items: flex-start; font-size: 11px; }
+  .insight-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px; font-size: 9px; font-weight: 700;
+  }
+  .dot-green { background: #e1f5ee; color: #0f6e56; }
+  .dot-amber { background: #faeeda; color: #854f0b; }
+  .insight-item .txt { color: #444; line-height: 1.55; }
+  .insight-item .txt strong { color: #111; font-weight: 700; }
+
+  /* ── Lead section ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .lead-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .lead-card { border-radius: 9px; padding: 10px 12px; }
+  .lc-hot { background: #e1f5ee; border: 0.5px solid #9fe1cb; }
+  .lc-mid { background: #faeeda; border: 0.5px solid #fac775; }
+  .lc-low { background: #f1efe8; border: 0.5px solid #d3d1c7; }
+  .lc-badge {
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 3px;
+    padding: 2px 6px;
+    margin-bottom: 5px;
+    display: inline-block;
+    letter-spacing: .03em;
+  }
+  .lc-hot .lc-badge { background: #9fe1cb; color: #085041; }
+  .lc-mid .lc-badge { background: #fac775; color: #633806; }
+  .lc-low .lc-badge { background: #d3d1c7; color: #444; }
+  .lc-name { font-size: 11px; font-weight: 700; color: #111; margin-bottom: 2px; }
+  .lc-sub { font-size: 10px; color: #777; line-height: 1.4; }
+
+  /* ── Divider ── */
+  .divider { height: 0.5px; background: #eceae3; margin: 0 0 20px; }
+
+  /* ── Action items ── */
+  .action-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .action-card {
+    background: #fff;
+    border: 0.5px solid #e0dfd8;
+    border-radius: 11px;
+    padding: 14px 15px;
+  }
+  .action-top {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 9px;
+  }
+  .action-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #1d9e75;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .action-when {
+    font-size: 9px;
+    font-weight: 700;
+    color: #0f6e56;
+    background: #e1f5ee;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: .02em;
+  }
+  .action-head {
+    font-size: 12px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 5px;
+    line-height: 1.35;
+  }
+  .action-body {
+    font-size: 10.5px;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 28px;
+    padding-top: 14px;
+    border-top: 0.5px solid #eceae3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    color: #bbb;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { border: none; border-radius: 0; box-shadow: none; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">LinkedIn 광고 성과 보고서</div>
+      <div class="main-title">IEG 미국 시장 첫 LinkedIn 캠페인 결과</div>
+      <div class="sub-title">운영 기간: 2026년 4월 17일 ~ 5월 19일 &nbsp;|&nbsp; 타깃: 미국 교육기관 · 현대차 계열사 및 유사 제조기업</div>
+    </div>
+    <div class="header-right">
+      <div class="logo-box">IEG Co., Ltd</div>
+      <div class="report-date">보고서 기준일: 2026.05.19<br>작성: 메텔</div>
+    </div>
+  </div>
+
+  <!-- Verdict -->
+  <div class="verdict">
+    <span class="verdict-badge">가성비 합격</span>
+    <span class="verdict-text">
+      LinkedIn B2B 업계 평균 리드당 비용 <strong>$50~$200 범위 내 달성</strong>. 구글 검색광고($300~$800) 대비 최대 12배, 외주 이메일 마케팅($250~$1,500) 대비 최대 22배 효율적. 미국 첫 진출 캠페인으로 채널 유효성을 실측 검증했습니다.
+    </span>
+  </div>
+
+  <!-- KPI Row -->
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-lbl">총 광고비</div>
+      <div class="kpi-val">$2,136</div>
+      <div class="kpi-note">≈ 290만 원</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">확보 리드 (잠재고객)</div>
+      <div class="kpi-val green">16건</div>
+      <div class="kpi-note">의사결정권자 직함 자동 검증</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">리드당 평균 비용</div>
+      <div class="kpi-val">$134</div>
+      <div class="kpi-note">최적화 후 최저 $38까지 절감</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">인메일 평균 오픈율</div>
+      <div class="kpi-val green">29.2%</div>
+      <div class="kpi-note">업계 평균 25~28% 상회</div>
+    </div>
+  </div>
+
+  <!-- CPL Benchmark -->
+  <div class="cpl-row">
+    <div class="cpl-item ieg-item">
+      <div class="cpl-ch">IEG (최적화 후 자료광고)</div>
+      <div class="cpl-val green">$67 / 리드</div>
+      <div class="cpl-sub">LinkedIn B2B 평균 하단 수준</div>
+    </div>
+    <div class="cpl-item">
+      <div class="cpl-ch">구글 검색광고 (제조·기술)</div>
+      <div class="cpl-val gray">$300~$800 / 리드</div>
+      <div class="cpl-sub">"스마트 제조 교육" 검색량 자체가 극히 작음</div>
+    </div>
+    <div class="cpl-item">
+      <div class="cpl-ch">외주 이메일 에이전시</div>
+      <div class="cpl-val gray">$250~$1,500 / 리드</div>
+      <div class="cpl-sub">월 리테이너 $5,000~$15,000 별도</div>
+    </div>
+  </div>
+
+  <!-- Mid: Bar + Insights -->
+  <div class="mid">
+    <div class="card">
+      <div class="card-title">광고 유형별 리드 성과</div>
+      <div class="bar-wrap">
+        <div class="bar-label-row">
+          <span class="nm">자료 다운로드 광고</span>
+          <span class="vl">8건 · $85/건</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%;background:#1d9e75;"></div>
+        </div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label-row">
+          <span class="nm">인메일 2차 (22개 계열사)</span>
+          <span class="vl">5건 · $81/건</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:62%;background:#5dcaa5;"></div>
+        </div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label-row">
+          <span class="nm">배너 광고 (로고버전)</span>
+          <span class="vl">3건 · $162/건</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:38%;background:#9fe1cb;"></div>
+        </div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label-row">
+          <span class="nm">인메일 1차 (광범위 타깃)</span>
+          <span class="vl">0건</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%;background:#d3d1c7;"></div>
+        </div>
+      </div>
+      <div class="bar-note">PDF 자료 개편 전 <span>$211/건</span> → 개편 후 <span>$67/건</span> (3분의 1로 절감)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">이번 캠페인에서 검증된 것</div>
+      <div class="insight-list">
+        <div class="insight-item">
+          <div class="insight-dot dot-green">✓</div>
+          <div class="txt"><strong>Samsung·LG·MOBIS 로고가 신뢰 무기다</strong> — 로고 강조 소재에서만 리드 발생. 글로벌 레퍼런스가 미국 타깃에게 유효하게 작동</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-dot dot-green">✓</div>
+          <div class="txt"><strong>타깃을 좁혀야 전환이 난다</strong> — 광범위 인메일 2,207건 발송에 리드 0건, 22개 계열사 집중 후 5건 발생</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-dot dot-green">✓</div>
+          <div class="txt"><strong>PDF 한 장이 광고비보다 강하다</strong> — 표지·구성 개편만으로 리드당 비용이 3분의 1로 감소</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-dot dot-amber">!</div>
+          <div class="txt"><strong>리드 5건이 미국 외 유입</strong> — 다음 캠페인은 지역 필터를 '미국 전용'으로 설정 필요</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lead Priority -->
+  <div class="section-label">확보된 핵심 리드 — 우선순위 분류</div>
+  <div class="lead-grid">
+    <div class="lead-card lc-hot">
+      <span class="lc-badge">최우선 연락</span>
+      <div class="lc-name">Drake State C&amp;TC</div>
+      <div class="lc-sub">부학장 · 이미 관련 교육 운영 중</div>
+    </div>
+    <div class="lead-card lc-hot">
+      <span class="lc-badge">최우선 연락</span>
+      <div class="lc-name">Toyota Motor Corp.</div>
+      <div class="lc-sub">Managing Director · 스마트 제조 교육 관심</div>
+    </div>
+    <div class="lead-card lc-hot">
+      <span class="lc-badge">최우선 연락</span>
+      <div class="lc-name">Hyundai AutoEver America</div>
+      <div class="lc-sub">Sr. Business Analyst · 현대차 북미 IT 조직</div>
+    </div>
+    <div class="lead-card lc-mid">
+      <span class="lc-badge">2순위 검토</span>
+      <div class="lc-name">SAB Biotherapeutics</div>
+      <div class="lc-sub">Executive Director · 품질·운영 교육 연결 가능</div>
+    </div>
+    <div class="lead-card lc-mid">
+      <span class="lc-badge">2순위 검토</span>
+      <div class="lc-name">Polaroid</div>
+      <div class="lc-sub">VP Fellow · 제조·제품 메시지 연결 가능</div>
+    </div>
+    <div class="lead-card lc-low">
+      <span class="lc-badge">자료 발송 후 대기</span>
+      <div class="lc-name">나머지 11건</div>
+      <div class="lc-sub">반응 확인 후 선별 진행</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Action Items -->
+  <div class="section-label">지금 바로 해야 할 액션 아이템</div>
+  <div class="action-grid">
+    <div class="action-card">
+      <div class="action-top">
+        <div class="action-num">1</div>
+        <span class="action-when">이번 주 안에</span>
+      </div>
+      <div class="action-head">전체 리드 16명에게 자료 이메일 발송</div>
+      <div class="action-body">사례집 PDF + 간단한 영문 인사말. Drake State, Toyota, Hyundai AutoEver 3곳은 개인화된 메시지로 별도 우선 발송. 일부 리드는 자료 이후 안내를 기다리고 있을 수 있음.</div>
+    </div>
+    <div class="action-card">
+      <div class="action-top">
+        <div class="action-num">2</div>
+        <span class="action-when">이번 주 안에</span>
+      </div>
+      <div class="action-head">Kelly LinkedIn으로 1촌 신청 시작</div>
+      <div class="action-body">리드 프로필 확인 → 연결 요청 → 수락 후 짧은 감사 메시지 → 관심 분야 확인 순으로 대화 전환. 광고로 만든 관심을 실제 미팅으로 이어가는 핵심 단계.</div>
+    </div>
+    <div class="action-card">
+      <div class="action-top">
+        <div class="action-num">3</div>
+        <span class="action-when">다음 캠페인 준비</span>
+      </div>
+      <div class="action-head">교육기관용·제조기업용 PDF 분리 제작</div>
+      <div class="action-body">자료 품질이 비용을 결정함. 두 타깃 맞춤 PDF 분리 + 미국 전용 지역 필터 설정으로 낭비 리드 차단. 자료 다운로드 광고 중심으로 예산 재편.</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>IEG Co., Ltd (주식회사 아이지) &nbsp;|&nbsp; Overseas Marketing Team &nbsp;|&nbsp; kellycho824@ieg.kr</span>
+    <span>작성 기준일: 2026년 5월 27일</span>
+  </div>
+
+</div>
+</body>
+</html>
