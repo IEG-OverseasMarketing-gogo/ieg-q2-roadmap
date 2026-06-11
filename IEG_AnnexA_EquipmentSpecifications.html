@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Annex A — IEG Training Equipment Specifications</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:   #0B1F3A;
+  --navy2:  #132D50;
+  --steel:  #1E4272;
+  --red:    #C8281E;
+  --red2:   #E8352A;
+  --gold:   #E8A000;
+  --silver: #8FA3BB;
+  --off:    #F4F7FB;
+  --smoke:  #EBF0F7;
+  --border: #D2DCE9;
+  --text:   #1A2B40;
+  --muted:  #6B829A;
+  --white:  #FFFFFF;
+
+  --e1: #1565C0; --e1bg: rgba(21,101,192,.09);
+  --e2: #2E7D32; --e2bg: rgba(46,125,50,.09);
+  --e3: #6A1B9A; --e3bg: rgba(106,27,154,.09);
+  --e4: #AD1457; --e4bg: rgba(173,20,87,.09);
+  --e5: #E65100; --e5bg: rgba(230,81,0,.09);
+  --e6: #00796B; --e6bg: rgba(0,121,107,.09);
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',sans-serif; background:var(--off); color:var(--text); font-size:13px; line-height:1.6; }
+
+/* ── COVER ── */
+.cover {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 100%);
+  color:white;
+  padding: 56px 60px 48px;
+  position:relative;
+  overflow:hidden;
+}
+.cover::before {
+  content:'';
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 40px,
+    rgba(255,255,255,.015) 40px,
+    rgba(255,255,255,.015) 41px
+  );
+}
+.cover-eyebrow {
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:18px;
+  display:flex; align-items:center; gap:10px;
+}
+.cover-eyebrow::after { content:''; flex:1; height:1px; background:var(--gold); opacity:.35; }
+.cover-title {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(28px,4vw,46px); font-weight:700; line-height:1.1;
+  margin-bottom:10px; letter-spacing:-.5px;
+}
+.cover-title span { color:var(--gold); }
+.cover-sub { color:rgba(255,255,255,.65); font-size:14px; max-width:580px; line-height:1.75; margin-bottom:32px; }
+.cover-meta {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:10px; max-width:760px;
+}
+.cm { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.13);
+  border-radius:8px; padding:11px 16px; }
+.cm-label { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:rgba(255,255,255,.4); margin-bottom:3px; }
+.cm-val { font-size:12.5px; color:white; font-weight:500; }
+.cover-bar { height:4px; background: linear-gradient(90deg, var(--red) 0%, var(--gold) 100%); }
+
+/* ── NAV / INDEX ── */
+.eq-index {
+  background:var(--navy2); padding:14px 60px;
+  display:flex; gap:6px; flex-wrap:wrap;
+  position:sticky; top:0; z-index:50;
+  box-shadow:0 2px 20px rgba(0,0,0,.3);
+}
+.eq-index a {
+  font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:600;
+  letter-spacing:.3px; padding:5px 13px; border-radius:20px;
+  text-decoration:none; color:rgba(255,255,255,.55);
+  border:1px solid transparent; transition:all .15s;
+}
+.eq-index a:hover { background:rgba(255,255,255,.1); color:white; }
+
+/* ── SECTION ── */
+main { max-width:1160px; margin:0 auto; padding:40px 40px 80px; }
+
+.eq-card {
+  background:white; border-radius:14px; border:1px solid var(--border);
+  overflow:hidden; margin-bottom:36px;
+  box-shadow:0 2px 16px rgba(10,30,60,.06);
+  scroll-margin-top:70px;
+}
+
+/* Card header */
+.eq-header {
+  display:flex; align-items:stretch; min-height:56px;
+}
+.eq-accent { width:6px; flex-shrink:0; }
+.eq-header-inner {
+  flex:1; padding:18px 24px;
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+}
+.eq-number {
+  font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:500;
+  padding:3px 10px; border-radius:5px; letter-spacing:1px;
+  flex-shrink:0;
+}
+.eq-model {
+  font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700;
+  letter-spacing:-.3px; color:var(--navy);
+}
+.eq-name { font-size:13px; color:var(--muted); margin-top:1px; }
+.eq-phase {
+  margin-left:auto; font-size:11px; font-weight:600; padding:4px 12px;
+  border-radius:12px; white-space:nowrap; flex-shrink:0;
+}
+
+/* Card body */
+.eq-body { display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--smoke); }
+@media(max-width:720px){ .eq-body { grid-template-columns:1fr; } }
+
+.eq-col { padding:22px 24px; }
+.eq-col + .eq-col { border-left:1px solid var(--smoke); }
+
+.col-title {
+  font-size:9.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted); margin-bottom:14px;
+  display:flex; align-items:center; gap:8px;
+}
+.col-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* Spec table */
+.spec-table { width:100%; border-collapse:collapse; }
+.spec-table tr { border-bottom:1px solid var(--smoke); }
+.spec-table tr:last-child { border-bottom:none; }
+.spec-table td { padding:6px 0; font-size:12px; vertical-align:top; line-height:1.55; }
+.spec-table td:first-child {
+  width:42%; color:var(--muted); font-weight:500; padding-right:12px;
+}
+.spec-table td:last-child { color:var(--text); font-weight:400; }
+.spec-val-highlight { font-weight:600; color:var(--navy); }
+
+/* Feature list */
+.feat-list { list-style:none; padding:0; }
+.feat-list li {
+  font-size:12px; padding:4px 0 4px 16px; position:relative;
+  border-bottom:1px solid var(--smoke); line-height:1.55; color:#2A3F5A;
+}
+.feat-list li:last-child { border-bottom:none; }
+.feat-list li::before {
+  content:'→'; position:absolute; left:0;
+  color:var(--muted); font-size:10px; top:6px;
+}
+
+/* Station grid for multi-station equipment */
+.station-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin-top:4px; }
+.station-card {
+  background:var(--off); border-radius:8px; padding:10px 13px;
+  border:1px solid var(--border);
+}
+.station-card-title { font-size:11px; font-weight:600; color:var(--navy); margin-bottom:4px; }
+.station-card-body { font-size:11px; color:var(--muted); line-height:1.5; }
+
+/* TESDA badge */
+.tesda-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(21,101,192,.07); border:1px solid rgba(21,101,192,.2);
+  border-radius:6px; padding:6px 12px; font-size:11px; font-weight:600;
+  color:#1565C0; margin-top:14px;
+}
+.tesda-badge-nc3 {
+  background:rgba(46,125,50,.07); border-color:rgba(46,125,50,.2);
+  color:#2E7D32;
+}
+
+/* Component tag */
+.comp-tag {
+  display:inline-block; font-size:10.5px; font-weight:600;
+  padding:2px 8px; border-radius:6px; margin:2px 2px 2px 0;
+}
+
+/* Color utilities */
+.c1 { color:var(--e1); background:var(--e1bg); }
+.c2 { color:var(--e2); background:var(--e2bg); }
+.c3 { color:var(--e3); background:var(--e3bg); }
+.c4 { color:var(--e4); background:var(--e4bg); }
+.c5 { color:var(--e5); background:var(--e5bg); }
+.c6 { color:var(--e6); background:var(--e6bg); }
+.a1 { background:var(--e1bg); } .a2 { background:var(--e2bg); }
+.a3 { background:var(--e3bg); } .a4 { background:var(--e4bg); }
+.a5 { background:var(--e5bg); } .a6 { background:var(--e6bg); }
+.border1 { border-left:4px solid var(--e1); }
+.border2 { border-left:4px solid var(--e2); }
+.border3 { border-left:4px solid var(--e3); }
+.border4 { border-left:4px solid var(--e4); }
+.border5 { border-left:4px solid var(--e5); }
+.border6 { border-left:4px solid var(--e6); }
+
+/* Footer */
+footer {
+  background:var(--navy); color:rgba(255,255,255,.4);
+  text-align:center; padding:28px; font-size:12px;
+}
+footer strong { color:var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-eyebrow">IEG Co., Ltd. × TESDA Philippines — KOICA IBS Submission · June 2026</div>
+  <h1 class="cover-title">Annex A — <span>Training Equipment</span><br/>Specifications</h1>
+  <p class="cover-sub">
+    Supporting reference document for the IEG Smart Factory TVET Program (32 Weeks · 960 Hours),
+    submitted in conjunction with the Competency Mapping Matrix to TESDA CTADD-QSO
+    and KOICA Philippines Country Office.
+  </p>
+  <div class="cover-meta">
+    <div class="cm"><div class="cm-label">Equipment Items</div><div class="cm-val">6 Training Systems</div></div>
+    <div class="cm"><div class="cm-label">TESDA Standards</div><div class="cm-val">EIM NC II &amp; NC III TR</div></div>
+    <div class="cm"><div class="cm-label">Program Duration</div><div class="cm-val">32 Weeks · 960 Hours</div></div>
+    <div class="cm"><div class="cm-label">Prepared by</div><div class="cm-val">IEG Co., Ltd. · Kelly Cho</div></div>
+    <div class="cm"><div class="cm-label">Document</div><div class="cm-val">Annex A / June 2026</div></div>
+  </div>
+</div>
+<div class="cover-bar"></div>
+
+<!-- INDEX NAV -->
+<div class="eq-index">
+  <a href="#ieg6030">IEG 6030</a>
+  <a href="#ieg4000">IEG 4000</a>
+  <a href="#ieg3430">IEG 3430</a>
+  <a href="#ieg3432">IEG 3432</a>
+  <a href="#ieg4100">IEG 4100</a>
+  <a href="#ieg6050">IEG 6050</a>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     EQ 1 — IEG 6030  Electric Machine Trainer
+     ══════════════════════════════════════════ -->
+<div class="eq-card" id="ieg6030">
+  <div class="eq-header">
+    <div class="eq-accent" style="background:var(--e6)"></div>
+    <div class="eq-header-inner">
+      <span class="eq-number c6">EQ-01</span>
+      <div>
+        <div class="eq-model">IEG 6030</div>
+        <div class="eq-name">Electric Machine Trainer</div>
+      </div>
+      <div class="eq-phase" style="background:var(--e6bg);color:var(--e6)">EIM NC II · Phase 1 · Weeks 1–16</div>
+    </div>
+  </div>
+
+  <div class="eq-body">
+    <div class="eq-col">
+      <div class="col-title">Core Specifications</div>
+      <table class="spec-table">
+        <tr><td>Power Input</td><td class="spec-val-highlight">AC 220V / 60Hz, Single Phase</td></tr>
+        <tr><td>Working Voltage (DC)</td><td>DC 24V Control Circuit</td></tr>
+        <tr><td>PLC Platform</td><td class="spec-val-highlight">SIEMENS S7-300 / TIA Portal</td></tr>
+        <tr><td>HMI Display</td><td>7" TFT Colour Touch Panel</td></tr>
+        <tr><td>Panel Dimensions</td><td>Approx. 600(W)×900(H)×400(D) mm</td></tr>
+        <tr><td>Motor Types</td><td>Single-phase AC, Three-phase AC, DC Geared</td></tr>
+        <tr><td>Protection</td><td>MCB, MCCB, RCCB, Earth Bonding per IEC 60364</td></tr>
+        <tr><td>Wiring Standard</td><td>Philippine Electrical Code (PEC)</td></tr>
+        <tr><td>Mobility</td><td>Lockable caster wheels, 4 EA</td></tr>
+      </table>
+      <div class="tesda-badge">TESDA EIM NC II — Units 1 &amp; 2 · Weeks 1–10</div>
+    </div>
+
+    <div class="eq-col">
+      <div class="col-title">Key Training Capabilities</div>
+      <ul class="feat-list">
+        <li>Electrical safety procedures and PPE identification</li>
+        <li>Wire stripping, crimping, and terminal block termination per PEC</li>
+        <li>Cable routing, labelling, and trunking management</li>
+        <li>MCB / MCCB / RCCB installation at rated capacity</li>
+        <li>Earth resistance testing and continuity verification (IEC 60364)</li>
+        <li>DOL and star-delta motor starter commissioning</li>
+        <li>Overload relay setting and thermal protection adjustment</li>
+        <li>Motor speed measurement and power consumption logging</li>
+        <li>Basic PLC I/O wiring and ladder logic programming (LAD)</li>
+        <li>HMI screen design and motor status visualisation</li>
+        <li>Fault diagnosis on live motor control circuits</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EQ 2 — IEG 4000  Pneumatics Trainer
+     ══════════════════════════════════════════ -->
+<div class="eq-card" id="ieg4000">
+  <div class="eq-header">
+    <div class="eq-accent" style="background:var(--e1)"></div>
+    <div class="eq-header-inner">
+      <span class="eq-number c1">EQ-02</span>
+      <div>
+        <div class="eq-model">IEG 4000</div>
+        <div class="eq-name">Pneumatics Trainer</div>
+      </div>
+      <div class="eq-phase" style="background:var(--e1bg);color:var(--e1)">EIM NC II · Phase 1 · Weeks 5–8</div>
+    </div>
+  </div>
+
+  <div class="eq-body">
+    <div class="eq-col">
+      <div class="col-title">Core Specifications</div>
+      <table class="spec-table">
+        <tr><td>Working Table</td><td class="spec-val-highlight">1400(W)×1600(H)×800(D) mm</td></tr>
+        <tr><td>Working Board</td><td>1100(W)×760(D) mm, Aluminium Profile</td></tr>
+        <tr><td>Slot Interval</td><td>25 mm (29 lines)</td></tr>
+        <tr><td>Component Cabinet</td><td>3–4 stage drawer, cushion board included</td></tr>
+        <tr><td>Operating Pressure</td><td>0.5–7 kgf/cm²</td></tr>
+        <tr><td>Air Supply</td><td>Air Service Unit — Filter, Regulator, Lubricator</td></tr>
+        <tr><td>Power Supply</td><td>AC 220V → DC 24V / 5A output</td></tr>
+        <tr><td>Cylinder Bore</td><td>25Φ, Stroke ≥125 mm (single &amp; double acting)</td></tr>
+        <tr><td>Solenoid Valves</td><td>3/2-way, 5/2-way, 5/3-way (single &amp; double acting)</td></tr>
+        <tr><td>Sensors</td><td>Photo, Capacitive, Inductive Proximity (NPN/PNP)</td></tr>
+        <tr><td>Simulation Software</td><td>Included (FluidSIM-compatible)</td></tr>
+        <tr><td>Mounting</td><td>Cam-type one-touch hand-lever fixture</td></tr>
+      </table>
+      <div class="tesda-badge">TESDA EIM NC II — Unit 3 · Weeks 5–8</div>
+    </div>
+
+    <div class="eq-col">
+      <div class="col-title">Key Component Modules</div>
+      <div class="station-grid">
+        <div class="station-card border1">
+          <div class="station-card-title">Cylinders</div>
+          <div class="station-card-body">Single Acting · Double Acting · Double Acting w/Flow Control · Cushioned</div>
+        </div>
+        <div class="station-card border1">
+          <div class="station-card-title">Manual Valves</div>
+          <div class="station-card-body">3/2-Way Push Button (N/C &amp; N/O) · 5/2-Way · Roller Lever (L/R)</div>
+        </div>
+        <div class="station-card border1">
+          <div class="station-card-title">Pneumatic Signal Valves</div>
+          <div class="station-card-body">Time Delay (N/C &amp; N/O) · Pressure Control · Quick Exhaust · AND / OR</div>
+        </div>
+        <div class="station-card border1">
+          <div class="station-card-title">Solenoid Valves</div>
+          <div class="station-card-body">3/2 Single · 5/2 Single · 5/2 Double · 5/3 All-Block / ABR / PAB</div>
+        </div>
+        <div class="station-card border1">
+          <div class="station-card-title">Electric Control</div>
+          <div class="station-card-body">3-Fold Relay · Digital Timer · Counter · Buzzer &amp; Lamp · E-Stop Unit</div>
+        </div>
+        <div class="station-card border1">
+          <div class="station-card-title">Accessories</div>
+          <div class="station-card-body">Air Hose Set · T-Connectors · Magnetic Symbol Set (40 EA, ISO/KS)</div>
+        </div>
+      </div>
+      <div class="col-title" style="margin-top:16px">Key Training Capabilities</div>
+      <ul class="feat-list">
+        <li>ISO 1219-1 circuit diagram reading and construction</li>
+        <li>Single/double-acting cylinder sequencing with position sensors</li>
+        <li>Electro-pneumatic circuits: PLC-controlled solenoid valve operation</li>
+        <li>Speed control via one-way flow valves; force calculations</li>
+        <li>Fault diagnosis: 5 induced faults per NC II assessment</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EQ 3 — IEG 3430  Mechatronics Trainer II
+     ══════════════════════════════════════════ -->
+<div class="eq-card" id="ieg3430">
+  <div class="eq-header">
+    <div class="eq-accent" style="background:var(--e3)"></div>
+    <div class="eq-header-inner">
+      <span class="eq-number c3">EQ-03</span>
+      <div>
+        <div class="eq-model">IEG 3430</div>
+        <div class="eq-name">Mechatronics System Trainer II</div>
+      </div>
+      <div class="eq-phase" style="background:var(--e3bg);color:var(--e3)">EIM NC II · Phase 1 · Weeks 9–16</div>
+    </div>
+  </div>
+
+  <div class="eq-body">
+    <div class="eq-col">
+      <div class="col-title">Core Specifications</div>
+      <table class="spec-table">
+        <tr><td>PLC Platform</td><td class="spec-val-highlight">SIEMENS S7-314 / S7-314C-2DP</td></tr>
+        <tr><td>I/O per Station</td><td>16 DI / 16 DO each station</td></tr>
+        <tr><td>Network</td><td class="spec-val-highlight">PROFIBUS-DP Field-Bus (inter-station)</td></tr>
+        <tr><td>Stations</td><td>9 independent, combinable stations</td></tr>
+        <tr><td>HMI</td><td>SIEMENS Touch Screen (station 9)</td></tr>
+        <tr><td>Robot (Station 7)</td><td>6-Axis Multi-Joint Robot (ABB)</td></tr>
+        <tr><td>Vision (Station 6)</td><td>Colour Vision System for material ID</td></tr>
+        <tr><td>Storage (Station 8)</td><td>2-Axis Servo + X-Y Storage Crane</td></tr>
+        <tr><td>Conveyor</td><td>Top &amp; Bottom dual conveyor with Lift Unit</td></tr>
+        <tr><td>Power</td><td>AC 220V / DC 24V per station</td></tr>
+        <tr><td>Certifications</td><td>SIEMENS SMSCP Level 1, 2, 3 compatible</td></tr>
+      </table>
+      <div class="tesda-badge">TESDA EIM NC II — Unit 4 · Weeks 9–16</div>
+    </div>
+
+    <div class="eq-col">
+      <div class="col-title">9-Station Process Overview</div>
+      <div class="station-grid">
+        <div class="station-card border3">
+          <div class="station-card-title">St. 1 — Pallet Supply</div>
+          <div class="station-card-body">Magazine feeder · Lift · DC motor direct/reverse · Dual conveyor</div>
+        </div>
+        <div class="station-card border3">
+          <div class="station-card-title">St. 2 — Material Supply</div>
+          <div class="station-card-body">Hall-check cylinder · Defect removal · 2-axis vacuum transport · Roadless cylinder</div>
+        </div>
+        <div class="station-card border3">
+          <div class="station-card-title">St. 3 — Bearing Inspection</div>
+          <div class="station-card-body">Linear potentiometer · Thickness detection · Air chuck transfer · A/D unit</div>
+        </div>
+        <div class="station-card border3">
+          <div class="station-card-title">St. 4 — Bearing Press</div>
+          <div class="station-card-body">Rotary cylinder · Vacuum adsorption · Press &amp; moving cylinder</div>
+        </div>
+        <div class="station-card border3">
+          <div class="station-card-title">St. 5 — Shaft Inspection</div>
+          <div class="station-card-body">Index table angle control · Shaft height measurement · Sequential supplier</div>
+        </div>
+        <div class="station-card border3">
+          <div class="station-card-title">St. 6 — Cover Supply</div>
+          <div class="station-card-body">Colour vision + PLC · Material cover identification · Rotating cylinder</div>
+        </div>
+        <div class="station-card border3">
+          <div class="station-card-title">St. 7 — Robot Assembly</div>
+          <div class="station-card-body">6-axis ABB robot · Screw feeder · Teach pendant programming · Real-time monitoring</div>
+        </div>
+        <div class="station-card border3">
+          <div class="station-card-title">St. 8 — AS/RS Storage</div>
+          <div class="station-card-body">2-axis servo motor · X-Y crane · Sensor-based classification · Storage card</div>
+        </div>
+        <div class="station-card border3">
+          <div class="station-card-title">St. 9 — Pallet Return</div>
+          <div class="station-card-body">Lift unit · Re-supply lower conveyor · SIEMENS HMI touch screen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EQ 4 — IEG 3432  Mechatronics Trainer I
+     ══════════════════════════════════════════ -->
+<div class="eq-card" id="ieg3432">
+  <div class="eq-header">
+    <div class="eq-accent" style="background:var(--e4)"></div>
+    <div class="eq-header-inner">
+      <span class="eq-number c4">EQ-04</span>
+      <div>
+        <div class="eq-model">IEG 3432</div>
+        <div class="eq-name">Mechatronics System Trainer I</div>
+      </div>
+      <div class="eq-phase" style="background:var(--e4bg);color:var(--e4)">EIM NC III · Phase 2 · Weeks 17–20, 30–32</div>
+    </div>
+  </div>
+
+  <div class="eq-body">
+    <div class="eq-col">
+      <div class="col-title">Core Specifications</div>
+      <table class="spec-table">
+        <tr><td>PLC Platform</td><td class="spec-val-highlight">SIEMENS S7-300 / TIA Portal V11+</td></tr>
+        <tr><td>CPU</td><td>Program 1MB · Data 5MB · ProfiNET/Ethernet/PROFIBUS/USB</td></tr>
+        <tr><td>Digital I/O</td><td>32 DI / 32 DO per station; Analog 8-Ch In / 4-Ch Out</td></tr>
+        <tr><td>HMI (per station)</td><td>7" TFT WinCC Advanced V11, Ethernet RJ45</td></tr>
+        <tr><td>Station Frame</td><td>400(W)×820(D)×750(H) mm, polycarbonate door, castors</td></tr>
+        <tr><td>Robot (St. 6)</td><td class="spec-val-highlight">6-Axis Vertical Articulated, 580mm reach, 3kg payload, ±0.01mm</td></tr>
+        <tr><td>Robot Controller</td><td>Multi-CPU · RAPID language · PROFINET/PROFIBUS/EtherNet-IP</td></tr>
+        <tr><td>Fieldbus Master</td><td>DeviceNet · PROFINET · PROFIBUS-DP · EtherNet/IP</td></tr>
+        <tr><td>Fieldbus Slave</td><td>PROFINET · PROFIBUS-DP · EtherNet/IP · CC-Link · Interbus</td></tr>
+        <tr><td>Ball Screw Unit</td><td>12Ø 4mm lead · ±0.2mm repeatability · stroke ≥300mm</td></tr>
+        <tr><td>Air Service</td><td>0–10 bar working; 0.5–8.5 bar set pressure</td></tr>
+        <tr><td>Stations</td><td>7 independent + inter-station PROFIBUS integration</td></tr>
+      </table>
+      <div class="tesda-badge tesda-badge-nc3">TESDA EIM NC III — Units 1–2, 5 · Weeks 17–20, 30–32</div>
+    </div>
+
+    <div class="eq-col">
+      <div class="col-title">7-Station Pneumatic Valve Assembly Process</div>
+      <div class="station-grid">
+        <div class="station-card border4">
+          <div class="station-card-title">St. 1 — Pick &amp; Place Feeding</div>
+          <div class="station-card-body">Tower magazine · Vacuum transport · Pneumatic robot P&amp;P</div>
+        </div>
+        <div class="station-card border4">
+          <div class="station-card-title">St. 2 — Gauging</div>
+          <div class="station-card-body">Ball screw + DC motor positioning · Defect removal · Optic-fibre &amp; capacitive inspection</div>
+        </div>
+        <div class="station-card border4">
+          <div class="station-card-title">St. 3 — Indexing</div>
+          <div class="station-card-body">Stepping motor · 8-position index table · 180° rotary cylinder · Photo sensor</div>
+        </div>
+        <div class="station-card border4">
+          <div class="station-card-title">St. 4 — Sorting &amp; Queuing</div>
+          <div class="station-card-body">DC motor conveyor · Metal/non-metal HF sensor · Handling unit transfer</div>
+        </div>
+        <div class="station-card border4">
+          <div class="station-card-title">St. 5 — Servo Robot Assembly</div>
+          <div class="station-card-body">6-axis robot pick · Pneumatic bolt supply · Handle-shaft insertion sequence</div>
+        </div>
+        <div class="station-card border4">
+          <div class="station-card-title">St. 6 — Torqueing</div>
+          <div class="station-card-body">Automatic torque control · Belt-driven linear traverse · DC motor torque &amp; RPN logging</div>
+        </div>
+        <div class="station-card border4">
+          <div class="station-card-title">St. 7 — Parts Storage</div>
+          <div class="station-card-body">PTP pneumatic robot · 4-position slide storage · Sensor classification · PROFIBUS link</div>
+        </div>
+      </div>
+      <div class="col-title" style="margin-top:14px">Advanced PLC Programming Modes</div>
+      <ul class="feat-list">
+        <li>FBD (≥5 function blocks, EN/ENO logic) — Week 17</li>
+        <li>Structured Text (IF/CASE/FOR/WHILE) + SFC batch control — Week 18</li>
+        <li>VFD commissioning: V/f ratio, ramp, energy logging — Week 19</li>
+        <li>Instrumentation calibration: 5-point pressure transmitter ±0.5% FS — Week 20</li>
+        <li>FMEA + 8-step fault diagnosis capstone — Weeks 30–32</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EQ 5 — IEG 4100  Hydraulics Trainer
+     ══════════════════════════════════════════ -->
+<div class="eq-card" id="ieg4100">
+  <div class="eq-header">
+    <div class="eq-accent" style="background:var(--e2)"></div>
+    <div class="eq-header-inner">
+      <span class="eq-number c2">EQ-05</span>
+      <div>
+        <div class="eq-model">IEG 4100</div>
+        <div class="eq-name">Hydraulic Trainer</div>
+      </div>
+      <div class="eq-phase" style="background:var(--e2bg);color:var(--e2)">EIM NC III · Phase 2 · Weeks 21–23</div>
+    </div>
+  </div>
+
+  <div class="eq-body">
+    <div class="eq-col">
+      <div class="col-title">Core Specifications</div>
+      <table class="spec-table">
+        <tr><td>Working Table</td><td class="spec-val-highlight">1500(W)×1650(H)×850(D) mm</td></tr>
+        <tr><td>Working Board</td><td>1100(W)×760(D) mm, Aluminium profile, 25mm slot</td></tr>
+        <tr><td>Pump Unit (1HP)</td><td>AC 220V / 1HP · Discharge 4.3 ℓ/min · Tank 30L</td></tr>
+        <tr><td>Pump Unit (2HP)</td><td>AC 220V / 2HP · Discharge 6.3 ℓ/min · Tank 50L</td></tr>
+        <tr><td>Max Operating Pressure</td><td class="spec-val-highlight">120 kgf/cm² (valves); 60 kgf/cm² (cylinders)</td></tr>
+        <tr><td>Hydraulic Fluid</td><td>Turbine Oil ISO VG #46 · 20L capacity</td></tr>
+        <tr><td>Cylinder Range</td><td>Single Acting · Double Acting · Differential · Transparent bore</td></tr>
+        <tr><td>Cylinder Bore/Stroke</td><td>25mm bore · 150mm stroke · 12–18mm rod diameter</td></tr>
+        <tr><td>Solenoid Valves (DC)</td><td>DC 24V / 6.5W · LED protection · NG4 nominal size</td></tr>
+        <tr><td>Manual Valves</td><td>2/2, 3/2, 4/2, 4/3 way (All Block · By-Pass · ABT · All Open)</td></tr>
+        <tr><td>Pressure Controls</td><td>Relief · Sequence · Counter Balance · 3-Way Reducing</td></tr>
+        <tr><td>Flow Controls</td><td>One-way · Bi-directional · Pressure-comp · Deceleration</td></tr>
+        <tr><td>Accumulator</td><td>0.7L · Nitrogen 10 kgf/cm² · Relief valve mounted</td></tr>
+        <tr><td>Pressure Switch</td><td>10–160 kgf/cm² · 1a1b contact · 3A capability</td></tr>
+        <tr><td>Transparency Blocks</td><td>Throttle (2mm dia) + Orifice (0.5mm) for visual flow study</td></tr>
+        <tr><td>Hose Set</td><td>Max 120 kgf/cm² · 6mm dia · 600/1000/1500mm lengths</td></tr>
+      </table>
+      <div class="tesda-badge tesda-badge-nc3">TESDA EIM NC III — Unit 3 · Weeks 21–23</div>
+    </div>
+
+    <div class="eq-col">
+      <div class="col-title">Component Library (85 Items)</div>
+      <div class="station-grid">
+        <div class="station-card border2">
+          <div class="station-card-title">Actuators (6 types)</div>
+          <div class="station-card-body">Transparency Double Acting · Differential · Single Acting · Double Acting · w/Brake · Hydraulic Motor (1,950 RPM)</div>
+        </div>
+        <div class="station-card border2">
+          <div class="station-card-title">Manual Valves (13 types)</div>
+          <div class="station-card-body">2/2 Roller &amp; Hand Lever · 3/2 · 4/2 · 4/3 All Block / By-Pass / ABT / All Open / PAB (N/C &amp; N/O variants)</div>
+        </div>
+        <div class="station-card border2">
+          <div class="station-card-title">Solenoid Valves (10 types)</div>
+          <div class="station-card-body">2/2 · 3/2 · 4/2 Single &amp; Double · 4/3 All Block / By-Pass / ABT / All Open / PAB</div>
+        </div>
+        <div class="station-card border2">
+          <div class="station-card-title">Pressure Controls (6 types)</div>
+          <div class="station-card-body">Direct-acting Relief · Sequence · Counter Balance · 3-Way Reducing · Unloading · Pressure Filter</div>
+        </div>
+        <div class="station-card border2">
+          <div class="station-card-title">Flow Controls (7 types)</div>
+          <div class="station-card-body">One-way · Bi-directional · Pressure-Comp · Shut-off · Deceleration · Flow Divider · Flow Divider Valve</div>
+        </div>
+        <div class="station-card border2">
+          <div class="station-card-title">Instrumentation</div>
+          <div class="station-card-body">Pressure Gauge · Pressure Switch · Flowmeter · Accumulator + Charging Device · Transparency Throttle &amp; Orifice Blocks</div>
+        </div>
+      </div>
+      <div class="col-title" style="margin-top:14px">Key Training Capabilities</div>
+      <ul class="feat-list">
+        <li>ISO 1219-1 hydraulic circuit diagram construction</li>
+        <li>Differential cylinder connection and force ratio analysis</li>
+        <li>Relief valve pressure setting under load conditions</li>
+        <li>Oil contamination control per ISO 4406 cleanliness levels</li>
+        <li>Cylinder seal replacement (O-rings, piston seals, wiper seals)</li>
+        <li>5 induced fault diagnosis: cavitation, external leak, valve stiction</li>
+        <li>Multi-actuator circuit commissioning under full load (NC III capstone)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     EQ 6 — IEG 6050  Smart Factory System
+     ══════════════════════════════════════════ -->
+<div class="eq-card" id="ieg6050">
+  <div class="eq-header">
+    <div class="eq-accent" style="background:var(--e5)"></div>
+    <div class="eq-header-inner">
+      <span class="eq-number c5">EQ-06</span>
+      <div>
+        <div class="eq-model">IEG 6050</div>
+        <div class="eq-name">Smart Factory System</div>
+      </div>
+      <div class="eq-phase" style="background:var(--e5bg);color:var(--e5)">EIM NC III · Phase 2 · Weeks 24–32</div>
+    </div>
+  </div>
+
+  <div class="eq-body">
+    <div class="eq-col">
+      <div class="col-title">Core Specifications</div>
+      <table class="spec-table">
+        <tr><td>Base Frame</td><td class="spec-val-highlight">800(W)×600(D) mm desktop-type (compact)</td></tr>
+        <tr><td>PLC</td><td class="spec-val-highlight">Mitsubishi FX5U · 32 DI / 32 DO</td></tr>
+        <tr><td>HMI</td><td>Mitsubishi GOT1000 · Colour LCD ≥10"</td></tr>
+        <tr><td>Collaborative Robot</td><td class="spec-val-highlight">Rainbow Robotics RB3-730 · 6-axis · 730mm reach · 3kg payload · ±0.05mm</td></tr>
+        <tr><td>Robot I/O</td><td>Digital 16 In/16 Out · Analog 4 In/4 Out · USB×4 · LAN RJ45</td></tr>
+        <tr><td>Robot Protocols</td><td>Ethernet TCP/IP · MODBUS TCP · Control Script</td></tr>
+        <tr><td>Vision System</td><td>Colour Smart Vision · metal/non-metal classification</td></tr>
+        <tr><td>Conveyor</td><td>500mm integrated conveyor</td></tr>
+        <tr><td>Supply Cylinder</td><td>16-50mm double-acting solenoid (5/2-way × 2)</td></tr>
+        <tr><td>Pressure Regulation</td><td>0–10 kgf/cm²</td></tr>
+        <tr><td>OPC-UA Architecture</td><td>PLC Drivers + Robot Drivers → OPC-UA Server → Client</td></tr>
+        <tr><td>Database Layer</td><td>OPC-UA middleware → RDBMS (NC III industrial technician)</td></tr>
+        <tr><td>Tower Lamp</td><td>3-colour (R/G/Y) status indicator</td></tr>
+        <tr><td>Workpieces</td><td>Aluminium ×6 + Plastic ×6 (numbered 1–6); defect tray ×5</td></tr>
+        <tr><td>Power</td><td>AC 100–240V / 50–60Hz</td></tr>
+        <tr><td>Certification Target</td><td>Smart Factory Technician / Industrial Technician (Korean KQTS)</td></tr>
+      </table>
+      <div class="tesda-badge tesda-badge-nc3">TESDA EIM NC III — Unit 4 · Weeks 24–29 · NC III Capstone Wk 30–32</div>
+    </div>
+
+    <div class="eq-col">
+      <div class="col-title">Integrated Process Flow</div>
+      <div class="station-grid">
+        <div class="station-card border5">
+          <div class="station-card-title">① Material Input</div>
+          <div class="station-card-body">Supply cylinder advance · workpiece detected by fibre-optic sensor</div>
+        </div>
+        <div class="station-card border5">
+          <div class="station-card-title">② Transfer</div>
+          <div class="station-card-body">Transfer cylinder forward · workpiece onto 500mm conveyor</div>
+        </div>
+        <div class="station-card border5">
+          <div class="station-card-title">③ Classification</div>
+          <div class="station-card-body">Technician: metal/non-metal sensor · Industrial Technician: colour vision inspection</div>
+        </div>
+        <div class="station-card border5">
+          <div class="station-card-title">④ Conveyor Stop &amp; Positioning</div>
+          <div class="station-card-body">PLC-triggered conveyor halt at pick position</div>
+        </div>
+        <div class="station-card border5">
+          <div class="station-card-title">⑤ Cobot Pick &amp; Sort</div>
+          <div class="station-card-body">RB3-730 picks product → routes to Tray A (metal) or Tray B (non-metal) → home return</div>
+        </div>
+        <div class="station-card border5">
+          <div class="station-card-title">⑥ OPC-UA Data Loop</div>
+          <div class="station-card-body">PLC &amp; Robot data → OPC-UA Server → Client monitoring · NC III: DB table insert/update</div>
+        </div>
+      </div>
+
+      <div class="col-title" style="margin-top:14px">Industry 4.0 Capabilities</div>
+      <ul class="feat-list">
+        <li>Cobot TCP/tool configuration and waypoint programming per ISO/TS 15066</li>
+        <li>OPC-UA node configuration: namespaces, monitored items, security</li>
+        <li>SCADA-style HMI: manual/auto modes, real-time lamp status, sort count display</li>
+        <li>Database integration: table creation, INSERT / UPDATE / DELETE via OPC-UA middleware</li>
+        <li>OEE (Availability × Performance × Quality) measurement and reporting</li>
+        <li>Fault tree analysis (FTA) and FMEA severity/RPN documentation</li>
+        <li>Full-system commissioning capstone under TESDA assessor (Week 32)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <strong>Annex A — IEG Training Equipment Specifications</strong><br/>
+  Submitted to: CTADD-QSO, TESDA Philippines &amp; KOICA Philippines Country Office<br/>
+  Prepared by: <strong>IEG Co., Ltd.</strong> (주식회사 아이지) · Kelly Cho · kellycho824@ieg.kr · +82-1644-3263 · June 2026<br/>
+  <span style="font-size:11px;opacity:.6;margin-top:6px;display:block">Specifications subject to change without prior notice for quality improvements. Redistribution prohibited.</span>
+</footer>
+
+</body>
+</html>
