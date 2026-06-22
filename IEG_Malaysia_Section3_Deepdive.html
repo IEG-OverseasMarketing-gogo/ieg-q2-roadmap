@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEG × Intel Malaysia — Section 3 심화분석</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+  :root {
+    --bg:        #0B0F1A;
+    --surface:   #131929;
+    --card:      #1A2235;
+    --border:    #243050;
+    --accent1:   #00C2FF;   /* Intel 계열 시안 */
+    --accent2:   #FF6B35;   /* IEG 오렌지 */
+    --accent3:   #4ADE80;   /* 수익 녹색 */
+    --accent4:   #A78BFA;   /* 보조 퍼플 */
+    --text-hi:   #F0F4FF;
+    --text-md:   #8B9EC0;
+    --text-lo:   #4A5878;
+    --mono:      'IBM Plex Mono', monospace;
+    --sans:      'Space Grotesk', sans-serif;
+    --kr:        'IBM Plex Sans KR', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-hi);
+    font-family: var(--kr);
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, #0B1628 0%, #0d1f3c 50%, #0B1628 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(0,194,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent1);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--sans);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-hi);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--accent2); }
+  .hero-sub {
+    font-size: 13px;
+    color: var(--text-md);
+    max-width: 680px;
+  }
+  .hero-meta {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text-md);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* ── LAYOUT ── */
+  .body-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* ── SECTION TITLE ── */
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 44px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+  .sec-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent1);
+    background: rgba(0,194,255,0.08);
+    border: 1px solid rgba(0,194,255,0.2);
+    border-radius: 3px;
+    padding: 3px 8px;
+    white-space: nowrap;
+  }
+  .sec-head h2 {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-hi);
+  }
+
+  /* ── CONTEXT CALLOUT ── */
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent1);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--text-md);
+    line-height: 1.7;
+  }
+  .callout strong { color: var(--text-hi); font-weight: 600; }
+
+  /* ── INTEL ROLE PIPELINE ── */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .pipe-step {
+    background: var(--card);
+    padding: 16px 14px;
+    text-align: center;
+    position: relative;
+  }
+  .pipe-step:last-child::after { display: none; }
+  .pipe-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .pipe-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-hi);
+    margin-bottom: 4px;
+  }
+  .pipe-sub {
+    font-size: 10px;
+    color: var(--text-md);
+    line-height: 1.4;
+  }
+  .pipe-badge {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    background: rgba(0,194,255,0.1);
+    color: var(--accent1);
+    border: 1px solid rgba(0,194,255,0.2);
+  }
+
+  /* ── MASTER MAPPING TABLE ── */
+  .map-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  table.map-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .map-table thead tr {
+    background: #0f1d35;
+  }
+  .map-table th {
+    padding: 10px 12px;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-md);
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .map-table td {
+    padding: 11px 12px;
+    border-bottom: 1px solid rgba(36,48,80,0.6);
+    vertical-align: top;
+    color: var(--text-hi);
+    line-height: 1.5;
+  }
+  .map-table tr:last-child td { border-bottom: none; }
+  .map-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .map-table .module-cell {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .mod-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    margin-right: 4px;
+  }
+  .mod-1 { background: rgba(0,194,255,0.12); color: var(--accent1); border: 1px solid rgba(0,194,255,0.25); }
+  .mod-2 { background: rgba(255,107,53,0.12); color: var(--accent2); border: 1px solid rgba(255,107,53,0.25); }
+  .mod-3 { background: rgba(74,222,128,0.12); color: var(--accent3); border: 1px solid rgba(74,222,128,0.25); }
+  .mod-4 { background: rgba(167,139,250,0.12); color: var(--accent4); border: 1px solid rgba(167,139,250,0.25); }
+  .mod-5 { background: rgba(251,191,36,0.12); color: #FBB F24; border: 1px solid rgba(251,191,36,0.25); color: #FBB024; }
+
+  .eq-chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: rgba(255,107,53,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(255,107,53,0.2);
+    margin: 1px;
+    white-space: nowrap;
+  }
+  .cert-chip {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: rgba(74,222,128,0.08);
+    color: var(--accent3);
+    border: 1px solid rgba(74,222,128,0.2);
+    margin: 1px;
+    white-space: nowrap;
+  }
+  .gap-chip {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: rgba(251,191,36,0.1);
+    color: #FBB024;
+    border: 1px solid rgba(251,191,36,0.2);
+    margin: 1px;
+    white-space: nowrap;
+  }
+  .fit-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .fit-fill {
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent3), var(--accent1));
+    min-width: 4px;
+  }
+  .fit-pct {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-md);
+    white-space: nowrap;
+  }
+  .intel-role {
+    font-size: 11px;
+    color: var(--text-md);
+    line-height: 1.5;
+  }
+  .intel-role strong {
+    display: block;
+    color: var(--text-hi);
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+  .skills-list {
+    list-style: none;
+    padding: 0;
+  }
+  .skills-list li {
+    font-size: 11px;
+    color: var(--text-md);
+    padding: 1px 0;
+    padding-left: 12px;
+    position: relative;
+  }
+  .skills-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent1);
+  }
+
+  /* ── REVENUE PHASE TABLE ── */
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .phase-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .phase-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .phase-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-md);
+    margin-bottom: 4px;
+  }
+  .phase-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-hi);
+  }
+  .phase-period {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-md);
+    margin-top: 2px;
+  }
+  .phase-body {
+    padding: 14px 16px;
+  }
+  .phase-revenue {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .phase-rev-label {
+    font-size: 10px;
+    color: var(--text-md);
+    margin-bottom: 14px;
+  }
+  .phase-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .phase-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .phase-item-text {
+    font-size: 11px;
+    color: var(--text-md);
+    line-height: 1.5;
+  }
+  .phase-item-text strong {
+    color: var(--text-hi);
+    font-weight: 500;
+  }
+  .p1 .phase-header { border-top: 3px solid var(--accent2); }
+  .p1 .phase-revenue { color: var(--accent2); }
+  .p1 .phase-dot { background: var(--accent2); }
+  .p2 .phase-header { border-top: 3px solid var(--accent1); }
+  .p2 .phase-revenue { color: var(--accent1); }
+  .p2 .phase-dot { background: var(--accent1); }
+  .p3 .phase-header { border-top: 3px solid var(--accent3); }
+  .p3 .phase-revenue { color: var(--accent3); }
+  .p3 .phase-dot { background: var(--accent3); }
+
+  /* ── REVENUE BREAKDOWN TABLE ── */
+  .rev-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  table.rev-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .rev-table th {
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-md);
+    text-transform: uppercase;
+    background: #0f1d35;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+  .rev-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(36,48,80,0.5);
+    color: var(--text-hi);
+    vertical-align: middle;
+  }
+  .rev-table tr:last-child td { border-bottom: none; }
+  .rev-table .total-row td {
+    background: rgba(74,222,128,0.05);
+    font-weight: 600;
+    border-top: 1px solid var(--border);
+  }
+  .rev-table .num { 
+    font-family: var(--mono); 
+    text-align: right;
+  }
+  .rev-table .tag-p1 { color: var(--accent2); font-family: var(--mono); font-size: 10px; }
+  .rev-table .tag-p2 { color: var(--accent1); font-family: var(--mono); font-size: 10px; }
+  .rev-table .tag-p3 { color: var(--accent3); font-family: var(--mono); font-size: 10px; }
+
+  /* ── GAP ANALYSIS ── */
+  .gap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .gap-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+  }
+  .gap-card h4 {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-hi);
+    margin-bottom: 4px;
+  }
+  .gap-card .sub { font-size: 11px; color: var(--text-md); margin-bottom: 14px; }
+  .gap-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(36,48,80,0.5);
+  }
+  .gap-item:last-child { border-bottom: none; }
+  .gap-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .gap-text { font-size: 11px; color: var(--text-md); line-height: 1.5; }
+  .gap-text strong { color: var(--text-hi); display: block; font-size: 12px; }
+
+  /* ── HRD CORP ── */
+  .hrd-box {
+    background: linear-gradient(135deg, rgba(0,194,255,0.05), rgba(74,222,128,0.05));
+    border: 1px solid rgba(0,194,255,0.2);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .hrd-box h3 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent1);
+    margin-bottom: 6px;
+  }
+  .hrd-box p { font-size: 12px; color: var(--text-md); margin-bottom: 14px; }
+  .hrd-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .hrd-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+  }
+  .hrd-item .label {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-lo);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .hrd-item .val {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-hi);
+    margin-bottom: 2px;
+  }
+  .hrd-item .note { font-size: 10px; color: var(--text-md); }
+
+  /* ── FOOTNOTES ── */
+  .footnotes {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .footnotes h5 {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-lo);
+    margin-bottom: 10px;
+  }
+  .footnotes p {
+    font-size: 10px;
+    color: var(--text-lo);
+    line-height: 1.7;
+    margin-bottom: 4px;
+  }
+  .footnotes a { color: var(--accent1); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .pipeline { grid-template-columns: repeat(3, 1fr); }
+    .phase-grid { grid-template-columns: 1fr; }
+    .gap-grid { grid-template-columns: 1fr; }
+    .hrd-grid { grid-template-columns: 1fr; }
+    .hero { padding: 32px 20px; }
+    .body-wrap { padding: 0 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">IEG Co., Ltd. × Intel Malaysia — Competency Intelligence Report</div>
+  <h1>Section 3 심화분석: Intel ATM 직무역량 →<br><span>IEG 장비 1:1 커리큘럼 맵핑 & 수익 로드맵</span></h1>
+  <p class="hero-sub">인텔 말레이시아(Penang / Kulim) ATM 공장의 실제 채용 공고, 직무기술서, 제조 프로세스를 역분석하여 IEG 장비와의 정밀 역량 매핑 및 3단계 Phase 수익 구조를 심화 제시합니다.</p>
+  <div class="hero-meta">
+    <span class="meta-tag">리서치 기준: 2026.06</span>
+    <span class="meta-tag">Intel Penang PG8 · PG16 / Kulim KMD</span>
+    <span class="meta-tag">HRD Corp SBL-Khas 연동</span>
+    <span class="meta-tag">IEG 6030 · 4100 · 4000 · 6050 · Cobot</span>
+  </div>
+</div>
+
+<div class="body-wrap">
+
+  <!-- ── SEC 3-A: Intel ATM 프로세스 파이프라인 ── -->
+  <div class="sec-head">
+    <span class="sec-num">3-A</span>
+    <h2>Intel Malaysia ATM 제조 프로세스 5단계 — 직무 역할 배치</h2>
+  </div>
+
+  <div class="callout">
+    <strong>왜 ATM을 기준으로 잡는가?</strong> 인텔 말레이시아는 전 세계 최대 Assembly Test Manufacturing(ATM) 거점입니다. <strong>Penang(PG8·PG16) + Kulim(KMD·KMDSDP)</strong>에서 15,000명 이상이 근무하며, 2026년 RM 12억 규모 첨단 패키징 단지가 가동 개시 예정입니다. IEG가 공략할 TVET 수요는 바로 이 ATM 공정 전반의 테크니션·엔지니어 신규 채용 파이프라인입니다.
+  </div>
+
+  <div class="pipeline">
+    <div class="pipe-step">
+      <span class="pipe-icon">🧹</span>
+      <div class="pipe-title">Die Sort / Die Prep</div>
+      <div class="pipe-sub">Kulim KMDSDP<br>웨이퍼 정렬·분리</div>
+      <span class="pipe-badge">ESD / Cleanroom</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">🔧</span>
+      <div class="pipe-title">Package Assembly</div>
+      <div class="pipe-sub">Penang PG8<br>기판 실장·에폭시 충전</div>
+      <span class="pipe-badge">자동화 장비 운용</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">🤖</span>
+      <div class="pipe-title">Advanced Packaging</div>
+      <div class="pipe-sub">Pelican (3D chiplet)<br>협동로봇 픽앤플레이스</div>
+      <span class="pipe-badge">Cobot / MPS</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">🔬</span>
+      <div class="pipe-title">Module Test</div>
+      <div class="pipe-sub">PLC 기반 테스트<br>ATE 운용·불량 분류</div>
+      <span class="pipe-badge">PLC / SCADA</span>
+    </div>
+    <div class="pipe-step">
+      <span class="pipe-icon">📦</span>
+      <div class="pipe-title">Product Shipping</div>
+      <div class="pipe-sub">스마트 물류·<br>DX 라벨링·추적</div>
+      <span class="pipe-badge">DX Labeler™</span>
+    </div>
+  </div>
+
+  <!-- ── SEC 3-B: 1:1 커리큘럼 맵핑 마스터 테이블 ── -->
+  <div class="sec-head">
+    <span class="sec-num">3-B</span>
+    <h2>Module 1~5 × Intel 직무역량 × IEG 장비 — 정밀 매핑 테이블</h2>
+  </div>
+
+  <div class="callout">
+    인텔 말레이시아 채용공고(Jobstreet·Indeed·Intel Workday, 2025~2026)에서 확인된 <strong>Module Equipment Technician, Process Engineer, Manufacturing Operation Manager, TEG Supervisor</strong> 4개 직군 역량 요건을 역분석, IEG 5개 교육모듈 및 장비라인과 1:1로 정합성 평가합니다.
+  </div>
+
+  <div class="map-table-wrap">
+    <table class="map-table">
+      <thead>
+        <tr>
+          <th style="width:110px">교육 모듈</th>
+          <th style="width:170px">Intel 직무 타이틀</th>
+          <th style="width:180px">Intel 요구 핵심역량<br><span style="font-size:9px;color:#4A5878">(채용공고 직접 인용·분석)</span></th>
+          <th style="width:150px">IEG 대응 장비</th>
+          <th style="width:160px">커버 가능 스킬</th>
+          <th style="width:130px">갭 / 보완 필요</th>
+          <th style="width:80px">적합도</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="module-cell"><span class="mod-tag mod-1">M-1</span><br>Cleanroom &amp; ESD 안전</td>
+          <td>
+            <div class="intel-role">
+              <strong>Module Equipment Technician</strong>
+              Kulim / Penang (Diploma)
+            </div>
+          </td>
+          <td>
+            <ul class="skills-list">
+              <li>Cleanroom 복장·입출 절차 (Bunny Suit)</li>
+              <li>ESD 접지·정전기 방지</li>
+              <li>OSHA 1994 / FMA 규정 이해</li>
+              <li>7S, ISO14001, QC080000</li>
+            </ul>
+          </td>
+          <td>
+            <span class="eq-chip">IEG 6030</span><br>
+            <span style="font-size:10px;color:var(--text-md);margin-top:4px;display:block">(클린룸 환경 시뮬레이션 패널 포함)</span>
+          </td>
+          <td>
+            <span class="cert-chip">클린룸 환경 이해</span>
+            <span class="cert-chip">정전기 측정 실습</span>
+            <span class="cert-chip">안전 프로토콜 체험</span>
+          </td>
+          <td>
+            <span class="gap-chip">실제 웨이퍼 취급 불가</span>
+            <span class="gap-chip">ISO14001 별도 모듈 필요</span>
+          </td>
+          <td>
+            <div class="fit-bar">
+              <div class="fit-fill" style="width:68px"></div>
+              <span class="fit-pct">85%</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="module-cell"><span class="mod-tag mod-2">M-2</span><br>PLC &amp; 자동화 제어</td>
+          <td>
+            <div class="intel-role">
+              <strong>Process &amp; Equipment Engineer</strong>
+              Kulim — "Own and optimize high-volume manufacturing equipment"
+            </div>
+          </td>
+          <td>
+            <ul class="skills-list">
+              <li>PLC 기반 장비 제어·정비</li>
+              <li>공정 데이터 분석·수율 최적화</li>
+              <li>Mechatronic systems 이해</li>
+              <li>Root-cause 분석·시정조치</li>
+              <li>HMI / SCADA 운용</li>
+            </ul>
+          </td>
+          <td>
+            <span class="eq-chip">IEG 6030</span>
+            <span class="eq-chip">IEG 3432</span>
+            <span class="eq-chip">IEG 3430</span>
+          </td>
+          <td>
+            <span class="cert-chip">Siemens S7 PLC 래더</span>
+            <span class="cert-chip">HMI 프로그래밍</span>
+            <span class="cert-chip">공압·유압 제어</span>
+            <span class="cert-chip">고장진단 시뮬레이션</span>
+          </td>
+          <td>
+            <span class="gap-chip">실생산 데이터 없음</span>
+            <span class="gap-chip">SPC/APC 연동 필요</span>
+          </td>
+          <td>
+            <div class="fit-bar">
+              <div class="fit-fill" style="width:76px"></div>
+              <span class="fit-pct">95%</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="module-cell"><span class="mod-tag mod-3">M-3</span><br>MPS &amp; 스마트 생산</td>
+          <td>
+            <div class="intel-role">
+              <strong>Manufacturing Operation Manager</strong>
+              "Lead team of operators, overseeing operational processes, maintenance"
+            </div>
+          </td>
+          <td>
+            <ul class="skills-list">
+              <li>생산라인 셋업·전환 절차</li>
+              <li>모듈 설치·툴 변환 (factory ramp)</li>
+              <li>팀 리더십·스태핑 관리</li>
+              <li>KPI 기반 성과 관리</li>
+              <li>Lean / 낭비 제거</li>
+            </ul>
+          </td>
+          <td>
+            <span class="eq-chip">IEG 4100</span>
+            <span class="eq-chip">IEG 4000</span>
+          </td>
+          <td>
+            <span class="cert-chip">생산공정 시퀀싱</span>
+            <span class="cert-chip">부품 이송·조립 실습</span>
+            <span class="cert-chip">OEE 측정·분석</span>
+            <span class="cert-chip">작업지시서(WI) 작성</span>
+          </td>
+          <td>
+            <span class="gap-chip">Lean/6Sigma 인증 별도</span>
+            <span class="gap-chip">HR 스태핑 콘텐츠 필요</span>
+          </td>
+          <td>
+            <div class="fit-bar">
+              <div class="fit-fill" style="width:70px"></div>
+              <span class="fit-pct">88%</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="module-cell"><span class="mod-tag mod-4">M-4</span><br>반도체 공정 이해</td>
+          <td>
+            <div class="intel-role">
+              <strong>Module Engineering Intern / Graduate</strong>
+              "Diploma fresh graduate — kick start career in semiconductor"
+            </div>
+          </td>
+          <td>
+            <ul class="skills-list">
+              <li>ATM 공정 플로우 이해 (Die Sort → Test)</li>
+              <li>패키징 재료·기판 지식</li>
+              <li>품질 기준 (ISO9001, QC080000)</li>
+              <li>SEM·검사 장비 기초</li>
+              <li>데이터 기록·리포팅</li>
+            </ul>
+          </td>
+          <td>
+            <span class="eq-chip">IEG 6050</span>
+            <span class="eq-chip">IEG 6030</span>
+          </td>
+          <td>
+            <span class="cert-chip">공정 플로우 시뮬레이션</span>
+            <span class="cert-chip">품질 검사 실습</span>
+            <span class="cert-chip">측정·기록 역량</span>
+          </td>
+          <td>
+            <span class="gap-chip">실제 웨이퍼·IC 없음</span>
+            <span class="gap-chip">ATE 장비 별도 파트너십</span>
+            <span class="gap-chip">SEM 장비 고비용</span>
+          </td>
+          <td>
+            <div class="fit-bar">
+              <div class="fit-fill" style="width:58px"></div>
+              <span class="fit-pct">72%</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="module-cell"><span class="mod-tag mod-5">M-5</span><br>협동로봇 &amp; Industry 4.0</td>
+          <td>
+            <div class="intel-role">
+              <strong>TEG Equipment Supervisor</strong>
+              "Enhancing team capabilities, driving operational excellence"<br><br>
+              <strong>Advanced Packaging Engineer</strong>
+              Pelican 3D chiplet — Pick &amp; Place 자동화
+            </div>
+          </td>
+          <td>
+            <ul class="skills-list">
+              <li>협동로봇 티칭·경로 프로그래밍</li>
+              <li>Vision 시스템 연동</li>
+              <li>IoT 센서 데이터 수집·분석</li>
+              <li>디지털 트윈 이해</li>
+              <li>신기술 적응 의지 (JD 명시)</li>
+            </ul>
+          </td>
+          <td>
+            <span class="eq-chip">IEG Cobot</span>
+            <span class="eq-chip">IEG 4100</span>
+          </td>
+          <td>
+            <span class="cert-chip">Cobot 티칭 펜던트</span>
+            <span class="cert-chip">Safety Zone 설정</span>
+            <span class="cert-chip">MPS 연동 자동화</span>
+            <span class="cert-chip">IoT 데이터 시각화</span>
+          </td>
+          <td>
+            <span class="gap-chip">AI 비전 모듈 미포함</span>
+            <span class="gap-chip">디지털 트윈 SW 필요</span>
+          </td>
+          <td>
+            <div class="fit-bar">
+              <div class="fit-fill" style="width:72px"></div>
+              <span class="fit-pct">90%</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── SEC 3-C: Gap 분석 ── -->
+  <div class="sec-head">
+    <span class="sec-num">3-C</span>
+    <h2>Gap 분석 — IEG가 채울 수 있는 것 vs. 보완 필요 영역</h2>
+  </div>
+
+  <div class="gap-grid">
+    <div class="gap-card">
+      <h4>✅ IEG 장비로 직접 커버 가능 (Strong Fit)</h4>
+      <p class="sub">Intel JD 요건 중 IEG 장비 단독으로 85%+ 역량 구현 가능 영역</p>
+      <div class="gap-item">
+        <span class="gap-icon">🔌</span>
+        <div class="gap-text"><strong>PLC / HMI 자동화 제어 (M-2)</strong>IEG 6030·3432 Siemens SMSCP 기반, Intel Process Engineer JD 직결. 업계 표준 래더·FBD 프로그래밍 완전 대응.</div>
+      </div>
+      <div class="gap-item">
+        <span class="gap-icon">🤖</span>
+        <div class="gap-text"><strong>협동로봇 운용 (M-5)</strong>Intel Pelican 공장 내 Pick &amp; Place 자동화 역할 직접 매핑. Cobot 티칭·안전 펜스 설정 실습 포함.</div>
+      </div>
+      <div class="gap-item">
+        <span class="gap-icon">🏭</span>
+        <div class="gap-text"><strong>생산공정 시퀀싱 (M-3)</strong>IEG 4000/4100 MPS 트레이너로 Intel factory ramp 절차 시뮬레이션. OEE·사이클타임 측정 실습.</div>
+      </div>
+      <div class="gap-item">
+        <span class="gap-icon">🧹</span>
+        <div class="gap-text"><strong>클린룸·ESD 안전 (M-1)</strong>IEG 6030 ESD 접지 패널 포함. Intel "Static is a unit killer" 원칙 교육 완전 대응.</div>
+      </div>
+    </div>
+
+    <div class="gap-card">
+      <h4>⚠️ 보완 필요 영역 — 파트너십 또는 Add-on 모듈</h4>
+      <p class="sub">IEG 단독으로 충족하기 어려운 Intel 요건, 해결책 포함</p>
+      <div class="gap-item">
+        <span class="gap-icon">📐</span>
+        <div class="gap-text"><strong>실제 반도체 웨이퍼·IC 취급</strong>Intel ATM 체험형 교육은 실물 웨이퍼가 필요. <em>→ 해결책: Penang Skill Development Centre(PSDC) 또는 Micron Malaysia와 현장실습 MOU</em></div>
+      </div>
+      <div class="gap-item">
+        <span class="gap-icon">🔭</span>
+        <div class="gap-text"><strong>ATE·SEM 검사 장비 (M-4)</strong>고가 장비로 IEG 라인업에 없음. <em>→ 해결책: Agilent·Keysight 등 테스트 장비 업체 교육 컨텐츠 임베딩 또는 가상 시뮬레이터 도입</em></div>
+      </div>
+      <div class="gap-item">
+        <span class="gap-icon">🧠</span>
+        <div class="gap-text"><strong>AI 비전·디지털 트윈 (M-5 고급)</strong>Intel AI Era 반도체 생산에서 핵심 부상. <em>→ 해결책: Emotii AI 파트너십 활용, IoT 데이터 시각화 대시보드 모듈 개발</em></div>
+      </div>
+      <div class="gap-item">
+        <span class="gap-icon">📜</span>
+        <div class="gap-text"><strong>ISO14001 / QC080000 인증 연계</strong>Intel JD에 명시된 환경·품질 인증. <em>→ 해결책: SIRIM QAS 인증기관과 커리큘럼 공동 개발, 수료 시 인증 연계 제공</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEC 3-D: Phase 수익 로드맵 ── -->
+  <div class="sec-head">
+    <span class="sec-num">3-D</span>
+    <h2>Phase 1~3 수익 구조 심화 로드맵 — HRD Corp SBL-Khas 연동</h2>
+  </div>
+
+  <div class="callout">
+    <strong>핵심 레버리지: HRD Corp SBL-Khas.</strong> 2026년 6월 15일부로 강화된 고용허가 기준으로 인해 말레이시아 반도체 기업들의 <em>내국인 숙련 인력 육성 의무</em>가 강화됩니다. IEG의 HRD Corp 등록 훈련 기관 지위 확보 시, 인텔·인피니온·마이크론 등 주요 고객사가 SBL-Khas를 통해 <strong>훈련비 100% 청구 가능</strong> — IEG에겐 사실상 무위험 매출원이 됩니다. 기술 집약 과정의 HRD Corp 허용 일일 비용은 RM 1,300~6,000/day 수준입니다.
+  </div>
+
+  <div class="phase-grid">
+    <div class="phase-card p1">
+      <div class="phase-header">
+        <div class="phase-label">Phase 1</div>
+        <div class="phase-title">장비 납품 + TTT</div>
+        <div class="phase-period">H2 2026 — Q2 2027 (12개월)</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-revenue" style="color:var(--accent2)">USD 280,000~</div>
+        <div class="phase-rev-label">예상 매출 (Year 1)</div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent2)"></div>
+          <div class="phase-item-text"><strong>HRD Corp 등록 기관 승인 취득</strong>신청~승인 3~4개월 소요. 우선 "Production Automation" 카테고리로 진입.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent2)"></div>
+          <div class="phase-item-text"><strong>파일럿 고객 1~2곳 확보</strong>PSDC(Penang Skill Dev Centre) 또는 Kulim 기반 TVET 칼리지에 IEG 6030 + PLC 트레이너 납품.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent2)"></div>
+          <div class="phase-item-text"><strong>Train-the-Trainer(TTT) 패키지 판매</strong>HRD Corp 승인 강사 양성 과정 포함. 5일 과정 × RM 8,000/인.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent2)"></div>
+          <div class="phase-item-text"><strong>커리큘럼 라이선스 계약</strong>교육기관에 IEG 맵핑 커리큘럼 1년 라이선스 USD 5,000~8,000/기관.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card p2">
+      <div class="phase-header">
+        <div class="phase-label">Phase 2</div>
+        <div class="phase-title">기업 In-house 훈련</div>
+        <div class="phase-period">Q3 2027 — Q2 2028 (12개월)</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-revenue" style="color:var(--accent1)">USD 520,000~</div>
+        <div class="phase-rev-label">예상 매출 (Year 2)</div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent1)"></div>
+          <div class="phase-item-text"><strong>반도체 기업 In-house 훈련 수주</strong>Intel·Infineon·Micron 공급망 내 SME 대상 SBL-Khas 과정. 배치 당 20명 × RM 3,500/pax × 20배치 = RM 1.4M.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent1)"></div>
+          <div class="phase-item-text"><strong>추가 장비 납품 확대</strong>Phase 1 파일럿 성과 기반 레퍼런스로 3~5기관 추가 수주. IEG 4100·4000·Cobot 라인업 확장.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent1)"></div>
+          <div class="phase-item-text"><strong>SACA 또는 SKPK 인증 과정 연계</strong>말레이시아 국가기술자격(SKM) 레벨 3~4 연계 가능성 협의. 정부 보조금 수혜 학생 유입.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent1)"></div>
+          <div class="phase-item-text"><strong>VR/AR 선택 모듈 런칭</strong>실물 웨이퍼 Gap 보완용. 반도체 공정 시뮬레이터 라이선스 번들 판매.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card p3">
+      <div class="phase-header">
+        <div class="phase-label">Phase 3</div>
+        <div class="phase-title">IEG 인증 ATC 설립</div>
+        <div class="phase-period">Q3 2028 — (IPO 전후)</div>
+      </div>
+      <div class="phase-body">
+        <div class="phase-revenue" style="color:var(--accent3)">USD 1.2M+</div>
+        <div class="phase-rev-label">예상 연매출 (Year 3+)</div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent3)"></div>
+          <div class="phase-item-text"><strong>IEG Malaysia ATC(공인 훈련 센터) 개소</strong>Penang 또는 Kulim HiTech Park 내 단독 훈련 센터. KOSDAQ IPO 스토리라인 글로벌 거점으로 활용.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent3)"></div>
+          <div class="phase-item-text"><strong>Intel Pathfinder 파트너십 타진</strong>Intel 공식 교육 파트너 자격. 인텔 공급망 기업 대상 우선 교육 공급업체 지위.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent3)"></div>
+          <div class="phase-item-text"><strong>Regional TVET Hub 포지셔닝</strong>말레이시아 센터를 기점으로 인도네시아·베트남 확장. ASEAN 반도체 TVET 허브.</div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-dot" style="background:var(--accent3)"></div>
+          <div class="phase-item-text"><strong>Recurring 수익 모델 완성</strong>장비 유지보수 계약 + 커리큘럼 연간 업데이트 라이선스 + 훈련 운영 수익 3원화.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Revenue Detail Table ── -->
+  <div class="sec-head">
+    <span class="sec-num">3-E</span>
+    <h2>3년 누적 수익 구조 상세 분해</h2>
+  </div>
+
+  <div class="rev-table-wrap">
+    <table class="rev-table">
+      <thead>
+        <tr>
+          <th>수익 스트림</th>
+          <th>Phase</th>
+          <th>단가 기준</th>
+          <th>예상 거래 건수</th>
+          <th class="num">연간 예상 매출</th>
+          <th>HRD Corp 연동</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>스마트팩토리 장비 납품</strong><br><span style="font-size:10px;color:var(--text-md)">IEG 6030·4100·4000·6050·Cobot</span></td>
+          <td><span class="tag-p1">P1~P2</span></td>
+          <td>USD 40,000~80,000 / 세트</td>
+          <td>3~5기관/년</td>
+          <td class="num">USD 160,000~400,000</td>
+          <td style="font-size:10px;color:var(--text-md)">간접(장비 구매는 별도)</td>
+        </tr>
+        <tr>
+          <td><strong>Train-the-Trainer 과정</strong><br><span style="font-size:10px;color:var(--text-md)">HRD Corp 등록 강사 양성 5일</span></td>
+          <td><span class="tag-p1">P1</span></td>
+          <td>RM 8,000 / 인 (≈USD 1,800)</td>
+          <td>20~40인/년</td>
+          <td class="num">USD 36,000~72,000</td>
+          <td style="font-size:10px;color:var(--accent3)">✓ SBL-Khas 청구 가능</td>
+        </tr>
+        <tr>
+          <td><strong>커리큘럼 라이선스</strong><br><span style="font-size:10px;color:var(--text-md)">5모듈 × 연간 갱신</span></td>
+          <td><span class="tag-p1">P1</span> <span class="tag-p2">P2</span></td>
+          <td>USD 5,000~8,000 / 기관·년</td>
+          <td>5~12기관</td>
+          <td class="num">USD 25,000~96,000</td>
+          <td style="font-size:10px;color:var(--text-md)">간접</td>
+        </tr>
+        <tr>
+          <td><strong>기업 In-house 훈련 운영</strong><br><span style="font-size:10px;color:var(--text-md)">반도체 SME 대상 배치 과정</span></td>
+          <td><span class="tag-p2">P2</span></td>
+          <td>RM 3,500 / pax (≈USD 800)</td>
+          <td>200~400인/년</td>
+          <td class="num">USD 160,000~320,000</td>
+          <td style="font-size:10px;color:var(--accent3)">✓ SBL-Khas 100% 청구</td>
+        </tr>
+        <tr>
+          <td><strong>장비 유지보수 계약 (AMC)</strong><br><span style="font-size:10px;color:var(--text-md)">납품 장비 연간 유지관리</span></td>
+          <td><span class="tag-p2">P2</span> <span class="tag-p3">P3</span></td>
+          <td>납품가의 8~12%/년</td>
+          <td>납품 누적 기준</td>
+          <td class="num">USD 30,000~80,000</td>
+          <td style="font-size:10px;color:var(--text-md)">해당 없음</td>
+        </tr>
+        <tr>
+          <td><strong>ATC 자체 훈련 운영 (공개과정)</strong><br><span style="font-size:10px;color:var(--text-md)">IEG Malaysia ATC 개소 후</span></td>
+          <td><span class="tag-p3">P3</span></td>
+          <td>RM 4,500 / pax × 배치</td>
+          <td>600~1,000인/년</td>
+          <td class="num">USD 620,000~1,030,000</td>
+          <td style="font-size:10px;color:var(--accent3)">✓ SBL-Khas + 정부 보조금</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="4"><strong>3년 누적 총매출 추정</strong></td>
+          <td class="num" style="color:var(--accent3)"><strong>USD 2.0M~4.0M</strong></td>
+          <td style="font-size:10px;color:var(--accent3)">HRD Corp 청구 비중 60%+</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── HRD CORP BOX ── -->
+  <div class="hrd-box">
+    <h3>🏦 HRD Corp SBL-Khas — IEG 적용 핵심 파라미터 (2026년 6월 기준 강화 요건 반영)</h3>
+    <p>2026년 6월 15일부 고용허가 강화 기준과 맞물려, 말레이시아 반도체 기업들의 HRD Corp 레비 활용 압력이 높아집니다. IEG 과정의 SBL-Khas 등록 완료 시 고객사는 사전 현금 지출 없이 훈련 가능 — <strong>IEG의 영업 저항 최소화</strong>.</p>
+    <div class="hrd-grid">
+      <div class="hrd-item">
+        <div class="label">허용 일일 비용 (기술과정)</div>
+        <div class="val">RM 1,300~6,000</div>
+        <div class="note">기술 집약도에 따라 차등 적용</div>
+      </div>
+      <div class="hrd-item">
+        <div class="label">과정 최소 시간</div>
+        <div class="val">4시간~</div>
+        <div class="note">온라인·오프라인·하이브리드 모두 적용</div>
+      </div>
+      <div class="hrd-item">
+        <div class="label">승인 소요기간</div>
+        <div class="val">24~48시간</div>
+        <div class="note">e-TRiS 시스템 자동 처리 (Grant 사전 승인 필수)</div>
+      </div>
+      <div class="hrd-item">
+        <div class="label">IEG 등록 카테고리</div>
+        <div class="val">Industry 4.0</div>
+        <div class="note">HRD Corp 공식 Focus Area, 심사 우대</div>
+      </div>
+      <div class="hrd-item">
+        <div class="label">필요 강사 자격</div>
+        <div class="val">TTT 수료</div>
+        <div class="note">IEG TTT 과정 → HRD Corp 강사 등록 직결</div>
+      </div>
+      <div class="hrd-item">
+        <div class="label">Budget 2026 반도체 TVET 예산</div>
+        <div class="val">RM 6.8B+</div>
+        <div class="note">AI·반도체 상위 인력 육성 국가 예산 배정</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTNOTES -->
+  <div class="footnotes">
+    <h5>Sources &amp; References</h5>
+    <p>[1] Intel Malaysia Job Postings — Module Equipment Technician, Process &amp; Equipment Engineer, Manufacturing Operation Manager, TEG Supervisor (Jobstreet / Indeed / Intel Workday, 2025~2026). <a href="https://my.jobstreet.com/Intel-jobs/in-Malaysia" target="_blank">Jobstreet Intel Malaysia</a></p>
+    <p>[2] "Inside Malaysia's Intel Factory" — WorldCrunch, May 2025. Cleanroom, ESD, Assembly process description. <a href="https://worldcrunch.com/tech-science/intel-malaysa-poland-microchips/" target="_blank">Link</a></p>
+    <p>[3] "Intel's Malaysian packaging complex set for first-phase operations" — CRN Asia, March 2026. RM12B Penang Pelican advanced packaging 2026 가동 확인. <a href="https://www.crnasia.com/news/2026/components-and-peripherals/intel-s-malaysian-packaging-complex-set-for-first-phase-oper" target="_blank">Link</a></p>
+    <p>[4] "Malaysia's Tech Frontier: How TVET is Forging a Skilled Workforce" — Financial Content, Oct 2025. Budget 2026 TVET RM6.8B, STAc-JTM, 국가반도체전략. <a href="https://markets.financialcontent.com/wral/article/tokenring-2025-10-3-malaysias-tech-frontier-how-tvet-is-forging-a-skilled-workforce-for-the-semiconductor-and-ai-revolution" target="_blank">Link</a></p>
+    <p>[5] "Top 10 In-Demand Skills in Malaysia for 2026" — Edstellar, May 2026. Penang 5만 엔지니어 부족, 연 15% Brain Drain, RM28.5B E&amp;E 투자. <a href="https://www.edstellar.com/blog/skills-in-demand-in-malaysia" target="_blank">Link</a></p>
+    <p>[6] HRD Corp SBL-Khas 2026 요건 강화 (2026.06.15 시행). 기술과정 RM1,300~6,000/day 허용 비용. <a href="https://winsynergy.com.my/en/hrd-corp-claimable-courses/" target="_blank">Link</a></p>
+    <p>[7] Intel Malaysia ATM sites — Penang PG8·PG16, Kulim KMD·KMDSDP, 15,000명 이상 종사. <a href="https://gradmalaysia.com/graduate-employers/intel-malaysia" target="_blank">GradMalaysia Intel</a></p>
+    <p style="margin-top:8px;color:var(--text-lo)">※ 수익 추정치는 공개 데이터 기반 IEG 내부 전략 참고용이며, 최종 계약 조건에 따라 변동될 수 있습니다. 환율 기준: KRW 1,380/USD, MYR 4.4/USD (KOICA 고정환율 참조 적용).</p>
+  </div>
+
+</div><!-- /body-wrap -->
+</body>
+</html>
