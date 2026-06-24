@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IEG × PSDC FutureTech Academy × Kesuma ASK — Curriculum Collaboration Mapping</title>
+<style>
+  :root {
+    --navy: #0d2137;
+    --navy-mid: #1a3a5c;
+    --teal: #0e7c7b;
+    --teal-light: #17a89f;
+    --amber: #e8a020;
+    --slate: #475569;
+    --slate-light: #64748b;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --score-high: #166534;
+    --score-mid: #92400e;
+    --score-low: #991b1b;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  /* ── TOP NAV ── */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .nav-brand {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--teal-light);
+    letter-spacing: 0.03em;
+    padding: 1rem 0;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+  }
+  nav a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.35rem 0.65rem;
+    border-radius: 5px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+  nav a.active { color: var(--amber); font-weight: 700; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e4976 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 em { font-style: normal; color: var(--amber); }
+  .hero-sub {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 680px;
+    margin: 1rem auto 0;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+  .pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .pill.green { background: rgba(14,124,123,0.35); border-color: var(--teal-light); color: #7ee8e5; }
+  .pill.amber { background: rgba(232,160,32,0.25); border-color: var(--amber); color: #fcd560; }
+  .pill.blue  { background: rgba(30,73,118,0.5); border-color: #5b9bd5; color: #a8d4f7; }
+
+  /* ── CONTENT WRAPPER ── */
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+  }
+  .section-title {
+    font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .section-desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    max-width: 780px;
+    margin-bottom: 2rem;
+  }
+  .section-divider {
+    border: none;
+    border-top: 2px solid var(--border);
+    margin: 3rem 0;
+  }
+
+  /* ── INSTITUTION CARDS ── */
+  .inst-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .inst-card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .inst-card-header {
+    background: var(--navy);
+    color: white;
+    padding: 1rem 1.25rem;
+  }
+  .inst-card-header .role {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 0.3rem;
+  }
+  .inst-card-header h3 {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .inst-card-header .tagline {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    margin-top: 0.25rem;
+  }
+  .inst-card-body {
+    padding: 1.25rem;
+  }
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .meta-row:last-of-type { border-bottom: none; }
+  .meta-key { color: var(--text-muted); }
+  .meta-val { color: var(--text); font-weight: 600; text-align: right; max-width: 60%; }
+  .module-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .module-chip {
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--navy);
+    border-left: 3px solid var(--teal);
+  }
+
+  /* ── MAPPING TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    background: white;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  thead tr {
+    background: var(--navy);
+    color: white;
+  }
+  thead th {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) { background: #f8fafc; }
+  td { padding: 0.85rem 1rem; vertical-align: top; }
+  .module-tag {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    white-space: nowrap;
+  }
+  .score-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: white;
+  }
+  .score-high { background: #166534; }
+  .score-mid  { background: #d97706; }
+  .score-low  { background: #b91c1c; }
+  .check { color: #16a34a; font-weight: 700; }
+  .warn  { color: #d97706; font-weight: 700; }
+  .blue  { color: #2563eb; font-weight: 700; }
+
+  /* ── OPPORTUNITY TIERS ── */
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .tier-card {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .tier-header {
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .tier-1 .tier-header { background: linear-gradient(135deg, #064e3b, #065f46); color: white; }
+  .tier-2 .tier-header { background: linear-gradient(135deg, #1e3a8a, #1d4ed8); color: white; }
+  .tier-3 .tier-header { background: linear-gradient(135deg, #3730a3, #4f46e5); color: white; }
+  .tier-num {
+    font-size: 1.5rem;
+    font-weight: 900;
+    opacity: 0.6;
+  }
+  .tier-meta { flex: 1; }
+  .tier-meta .badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 0.2rem;
+  }
+  .tier-meta h3 { font-size: 0.9rem; font-weight: 800; }
+  .tier-body { padding: 1.25rem; }
+  .tier-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .tier-body li {
+    padding-left: 1rem;
+    position: relative;
+    font-size: 0.8rem;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+  .tier-body li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* ── STRATEGY GRID ── */
+  .strategy-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  @media (max-width: 700px) { .strategy-cols { grid-template-columns: 1fr; } }
+  .strategy-box {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+  }
+  .strategy-box h3 {
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .strategy-box h3.leads { color: var(--teal); border-color: var(--teal-light); }
+  .strategy-box h3.follows { color: var(--amber); border-color: var(--amber); }
+  .strategy-item {
+    margin-bottom: 1.25rem;
+  }
+  .strategy-item .icon-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+  .strategy-item p {
+    font-size: 0.78rem;
+    color: var(--slate);
+    line-height: 1.55;
+  }
+  .strategy-item .arrow-note {
+    font-size: 0.74rem;
+    color: var(--teal);
+    font-weight: 600;
+    margin-top: 0.3rem;
+  }
+
+  /* ── MOU ROADMAP ── */
+  .mou-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .mou-step {
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+  }
+  .mou-step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 48px;
+  }
+  .mou-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .mou-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    margin: 0.5rem 0;
+  }
+  .mou-step:last-child .mou-line { display: none; }
+  .mou-content {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+    flex: 1;
+  }
+  .mou-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.3rem;
+  }
+  .mou-content h3 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .mou-content p {
+    font-size: 0.8rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .mou-note {
+    background: #fff8ed;
+    border: 1px solid #fed7aa;
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    font-size: 0.8rem;
+    color: #7c2d12;
+    line-height: 1.65;
+    margin-top: 1.5rem;
+  }
+  .mou-note strong { color: var(--navy); }
+
+  /* ═══════════════════════════════════
+     Q&A TAB SECTION
+  ═══════════════════════════════════ */
+  #qa { scroll-margin-top: 60px; }
+
+  .qa-intro-box {
+    background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
+    border-radius: var(--radius);
+    padding: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .qa-intro-box .qa-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+  .qa-intro-box h2 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+  .qa-intro-box p {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+  }
+  .qa-intro-box .kelly-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.75rem;
+  }
+
+  /* session accordion */
+  .qa-sessions { display: flex; flex-direction: column; gap: 1rem; }
+
+  .qa-session {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .qa-session-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .qa-session-header:hover { background: #f8fafc; }
+  .qa-session-tag {
+    background: var(--navy);
+    color: white;
+    border-radius: 6px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .qa-session-header h3 {
+    flex: 1;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .qa-session-header .q-count {
+    font-size: 0.72rem;
+    color: var(--teal);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .qa-session-toggle {
+    font-size: 1rem;
+    color: var(--slate-light);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .qa-session.open .qa-session-toggle { transform: rotate(180deg); }
+
+  .qa-session-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+  .qa-session.open .qa-session-body { display: block; }
+
+  .qa-context {
+    background: #f1f5f9;
+    border-radius: 7px;
+    padding: 0.75rem 1rem;
+    font-size: 0.76rem;
+    color: var(--slate);
+    line-height: 1.55;
+    margin: 1rem 0 1.25rem;
+  }
+  .qa-context strong { color: var(--navy); }
+
+  .qa-questions { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .qa-question-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+  .qa-q-num {
+    width: 24px;
+    height: 24px;
+    background: var(--teal);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 0.5rem;
+  }
+  .qa-question-row textarea {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    font-family: inherit;
+    color: var(--text);
+    resize: vertical;
+    min-height: 56px;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+    background: #fafafa;
+  }
+  .qa-question-row textarea:focus {
+    outline: none;
+    border-color: var(--teal);
+    background: white;
+  }
+  .qa-question-row textarea::placeholder { color: #94a3b8; }
+
+  .qa-remove-btn {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: #fee2e2;
+    color: #dc2626;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    margin-top: 0.45rem;
+    transition: background 0.15s;
+  }
+  .qa-remove-btn:hover { background: #fecaca; }
+
+  .qa-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.85rem;
+    background: none;
+    border: 1.5px dashed var(--teal-light);
+    color: var(--teal);
+    border-radius: 7px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .qa-add-btn:hover { background: #f0fdfc; }
+
+  /* ── SUMMARY & SEND ── */
+  .qa-send-box {
+    background: white;
+    border: 2px solid var(--navy);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin-top: 2rem;
+  }
+  .qa-send-box h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+  .qa-send-box p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+  .qa-preview-area {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    font-size: 0.78rem;
+    color: var(--text);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 340px;
+    overflow-y: auto;
+    margin-bottom: 1.25rem;
+    font-family: 'Courier New', monospace;
+  }
+  .qa-send-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    color: var(--navy);
+    border: 1.5px solid var(--navy);
+    border-radius: 8px;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover { background: #f1f5f9; }
+  .btn-teal {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-teal:hover { background: var(--teal-light); }
+
+  .qa-empty-hint {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+  .qa-empty-hint .big { font-size: 2rem; margin-bottom: 0.5rem; }
+
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--navy);
+    color: white;
+    border-radius: 100px;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    z-index: 999;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.55);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.75rem;
+  }
+  footer a { color: var(--teal-light); text-decoration: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    table { min-width: 900px; }
+    .strategy-cols { grid-template-columns: 1fr; }
+    .qa-intro-box { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="nav-brand">IEG</div>
+    <nav>
+      <a href="#institutions">Institutions</a>
+      <a href="#matrix">Mapping Matrix</a>
+      <a href="#opportunities">Opportunities</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#mou">MOU Roadmap</a>
+      <a href="#qa" class="active">❓ Q&amp;A to Kelly</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Curriculum Collaboration Intelligence · Penang 2026</div>
+  <h1>IEG Equipment × PSDC FutureTech Academy × Kesuma ASK<br><em>Curriculum Co-development Feasibility Matrix</em></h1>
+  <p class="hero-sub">A structured mapping of PSDC's SKM / DKM national qualification programmes and the Kesuma Semiconductor Academy (ASK)'s emerging chip & AI curriculum against IEG's five training modules — assessing where genuine co-development overlap exists, and where IEG fills critical gaps these institutions cannot address alone.</p>
+  <div class="hero-pills">
+    <span class="pill green">✅ Strong fit: M-2, M-3, M-5</span>
+    <span class="pill amber">⚠ Partial fit: M-1, M-4</span>
+    <span class="pill blue">🔷 ASK: upstream IC — complementary</span>
+  </div>
+</div>
+
+<!-- ═══════════════ SECTION 1 ═══════════════ -->
+<div class="wrap" id="institutions">
+  <div class="section-label">Section 1</div>
+  <h2 class="section-title">Institution Profiles — What They Are &amp; What They Currently Offer</h2>
+  <p class="section-desc">Understanding the existing curriculum scope and institutional status of each partner before mapping.</p>
+
+  <div class="inst-grid">
+    <!-- IEG -->
+    <div class="inst-card">
+      <div class="inst-card-header">
+        <div class="role">Equipment Supplier · Korea</div>
+        <h3>IEG Co., Ltd.</h3>
+        <div class="tagline">Smart Manufacturing TVET Equipment · www.ieg.kr</div>
+      </div>
+      <div class="inst-card-body">
+        <div class="meta-row"><span class="meta-key">Founded</span><span class="meta-val">2009 · Seongnam, Korea</span></div>
+        <div class="meta-row"><span class="meta-key">HRD Corp status</span><span class="meta-val">Not yet registered (target 2026)</span></div>
+        <div class="meta-row"><span class="meta-key">Certification ref</span><span class="meta-val">Catalog Ver.2 (official)</span></div>
+        <div class="meta-row"><span class="meta-key">Delivery record</span><span class="meta-val">Samsung DS Academy, Korea Polytechnic Univ.</span></div>
+        <div class="meta-row"><span class="meta-key">Malaysia presence</span><span class="meta-val">Via Galaxy Global / FCoEE (Sean Lim)</span></div>
+        <div class="module-list">
+          <div class="module-chip">M-1 Cleanroom &amp; ESD Safety</div>
+          <div class="module-chip">M-2 PLC &amp; Automation Control (Siemens / Mitsubishi)</div>
+          <div class="module-chip">M-3 MPS &amp; Smart Production (Wafer TM+PM)</div>
+          <div class="module-chip">M-4 Semiconductor Process Fundamentals (8-process)</div>
+          <div class="module-chip">M-5 Collaborative Robots &amp; Industry 4.0 (IMOBA, Digital Twin)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PSDC -->
+    <div class="inst-card">
+      <div class="inst-card-header">
+        <div class="role">Accredited TVET · Penang · Since 1989</div>
+        <h3>PSDC FutureTech Academy</h3>
+        <div class="tagline">Formerly PSDC Academy · Bayan Lepas FIZ · Intel founding member</div>
+      </div>
+      <div class="inst-card-body">
+        <div class="meta-row"><span class="meta-key">Founded</span><span class="meta-val">1989 (academy arm: 1991)</span></div>
+        <div class="meta-row"><span class="meta-key">HRD Corp status</span><span class="meta-val">✓ Registered · 200% tax deduction</span></div>
+        <div class="meta-row"><span class="meta-key">Alumni trained</span><span class="meta-val">257,000+ across 13,000+ courses</span></div>
+        <div class="meta-row"><span class="meta-key">Industry members</span><span class="meta-val">200+ MNCs incl. Intel, HP, Infineon</span></div>
+        <div class="module-list">
+          <div class="module-chip">SKM L2/L3 Industrial Automation Technology</div>
+          <div class="module-chip">SKM L2/L3 Precision Machining Technology</div>
+          <div class="module-chip">SKM L2/L3 Quality Assurance Technology</div>
+          <div class="module-chip">DKM L4 Industrial Automation Technology</div>
+          <div class="module-chip">DKM L4 Manufacturing Technology (CAD/CAM)</div>
+          <div class="module-chip">German Dual VET Mechatronics Industriemeister</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASK -->
+    <div class="inst-card">
+      <div class="inst-card-header">
+        <div class="role">Government · KESUMA / JTM · Est. 2026</div>
+        <h3>Kesuma Semiconductor Academy (ASK)</h3>
+        <div class="tagline">Under JMTI Penang · Kementerian Sumber Manusia</div>
+      </div>
+      <div class="inst-card-body">
+        <div class="meta-row"><span class="meta-key">Parent body</span><span class="meta-val">KESUMA (Dept. of Skills Dev.) / JTM</span></div>
+        <div class="meta-row"><span class="meta-key">Host institution</span><span class="meta-val">JMTI Penang</span></div>
+        <div class="meta-row"><span class="meta-key">Announced</span><span class="meta-val">30 Apr 2026 · National Workers' Day</span></div>
+        <div class="meta-row"><span class="meta-key">Focus</span><span class="meta-val">Chip design &amp; AI — "creators, not users"</span></div>
+        <div class="meta-row"><span class="meta-key">Status</span><span class="meta-val">⚠ Announced — curriculum TBC</span></div>
+        <div class="module-list">
+          <div class="module-chip">Chip Design — IC / chip design talent development</div>
+          <div class="module-chip">AI Design — AI application in semiconductor</div>
+          <div class="module-chip">Future Tech — Semiconductors &amp; future technologies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" style="max-width:1200px;margin:0 auto 0;">
+
+<!-- ═══════════════ SECTION 2 ═══════════════ -->
+<div class="wrap" id="matrix">
+  <div class="section-label">Section 2</div>
+  <h2 class="section-title">Curriculum Mapping Matrix — IEG Modules × PSDC × ASK</h2>
+  <p class="section-desc">Each IEG training module is mapped against PSDC's accredited JPK programmes and ASK's announced curriculum directions, with co-development opportunity ratings.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>IEG Module</th>
+          <th>IEG Equipment &amp; Skills</th>
+          <th>PSDC FutureTech — Matching Programme</th>
+          <th>Kesuma ASK — Alignment</th>
+          <th>Overlap &amp; Gap Analysis</th>
+          <th>Co-development Opportunity</th>
+          <th style="text-align:center;">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="module-tag">M-1</span><br>Cleanroom &amp; ESD Safety</td>
+          <td>Semiconductor Facility Sensor Practice Equipment · PCS Training Equipment · ESD grounding, cleanroom protocol, safety simulation, PID control, OSHA 1994 / FMA</td>
+          <td>SKM L2/L3 IAT — Electronic Systems and safety content included, but no dedicated cleanroom or ESD-specific curriculum. QAT covers inspection but not semiconductor-specific ESD protocols.</td>
+          <td>ASK focuses on upstream chip design and AI. Cleanroom/ESD is ATM process-layer training — <strong>outside ASK's announced scope</strong>.</td>
+          <td><span class="warn">⚠ PSDC partial only</span> — PSDC has safety and electronics content but lacks semiconductor-specific ESD and cleanroom simulation. IEG's equipment fills this gap directly.</td>
+          <td>IEG fills PSDC gap — IEG provides dedicated cleanroom + ESD module as add-on to PSDC's IAT programme. Bolt-on module for HRD Corp SBL-Khas registration via PSDC as host institution.</td>
+          <td style="text-align:center;"><span class="score-badge score-low">65%</span></td>
+        </tr>
+        <tr>
+          <td><span class="module-tag">M-2</span><br>PLC &amp; Automation Control</td>
+          <td>PCS Hands-on Equipment (SIEMENS / OMRON / LS) · PCS Hands-on Equipment (MITSUBISHI) · SECS / GEM Interface Equipment · Siemens SMSCP · PLC, ladder / FBD, HMI, pneumatic/hydraulic, fault diagnosis, SECS/GEM FAB automation</td>
+          <td>SKM L2/L3 IAT — PLC, Electrical, Hydraulic, Pneumatic Systems. Very high content overlap with IEG M-2. DKM L4 IAT — Systems Design, Integration, Commissioning, Maintenance. 70% hands-on. Directly maps to IEG M-2 at supervisor level.</td>
+          <td>JMTI's existing Mechatronics department covers PLC and automation — foundational. ASK will likely leverage this base for semiconductor-context automation.</td>
+          <td><span class="check">✅ Strongest overlap</span> — PSDC IAT (SKM L2/L3 + DKM L4) and IEG M-2 share 85%+ content scope. IEG adds Siemens SMSCP semiconductor-grade standard and SECS/GEM FAB integration that PSDC currently lacks.</td>
+          <td><strong>Co-develop joint module</strong> — IEG provides Siemens-certified PLC hardware + SECS/GEM module. PSDC provides JPK-accredited DKM L4 IAT framework and HRD Corp registration. Joint module = SKM/DKM + Intel-aligned outcome.</td>
+          <td style="text-align:center;"><span class="score-badge score-high">92%</span></td>
+        </tr>
+        <tr>
+          <td><span class="module-tag">M-3</span><br>MPS &amp; Smart Production</td>
+          <td>Wafer Transfer Module (TM) Training Equipment · Wafer TM + Process Module (PM) Training Equipment · EasyCluster Control Solution Software · Production sequencing, OEE measurement, Lean practice, EasyCluster FAB automation SW</td>
+          <td>DKM L4 IAT — Systems Integration and Maintenance Coordination cover production process management. DKM L4 Mfg. Tech — Plan manufacturing processes and perform supervisory functions. German Dual VET Mechatronics — Production-line thinking in dual VET context.</td>
+          <td>JMTI's Manufacturing Engineering department covers production fundamentals. ASK's semiconductor overlay may include smart factory / fab operations contexts.</td>
+          <td><span class="check">✅ High structural fit</span> — PSDC DKM L4 frameworks map well to IEG M-3's supervisory and production content. IEG's Wafer TM+PM equipment introduces actual semiconductor production simulation that PSDC currently cannot deliver.</td>
+          <td><strong>IEG hardware + PSDC accreditation</strong> — PSDC provides DKM L4 Mfg. Tech academic framework. IEG installs TM+PM simulator and EasyCluster SW. Combined outcome: JPK DKM L4 with Intel ATM factory ramp competency embedded.</td>
+          <td style="text-align:center;"><span class="score-badge score-high" style="background:#15803d;">85%</span></td>
+        </tr>
+        <tr>
+          <td><span class="module-tag">M-4</span><br>Semiconductor Process Fundamentals</td>
+          <td>Testbed of 8 Major Semiconductor Processes · Semiconductor Photo Process Testbed · Post-Process Inspection Training Equipment · AR/XR VR Learning Content · Full 8-process simulation, photolithography line, EDS inspection, packaging, VR FAB immersion</td>
+          <td>SKM L2/L3 IAT — Electronic systems content provides some semiconductor-adjacent theory, but PSDC has no dedicated semiconductor process curriculum. SKM L2/L3 QAT — Inspection and quality control: partial match for M-4's quality standards component. <strong>⚠ PSDC has no 8-process testbed equivalent.</strong></td>
+          <td>ASK targets chip/IC design — the upstream layer. IEG M-4 covers ATM (Assembly, Test, Manufacturing) — the downstream layer. These are <strong>complementary, not competing</strong>. AR/XR module has direct interface potential with ASK's AI-in-semiconductor direction.</td>
+          <td><span class="warn">⚠ IEG is exclusive provider</span> — Neither PSDC nor ASK currently offers 8-process semiconductor testbed training. IEG M-4 is the only pathway to Intel ATM process-flow competency. PSDC can provide the accreditation shell; IEG provides the entire content.</td>
+          <td><strong>PSDC: accreditation shell only</strong> — IEG delivers all curriculum content and hardware. PSDC registers the programme under a new SKM / SKMC module. ASK: explore AR/XR cross-over for chip design visualisation — long-term opportunity.</td>
+          <td style="text-align:center;"><span class="score-badge score-low" style="background:#c2410c;">55%</span></td>
+        </tr>
+        <tr>
+          <td><span class="module-tag">M-5</span><br>Collaborative Robots &amp; Industry 4.0</td>
+          <td>Semiconductor Wafer Cassette Transfer Robot (IMOBA) · Wafer TM+PM Training Equipment · Digital Twin Solution (EasyCluster + PLM SW) · SECS/GEM Interface (EasyFASGEM) · AMR cobot, pick &amp; place, vision, IoT, Digital Twin, SECS/GEM Industry 4.0</td>
+          <td>SKM L2/L3 IAT Robotics — PSDC IAT includes robotics and industrial automation. No AMR or IMOBA-level semiconductor wafer handling content. DKM L4 IAT Systems Integration — maps to IEG M-5 integration competency. German Dual VET Mechatronics Industriemeister — Advanced mechatronics with 7 semiconductor companies. Strongest candidate for a joint M-5 track.</td>
+          <td>ASK's AI-in-semiconductor direction aligns with IEG M-5's IoT dashboard and AI vision add-on components. Potential joint module: AI-assisted fab automation. Digital Twin and smart factory fundamentals are core "future technology" content — directly relevant to ASK's mandate.</td>
+          <td><span class="check">✅ Three-way opportunity</span> — IEG hardware (IMOBA + Digital Twin) + PSDC accreditation (DKM L4 IAT / German Dual VET) + ASK AI overlay = a unique three-institution semiconductor Industry 4.0 programme unavailable anywhere in Penang.</td>
+          <td><strong>Flagship joint module — M-5</strong> — Propose a tripartite "Semiconductor Smart Factory Technologist" programme: IEG provides equipment, PSDC provides JPK accreditation + HRD Corp registration, ASK provides AI/chip design context. SBL-Khas claimable.</td>
+          <td style="text-align:center;"><span class="score-badge score-high" style="background:#1e6b3a;">88%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="section-divider" style="max-width:1200px;margin:0 auto 0;">
+
+<!-- ═══════════════ SECTION 3 ═══════════════ -->
+<div class="wrap" id="opportunities">
+  <div class="section-label">Section 3</div>
+  <h2 class="section-title">Co-development Opportunity Matrix — Three Tiers</h2>
+  <p class="section-desc">Ranked collaboration opportunities by feasibility, speed to market, and strategic value for IEG.</p>
+
+  <div class="tier-grid">
+    <div class="tier-card tier-1">
+      <div class="tier-header">
+        <div class="tier-num">01</div>
+        <div class="tier-meta">
+          <div class="badge">Tier 1 · Immediate · High Feasibility</div>
+          <h3>IEG × PSDC FutureTech Academy</h3>
+        </div>
+      </div>
+      <div class="tier-body">
+        <p style="font-size:0.78rem;color:#374151;font-weight:700;margin-bottom:0.75rem;">PLC / Automation Equipment Supply + DKM L4 IAT Co-curriculum</p>
+        <ul>
+          <li>IEG delivers PCS Hands-on Equipment (Siemens + Mitsubishi) to PSDC's existing DKM L4 IAT lab — slot-in hardware upgrade to an accredited programme.</li>
+          <li>Co-develop a "Semiconductor-Grade PLC" add-on unit within PSDC's IAT DKM L4 framework — adds Siemens SMSCP and SECS/GEM content not currently available in Malaysia.</li>
+          <li>PSDC registers IEG M-2 + M-3 content under its HRD Corp provider number — IEG accesses SBL-Khas without waiting for own registration.</li>
+          <li>PSDC's 200+ MNC member base (Intel, Infineon, Micron) becomes IEG's instant customer pipeline for in-house training.</li>
+          <li>Revenue split model: IEG supplies hardware + curriculum IP; PSDC operates training and claims HRD Corp levy — shared fee structure.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tier-card tier-2">
+      <div class="tier-header">
+        <div class="tier-num">02</div>
+        <div class="tier-meta">
+          <div class="badge">Tier 2 · Medium-term · Strategic Value</div>
+          <h3>IEG × PSDC × Kesuma ASK (Tripartite)</h3>
+        </div>
+      </div>
+      <div class="tier-body">
+        <p style="font-size:0.78rem;color:#374151;font-weight:700;margin-bottom:0.75rem;">Semiconductor Smart Factory Technologist Programme</p>
+        <ul>
+          <li>Propose a new "Semiconductor Smart Factory Technologist" national qualification — combining PSDC's DKM L4 IAT with IEG's IMOBA AMR + Digital Twin equipment and ASK's AI-in-fab context.</li>
+          <li>Target a new SKMC (Malaysian Modular Skills Certificate) — enabling stackable micro-credentials rather than a full diploma, lowering barrier to entry for Intel ATM upskilling.</li>
+          <li>IEG M-5 (IMOBA + EasyFASGEM + Digital Twin) is the anchor hardware. PSDC provides JPK accreditation. ASK contributes AI design-to-fab context lectures.</li>
+          <li>Eligible for Budget 2026's RM 6.8B TVET allocation as a national semiconductor priority programme — strong government grant potential beyond HRD Corp SBL-Khas.</li>
+          <li>Positions IEG as the sole equipment supplier in a government-backed national semiconductor TVET programme — the strongest IPO narrative asset available in Malaysia.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tier-card tier-3">
+      <div class="tier-header">
+        <div class="tier-num">03</div>
+        <div class="tier-meta">
+          <div class="badge">Tier 3 · Long-term · IEG × ASK Bilateral</div>
+          <h3>IEG × Kesuma ASK (JMTI)</h3>
+        </div>
+      </div>
+      <div class="tier-body">
+        <p style="font-size:0.78rem;color:#374151;font-weight:700;margin-bottom:0.75rem;">Process Equipment for Chip Design Visualisation &amp; ATM Bridge</p>
+        <ul>
+          <li>ASK trains chip designers — but chip designers need to understand how their designs are manufactured, packaged and tested. IEG's 8-process testbed and AR/XR VR content bridges this design-to-manufacturing knowledge gap.</li>
+          <li>Propose an "ATM Bridge Module" for ASK: IEG M-4 content (8-process testbed + VR) delivered at JMTI to chip design students — 2-day immersive ATM literacy course.</li>
+          <li>Leverage IEG's AR/XR Semiconductor Process VR Learning Content as ASK's low-cost entry point — no physical equipment needed, VR licence model.</li>
+          <li>ASK is a government body (KESUMA/JTM) — MOU with JMTI opens ADTEC network (33 campuses) for IEG's AR/XR VR content licensing nationally.</li>
+          <li>Long-term: ASK's AI design graduates become the talent pipeline for companies buying IEG equipment — virtuous ecosystem loop.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" style="max-width:1200px;margin:0 auto 0;">
+
+<!-- ═══════════════ SECTION 4 ═══════════════ -->
+<div class="wrap" id="strategy">
+  <div class="section-label">Section 4</div>
+  <h2 class="section-title">Gap Analysis &amp; Collaboration Strategy — Where IEG Leads vs. Where It Follows</h2>
+  <p class="section-desc">Strategic positioning guide for IEG across the PSDC and ASK partnership landscape.</p>
+
+  <div class="strategy-cols">
+    <div class="strategy-box">
+      <h3 class="leads">✅ Areas Where IEG Leads — Unique Contribution</h3>
+      <div class="strategy-item">
+        <div class="icon-label">🔬 Semiconductor Process Simulation (M-4)</div>
+        <p>Neither PSDC nor ASK currently operates an 8-process semiconductor testbed. IEG's Testbed of 8 Major Semiconductor Processes and Photo Process Testbed are unavailable anywhere else in Malaysia's accredited TVET landscape.</p>
+        <div class="arrow-note">→ IEG should assert content ownership and negotiate equipment-supply MOU with PSDC as host.</div>
+      </div>
+      <div class="strategy-item">
+        <div class="icon-label">🤖 AMR &amp; Digital Twin for Semiconductor (M-5)</div>
+        <p>IMOBA Wafer Cassette Transfer Robot and EasyCluster Digital Twin are not available in any Penang TVET institution. PSDC's robotics content is general industrial — not semiconductor-specific.</p>
+        <div class="arrow-note">→ IEG proposes a joint "Semiconductor AMR Technician" SKMC micro-credential with PSDC.</div>
+      </div>
+      <div class="strategy-item">
+        <div class="icon-label">📡 SECS/GEM FAB Automation Standard</div>
+        <p>No Malaysian TVET institution currently teaches SECS/GEM. IEG's EasyFASGEM is the only training-grade SECS/GEM equipment in the region.</p>
+        <div class="arrow-note">→ Exclusive: position IEG as the SECS/GEM TVET standard-setter in Malaysia in partnership with SEMI Malaysia.</div>
+      </div>
+      <div class="strategy-item">
+        <div class="icon-label">🥽 AR/XR VR Semiconductor Learning Content</div>
+        <p>IEG's 12-inch wafer VR content covers the full ATM process in an immersive environment. This gives ASK a high-quality entry point into hands-on process literacy for chip designers.</p>
+        <div class="arrow-note">→ Licence VR content to JMTI / ASK under a per-seat annual model. Low capital, high margin.</div>
+      </div>
+    </div>
+
+    <div class="strategy-box">
+      <h3 class="follows">⚠ Areas Where IEG Must Leverage Partners</h3>
+      <div class="strategy-item">
+        <div class="icon-label">📜 JPK / HRD Corp Accreditation</div>
+        <p>IEG is a foreign equipment supplier with no Malaysian legal entity or HRD Corp registration. All SBL-Khas claims must flow through a Malaysian registered training provider. PSDC is the ideal host.</p>
+        <div class="arrow-note">→ IEG must structure a revenue-sharing agreement where PSDC registers the programme and IEG receives equipment fees + curriculum royalties.</div>
+      </div>
+      <div class="strategy-item">
+        <div class="icon-label">🔭 Live Wafer &amp; ATE Practical Experience</div>
+        <p>PSDC has MNC relationships (Intel, Micron, Infineon) but no wafer-handling facilities. Neither does IEG. Live wafer practicals remain the critical gap in M-4 that neither party can fill alone.</p>
+        <div class="arrow-note">→ Negotiate a three-way arrangement: IEG (testbed theory) + PSDC (host + accreditation) + Micron Malaysia / PSDC's Intel link (live wafer practicals). PSDC is the logical broker.</div>
+      </div>
+      <div class="strategy-item">
+        <div class="icon-label">🏅 Industry Certification Links (ISO 14001, QC080000)</div>
+        <p>Intel JDs explicitly require ISO 14001 / QC080000 certification — neither IEG nor PSDC currently delivers a certification-linked pathway for these standards in TVET context.</p>
+        <div class="arrow-note">→ SIRIM QAS International (now in PSDC Block 3 since July 2025) is the natural co-development partner. PSDC introductions recommended.</div>
+      </div>
+      <div class="strategy-item">
+        <div class="icon-label">🌐 Chip Design / IC Upstream Context (ASK territory)</div>
+        <p>IEG's equipment addresses ATM (downstream assembly and test). Chip design, EDA software, and IC verification are ASK's domain. IEG cannot and should not compete here.</p>
+        <div class="arrow-note">→ Respect the boundary. Position IEG M-4/M-5 as the "ATM literacy layer" for ASK's chip design graduates — complementary, not competitive.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider" style="max-width:1200px;margin:0 auto 0;">
+
+<!-- ═══════════════ SECTION 5 ═══════════════ -->
+<div class="wrap" id="mou">
+  <div class="section-label">Section 5</div>
+  <h2 class="section-title">Recommended MOU Roadmap — Sequenced Action</h2>
+  <p class="section-desc">Three-step MOU sequencing — H2 2026 to Q2 2027</p>
+
+  <div class="mou-steps">
+    <div class="mou-step">
+      <div class="mou-step-left">
+        <div class="mou-num">01</div>
+        <div class="mou-line"></div>
+      </div>
+      <div class="mou-content">
+        <div class="mou-eyebrow">Step 01 · Immediate — via Sean / FCoEE</div>
+        <h3>PSDC FutureTech Academy — Equipment MOU</h3>
+        <p>IEG supplies PCS Hands-on Equipment (Siemens + Mitsubishi) + SECS/GEM Interface to PSDC's IAT lab. PSDC registers M-2 + M-3 content under HRD Corp. Revenue sharing: IEG 60% hardware / PSDC 40% training ops. Target sign: Q4 2026.</p>
+      </div>
+    </div>
+    <div class="mou-step">
+      <div class="mou-step-left">
+        <div class="mou-num">02</div>
+        <div class="mou-line"></div>
+      </div>
+      <div class="mou-content">
+        <div class="mou-eyebrow">Step 02 · H1 2027 — tripartite</div>
+        <h3>PSDC + ASK (JMTI) — Curriculum Co-development MOU</h3>
+        <p>Jointly develop "Semiconductor Smart Factory Technologist" SKMC micro-credential. IEG: M-5 hardware (IMOBA + Digital Twin). PSDC: JPK accreditation + HRD Corp. ASK: AI-in-fab context module. Target submission to JPK: Q2 2027.</p>
+      </div>
+    </div>
+    <div class="mou-step">
+      <div class="mou-step-left">
+        <div class="mou-num">03</div>
+        <div class="mou-line"></div>
+      </div>
+      <div class="mou-content">
+        <div class="mou-eyebrow">Step 03 · H2 2027 — bilateral</div>
+        <h3>JMTI / ASK — VR Content Licence Agreement</h3>
+        <p>IEG licences AR/XR Semiconductor Process VR Learning Content to JMTI for ASK's chip design students. Annual per-seat licence model (USD 200–300/seat). Opens ADTEC national network (33 campuses) for IEG VR content distribution.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mou-note">
+    <strong>Key prerequisite for Step 01:</strong> Confirm PSDC's willingness to accept a foreign equipment partner and revenue-share model. PSDC has precedent — SIRIM QAS International occupies Block 3 as a resident partner since July 2025. Sean Lim (Galaxy Global) and FCoEE should facilitate the first introduction to PSDC's training director. Ask Sean: "Do you have an existing relationship with PSDC or JMTI?" — the answer determines whether the June 30 Penang visit should include a PSDC call.<br><br>
+    <strong>Note on ASK timing:</strong> The Kesuma Semiconductor Academy was announced 30 April 2026 and its curriculum is still being developed. This is the optimal window to influence what IEG equipment and content gets embedded from the start — approaching ASK now (before curriculum lock-in) is significantly more valuable than doing so after.
+  </div>
+</div>
+
+<hr class="section-divider" style="max-width:1200px;margin:0 auto 0;">
+
+<!-- ═══════════════ Q&A TAB ═══════════════ -->
+<div class="wrap" id="qa">
+  <div class="section-label">Q&amp;A to Kelly</div>
+  <h2 class="section-title">Compile &amp; Send Questions by Section</h2>
+  <p class="section-desc">Enter your questions for Kelly in each section below. Once you are done, you can send all questions together in a single email.</p>
+
+  <div class="qa-intro-box">
+    <div class="qa-icon">✉️</div>
+    <div>
+      <h2>Send Your Questions to Kelly Cho</h2>
+      <p>As you review this curriculum mapping document, please enter any questions you have for each section below.<br>Once all your questions are ready, click "Open Email" to send them all at once.</p>
+      <div class="kelly-badge">
+        <span>📧</span>
+        <span>kellycho824@ieg.kr</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="qa-sessions" id="qaSessions">
+
+    <!-- Session: Section 1 -->
+    <div class="qa-session open" data-session="sec1" data-label="Section 1 — Institution Profiles">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">SEC 1</span>
+        <h3>Institution Profiles — IEG / PSDC / ASK</h3>
+        <span class="q-count" id="count-sec1">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> This section covers IEG Co., Ltd.'s core profile, the current programme status of PSDC FutureTech Academy, and the establishment background and curriculum direction of Kesuma Semiconductor Academy (ASK).</div>
+        <div class="qa-questions" id="qlist-sec1"></div>
+        <button class="qa-add-btn" onclick="addQuestion('sec1')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: M-1 -->
+    <div class="qa-session" data-session="m1" data-label="M-1 — Cleanroom & ESD Safety">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">M-1</span>
+        <h3>Cleanroom &amp; ESD Safety</h3>
+        <span class="q-count" id="count-m1">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> ESD grounding, cleanroom protocols, safety simulation, and PID control using Semiconductor Facility Sensor Practice Equipment and PCS Training Equipment. Partial match with PSDC (65 pts); outside ASK scope.</div>
+        <div class="qa-questions" id="qlist-m1"></div>
+        <button class="qa-add-btn" onclick="addQuestion('m1')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: M-2 -->
+    <div class="qa-session" data-session="m2" data-label="M-2 — PLC & Automation Control">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">M-2</span>
+        <h3>PLC &amp; Automation Control</h3>
+        <span class="q-count" id="count-m2">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> Siemens / Mitsubishi / OMRON PCS equipment and SECS/GEM Interface. 85%+ content overlap with PSDC IAT SKM/DKM. Highest collaboration score (92 pts). Top-priority candidate for IEG + PSDC joint module development.</div>
+        <div class="qa-questions" id="qlist-m2"></div>
+        <button class="qa-add-btn" onclick="addQuestion('m2')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: M-3 -->
+    <div class="qa-session" data-session="m3" data-label="M-3 — MPS & Smart Production">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">M-3</span>
+        <h3>MPS &amp; Smart Production</h3>
+        <span class="q-count" id="count-m3">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> Wafer TM/PM training equipment and EasyCluster software. Covers production sequencing, OEE measurement, and Lean practice. High structural match with PSDC DKM L4 (85 pts). Cleanroom semiconductor production simulation is IEG-exclusive.</div>
+        <div class="qa-questions" id="qlist-m3"></div>
+        <button class="qa-add-btn" onclick="addQuestion('m3')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: M-4 -->
+    <div class="qa-session" data-session="m4" data-label="M-4 — Semiconductor Process Fundamentals">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">M-4</span>
+        <h3>Semiconductor Process Fundamentals</h3>
+        <span class="q-count" id="count-m4">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> 8-process semiconductor Testbed, photo-process Testbed, back-end inspection equipment, and AR/XR VR content. Neither PSDC nor ASK holds equivalent equipment — IEG is sole supplier. Collaboration score 55 pts (PSDC provides accreditation shell only).</div>
+        <div class="qa-questions" id="qlist-m4"></div>
+        <button class="qa-add-btn" onclick="addQuestion('m4')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: M-5 -->
+    <div class="qa-session" data-session="m5" data-label="M-5 — Collaborative Robots & Industry 4.0">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">M-5</span>
+        <h3>Collaborative Robots &amp; Industry 4.0</h3>
+        <span class="q-count" id="count-m5">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> IMOBA wafer cassette transfer robot, Digital Twin (EasyCluster+PLM SW), and SECS/GEM (EasyFASGEM). Flagship tri-party collaboration module for IEG + PSDC + ASK. Collaboration score 88 pts. Eligible for SBL-Khas funding.</div>
+        <div class="qa-questions" id="qlist-m5"></div>
+        <button class="qa-add-btn" onclick="addQuestion('m5')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: Section 3 -->
+    <div class="qa-session" data-session="sec3" data-label="Section 3 — Co-development Opportunity (3 Tiers)">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">SEC 3</span>
+        <h3>Co-development 3 Tiers — Collaboration Opportunity Matrix</h3>
+        <span class="q-count" id="count-sec3">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> Tier 1 (IEG × PSDC — immediate), Tier 2 (IEG × PSDC × ASK tri-party, SKMC micro-credentials), Tier 3 (IEG × JMTI long-term, VR licensing). Aligned by feasibility, speed, and strategic value for each tier.</div>
+        <div class="qa-questions" id="qlist-sec3"></div>
+        <button class="qa-add-btn" onclick="addQuestion('sec3')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: Section 4 -->
+    <div class="qa-session" data-session="sec4" data-label="Section 4 — Gap Analysis & Strategy">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">SEC 4</span>
+        <h3>Gap Analysis &amp; Collaboration Strategy</h3>
+        <span class="q-count" id="count-sec4">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> IEG's exclusive contribution areas (8-process testbed, IMOBA, SECS/GEM, AR/XR VR) versus areas requiring partner dependency (HRD Corp accreditation, live wafer practice, ISO certification, IC design upstream). Strategic positioning across both.</div>
+        <div class="qa-questions" id="qlist-sec4"></div>
+        <button class="qa-add-btn" onclick="addQuestion('sec4')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: Section 5 -->
+    <div class="qa-session" data-session="sec5" data-label="Section 5 — MOU Roadmap">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">SEC 5</span>
+        <h3>MOU Roadmap — Phased Execution Plan</h3>
+        <span class="q-count" id="count-sec5">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> Step 01 (PSDC Equipment MOU, Q4 2026), Step 02 (PSDC + ASK tri-party Curriculum MOU, H1 2027), Step 03 (JMTI VR Content Licence, H2 2027). Includes roles of Sean Lim / FCoEE and preconditions related to the June 30 Penang meeting.</div>
+        <div class="qa-questions" id="qlist-sec5"></div>
+        <button class="qa-add-btn" onclick="addQuestion('sec5')">＋ Add Question</button>
+      </div>
+    </div>
+
+    <!-- Session: General -->
+    <div class="qa-session" data-session="general" data-label="General — Other Questions">
+      <div class="qa-session-header" onclick="toggleSession(this)">
+        <span class="qa-session-tag">GEN</span>
+        <h3>General — Other / Overall Questions</h3>
+        <span class="q-count" id="count-general">0 questions</span>
+        <span class="qa-session-toggle">▼</span>
+      </div>
+      <div class="qa-session-body">
+        <div class="qa-context"><strong>Context:</strong> Use this space for general questions that do not belong to a specific section, strategic feedback, or any items requiring further clarification.</div>
+        <div class="qa-questions" id="qlist-general"></div>
+        <button class="qa-add-btn" onclick="addQuestion('general')">＋ Add Question</button>
+      </div>
+    </div>
+
+  </div><!-- /qa-sessions -->
+
+  <!-- SEND BOX -->
+  <div class="qa-send-box" id="sendBox">
+    <h3>📬 Compile &amp; Send All Questions</h3>
+    <p>If no questions have been entered, the preview will be empty. Add your questions first, then use the buttons below to open your email client or copy to clipboard.</p>
+    <div class="qa-preview-area" id="qaPreview"></div>
+    <div class="qa-send-actions">
+      <button class="btn-primary" onclick="openEmail()">✉️ Open Email (kellycho824@ieg.kr)</button>
+      <button class="btn-teal" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+      <button class="btn-secondary" onclick="refreshPreview()">🔄 Refresh Preview</button>
+    </div>
+  </div>
+
+</div><!-- /wrap qa -->
+
+<footer>
+  IEG Co., Ltd. · <a href="https://www.ieg.kr" target="_blank">www.ieg.kr</a> · Sources: PSDC.org.my, JMTI.gov.my, Bernama (Apr 2026), NST (Jun 2026), IEG Semiconductor Solutions Catalog Ver.2<br>
+  Prepared by Kelly Cho · June 2026 · For Penang visit briefing
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── DATA STORE ──
+  const sessions = [
+    { id: 'sec1', label: 'Section 1 — Institution Profiles' },
+    { id: 'm1',   label: 'M-1 — Cleanroom & ESD Safety' },
+    { id: 'm2',   label: 'M-2 — PLC & Automation Control' },
+    { id: 'm3',   label: 'M-3 — MPS & Smart Production' },
+    { id: 'm4',   label: 'M-4 — Semiconductor Process Fundamentals' },
+    { id: 'm5',   label: 'M-5 — Collaborative Robots & Industry 4.0' },
+    { id: 'sec3', label: 'Section 3 — Co-development Opportunity Tiers' },
+    { id: 'sec4', label: 'Section 4 — Gap Analysis & Strategy' },
+    { id: 'sec5', label: 'Section 5 — MOU Roadmap' },
+    { id: 'general', label: 'General — Other Questions' },
+  ];
+
+  let counters = {};
+  sessions.forEach(s => counters[s.id] = 0);
+
+  // ── TOGGLE ACCORDION ──
+  function toggleSession(headerEl) {
+    const card = headerEl.closest('.qa-session');
+    card.classList.toggle('open');
+  }
+
+  // ── ADD QUESTION ──
+  function addQuestion(sessionId) {
+    counters[sessionId]++;
+    const n = counters[sessionId];
+    const list = document.getElementById('qlist-' + sessionId);
+
+    const row = document.createElement('div');
+    row.className = 'qa-question-row';
+    row.dataset.qid = sessionId + '-' + n;
+
+    row.innerHTML = `
+      <div class="qa-q-num">${n}</div>
+      <textarea placeholder="Enter your question here..." oninput="updateCount('${sessionId}')"></textarea>
+      <button class="qa-remove-btn" onclick="removeQuestion(this, '${sessionId}')" title="Remove">✕</button>
+    `;
+    list.appendChild(row);
+    updateCount(sessionId);
+    row.querySelector('textarea').focus();
+    refreshPreview();
+  }
+
+  // ── REMOVE QUESTION ──
+  function removeQuestion(btn, sessionId) {
+    btn.closest('.qa-question-row').remove();
+    renumberSession(sessionId);
+    updateCount(sessionId);
+    refreshPreview();
+  }
+
+  function renumberSession(sessionId) {
+    const rows = document.querySelectorAll(`#qlist-${sessionId} .qa-question-row`);
+    rows.forEach((row, i) => {
+      row.querySelector('.qa-q-num').textContent = i + 1;
+    });
+    counters[sessionId] = rows.length;
+  }
+
+  // ── UPDATE COUNT BADGE ──
+  function updateCount(sessionId) {
+    const rows = document.querySelectorAll(`#qlist-${sessionId} .qa-question-row textarea`);
+    const filled = Array.from(rows).filter(t => t.value.trim() !== '').length;
+    document.getElementById('count-' + sessionId).textContent = filled + ' questions';
+    refreshPreview();
+  }
+
+  // ── BUILD PREVIEW TEXT ──
+  function buildEmailBody() {
+    const today = new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+    let body = `Dear Kelly,\n\nPlease find below my section-by-section questions compiled while reviewing the IEG × PSDC × Kesuma ASK Curriculum Mapping document. I would appreciate your response at your convenience.\n\nDate: ${today}\n${'─'.repeat(60)}\n\n`;
+
+    let hasAny = false;
+    sessions.forEach(s => {
+      const rows = document.querySelectorAll(`#qlist-${s.id} .qa-question-row textarea`);
+      const qs = Array.from(rows).map(t => t.value.trim()).filter(v => v !== '');
+      if (qs.length > 0) {
+        hasAny = true;
+        body += `【${s.label}】\n`;
+        qs.forEach((q, i) => {
+          body += `  Q${i+1}. ${q}\n`;
+        });
+        body += '\n';
+      }
+    });
+
+    if (!hasAny) return null;
+
+    body += `${'─'.repeat(60)}\nThank you for taking the time to review these questions. I look forward to your reply.\n\nBest regards.`;
+    return body;
+  }
+
+  // ── REFRESH PREVIEW ──
+  function refreshPreview() {
+    const body = buildEmailBody();
+    const preview = document.getElementById('qaPreview');
+    if (!body) {
+      preview.innerHTML = '<div class="qa-empty-hint"><div class="big">✏️</div>No questions entered yet.<br>Click the "＋ Add Question" button in each section to get started.</div>';
+    } else {
+      preview.textContent = body;
+    }
+  }
+
+  // ── OPEN EMAIL ──
+  function openEmail() {
+    const body = buildEmailBody();
+    if (!body) { showToast('❗ Please enter at least one question first.'); return; }
+    const subject = encodeURIComponent('[IEG × PSDC × ASK Curriculum] Review Questions');
+    const encoded = encodeURIComponent(body);
+    window.location.href = `mailto:kellycho824@ieg.kr?subject=${subject}&body=${encoded}`;
+    showToast('✉️ Opening your email client...');
+  }
+
+  // ── COPY TO CLIPBOARD ──
+  function copyToClipboard() {
+    const body = buildEmailBody();
+    if (!body) { showToast('❗ Please enter at least one question first.'); return; }
+    navigator.clipboard.writeText(body).then(() => {
+      showToast('✅ Copied to clipboard!');
+    }).catch(() => {
+      // fallback
+      const el = document.createElement('textarea');
+      el.value = body;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      showToast('✅ Copied!');
+    });
+  }
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // ── NAV ACTIVE HIGHLIGHT ──
+  const navLinks = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const id = entry.target.id;
+        const link = document.querySelector(`nav a[href="#${id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('[id]').forEach(el => {
+    if (['institutions','matrix','opportunities','strategy','mou','qa'].includes(el.id)) observer.observe(el);
+  });
+
+  // init preview
+  refreshPreview();
+</script>
+</body>
+</html>
